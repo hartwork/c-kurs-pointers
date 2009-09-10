@@ -1,0 +1,348 @@
+% Copyright (C) 2009 Sebastian Pipping <sebastian@pipping.org>
+% Licensed under Creative Commons Attribution-ShareAlike 3.0 License
+%
+\newcommand{\ind}{\hspace*{3ex}}
+\setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertframenumber\vspace*{0.5ex}\hspace*{0.5ex}}
+
+
+==== C-Kurs ====
+{\Large
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Konzepte, Syntax, ...\\
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}printf, scanf\\[1ex]
+\hspace*{2ex}Next --> \hspace*{1ex}Pointers, Arrays, ...\\
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Structs, malloc, ...\\[1ex]
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Compiler, Headers, ...\\
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Debugging I\\[1ex]
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Guter Code\\
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Debugging II\\[1ex]
+\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}stdlib, Bücher, ...\\
+}
+
+
+==== Übersicht ====
+{\LARGE
+* Pointers
+* Arrays
+* Strings
+}
+
+
+==== Themen ====
+{\large
+* Hello pointer
+* Pointer auf Pointer
+* Arrays und Pointer
+* Pointer-Arithmetik
+* Strings
+* my\_strlen
+* const correctness
+* Deklaration von Arrays
+* Strings versus "Memory"
+* NULL-Pointer
+* Weiterführende Themen
+}
+
+
+==== Meta-Zeug ====
+{\LARGE
+Wir haben viel vor.\\
+~\\
+Eure Fragen...
+* bitte notieren, mit Slidenummer
+* beantworte ich gern am Ende
+}
+
+
+==== Pointer ====
+{\LARGE
+* zeigen auf eine Stelle im Speicher
+
+*<2-> sind Adressen
+*<3-> sind Zahlen
+*<4-> sind quasi auch Referenzen
+}
+
+
+==== Hello pointer ====
+{\ttfamily\large
+    \#include <stdio.h>\\
+~\\
+    int\\
+    main() \{\\
+    ~~int i = 3;\\
+    \uncover<2->{~~int *p = \&i;\\}
+~\\
+    \uncover<3->{~~printf("p == \%u$\backslash$n"\\
+    ~~~~~~"*p == \%d$\backslash$n"\\
+    ~~~~~~"i == \%d$\backslash$n", p, *p, i);\\}
+~\\
+    \uncover<4->{~~*p = 14;\\
+    ~~printf("i == \%d$\backslash$n", i);\\}
+    ~~return 0;\\
+    \}
+}
+
+
+==== Ausgabe ====
+{\ttfamily
+    \# ./hello\_pointer\\
+    \uncover<2->{p == 3218536620\\
+    *p == 3\\
+    i == 3\\
+    i == 14\\
+~\\
+    \uncover<3->{\# ./hello\_pointer\\
+    p == 3213159308\uncover<4->{~\textsf{ <-- Andere Adresse!}}\\
+    *p == 3\\
+    i == 3\\
+    i == 14}}
+}
+
+
+==== Zusammenfassung 1/2 ====
+{\LARGE
+Pointer zeigen auf getypte Daten:\\[1ex]
+\ind{}int * == Pointer auf int\\[1ex]
+\ind{}char * == Pointer auf char
+}
+
+==== Zusammenfassung 2/2 ====
+{\LARGE
+* Prefix-Operator \& liefert Adresse
+* Prefix-Operator * de-referenziert
+
+* \& und * sind komplementär:\\\ind{}*(\&x) == x
+}
+
+
+==== Pointer auf Pointer ====
+{\ttfamily\Huge
+    int a = 3;\\
+    int *pa = \&a;\\[1ex]
+    \uncover<2->{int **ppa = \&pa;}
+}
+
+
+==== Wohin mit den Sternen?~~(1/2) ====
+{\ttfamily\Huge
+    abc~**~foo\\
+    abc**~~foo~\textsf{ <-- NO!}\\
+    abc~~**foo\\
+}
+
+==== Wohin mit den Sternen?~~(2/2) ====
+{\ttfamily\LARGE
+    int x, y, z;\\
+~\\
+    \uncover<2->{int** a, b;\uncover<3->{~~/* Misleading */\\
+    \uncover<4->{int **a, b;\uncover<5->{~~/* Better */\\
+~\\
+    \uncover<6->{/* Best:~*/\\
+    int **a;\\
+    int b;\\}}}}}
+}
+
+
+==== Arrays und Pointer ====
+{\ttfamily
+    \#include <stdio.h>\\
+~\\
+    int\\
+    main() \{\\
+    ~~int primes[] = \{2, 3, 5, 7, 11\};\\
+    ~~int i;\\
+~\\
+    \uncover<2->{~~for (i = 0; i < sizeof(primes) / sizeof(int); ++i) \{\\
+    \uncover<3->{~~~~printf("primes[\%d] via array == \%d$\backslash$n", i,\\
+    ~~~~~~~~primes[i]);\\
+    \uncover<4->{~~~~printf("primes[\%d] via pointer == \%d$\backslash$n", i,\\
+    ~~~~~~~~*(primes + i));\\}}
+    ~~\}\\}
+    ~~return 0;\\
+    \}
+}
+
+
+==== Zusammenfassung 1/2 ====
+{\LARGE
+<[center]
+Pointer~\,==\,~Anfang eines Arrays
+[center]>
+}
+
+==== Zusammenfassung 2/2 ====
+{\Huge
+<[center]
+a[n]~\,==\,~*(a + n)
+[center]>
+}
+
+
+==== Pointer-Arithmetik ====
+{\Large
+    {\ttfamily
+        int numbers[3];\\
+        char text[] = "software libre";\\
+    }
+~\\
+    \uncover<2->{Es gilt:\\
+    \ind{}numbers[i] == *(numbers + i)\\
+    \uncover<3->{\ind{}text[j] == *(text + j)\\
+    \uncover<4->{\ind{}sizeof(char) != sizeof(int)\\
+~\\
+    \uncover<5->{Für Operatoren +/- auf Pointern folgt:\\
+    \uncover<6->{\ind{}Sprungweite variiert mit dem Typen!\\}}}}}
+}
+
+
+==== Strings ====
+{\LARGE
+    "ABC"\uncover<2->{~ --> ~41 42 43 \underline{00}\\
+~\\
+    \uncover<3->{{\ttfamily
+        \#include <string.h>\\
+        strlen("ABC");\\[1ex]
+    }
+    \uncover<4->{ --> 3\\}}}
+}
+
+==== my\_strlen ====
+{\ttfamily\Large
+    \uncover<3->{\#include <assert.h>\\
+    \#include <stdlib.h>~~/* for NULL */\\}
+~\\
+    unsigned int\\
+    my\_strlen(const char *str) \{\\
+    \uncover<2->{~~const char *walker = str;\\}
+    \uncover<3->{~~assert(str != NULL);\\}
+    \uncover<4->{~~while (*walker\only<4>{ != '$\backslash$0'}) \{\\
+    ~~~~walker++;\\
+    ~~\}\\}
+    ~~return \uncover<6->{(walker - str)};\\
+    \}
+}
+
+
+==== Strings ====
+{\ttfamily\LARGE
+    strlen("ABC");\\
+    \uncover<2->{ --> 3\\[1ex]}
+    \uncover<3->{strlen("A$\backslash$0B$\backslash$0C");\\}
+    \uncover<4->{ --> 1\\[1ex]}
+    \uncover<5->{strlen("ABC$\backslash$0$\backslash$0");\\}
+    \uncover<6->{ --> 3\\}
+}
+
+
+==== const correctness~~(1/5) ====
+{\LARGE
+<[center]
+\underline{const} char * \underline{const} foo = "foo";
+[center]>
+}
+
+==== const correctness~~(2/5) ====
+{\ttfamily\LARGE
+~~\underline{~~~~~}~char~\underline{~~~~~}~*~\underline{~~~~~}~foo;\\
+\uncover<3->{~~~~|~~~~~~~~~~|}\uncover<2->{~~~~~~~|\\}
+\uncover<3->{~~~~2a~~~~~~~~~2b}\uncover<2->{~~~~~~1\\}
+}
+
+==== const correctness~~(3/5) ====
+{\ttfamily\LARGE
+    <1>~~char * const foo;\\
+    \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
+    ~~~~~~~foo = bar;\\
+~\\
+    \uncover<3->{<2a> const char *foo;\\
+    <2b> char const *foo;\\
+    \uncover<4->{~~~~~~~\textsf{Verbietet:}\\
+    ~~~~~~~foo[3] = 'a';\\}}}
+}
+
+==== const correctness~~(4/5) ====
+{\ttfamily\LARGE
+    <2a,1> const char * const foo;\\
+    \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
+    ~~~~~~~foo[3] = 'a';\\
+    ~~~~~~~foo = bar;\\
+~\\
+\uncover<3->{\textsf{String-Konstanten bitte immer so $\uparrow$}\\}}
+}
+
+==== const correctness~~(5/5) ====
+{\ttfamily\LARGE
+    char const * const * const foo;\\
+    \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
+    ~~~~~~~foo = ...;\\
+    ~~~~~~~foo[3] = ...;\\
+    ~~~~~~~foo[7][2] = ...;\\}
+}
+
+
+==== const correctness in APIs ====
+{\large
+    \texttt{int my\_strlen(char *str);\\}
+    \uncover<2->{\ind{}Funktion darf den \emph{Inhalt} von \texttt{str} verändern\\}
+    \uncover<3->{\ind{}my\_strlen("ABC") gibt Compile-Fehler\\}
+~\\
+    \texttt{int my\_strlen(\underline{const} char *str);\\}
+    \uncover<4->{\ind{}Funktion darf den Inhalt von \texttt{str} nicht verändern\\}
+    \uncover<5->{\ind{}my\_strlen("ABC") erlaubt und sicher\\}
+}
+
+
+==== Deklaration ====
+{\Large
+    \uncover<3->{Variante "Mit Array"\\}
+    \ind{}\texttt{char a[] = "Hallo";}\\
+    \uncover<2->{\ind{}reserviert~~sizeof(char)*(5 + 1)~~Byte\\}
+    \uncover<4->{\ind{}lesen und schreiben möglich\\}
+~\\
+    \uncover<5->{Variante "Nur Pointer"\\}
+    \uncover<6->{\ind{}\texttt{const char *p = "Hallo";}\\}
+    \uncover<7->{\ind{}reserviert~~sizeof(char *)~~Byte\\}
+    \uncover<8->{\ind{}nur lesen möglich\\}
+}
+
+
+==== Strings versus "Memory" ====
+{\Large
+    \underline{str}ncpy(\underline{char} *dest, const \underline{char} *src, size\_t n);\\[1.5ex]
+    \underline{mem}cpy(\underline{void} *dest, const \underline{void} *src, size\_t n);\\[0.5ex]
+    \uncover<2->{ohne Null-Byte-Behandlung}
+}
+
+
+==== NULL-Pointer ====
+{\ttfamily\Large
+    char *foo = NULL;\\
+    printf("foo = '\%s'$\backslash$n", foo)\uncover<2->{\textsf{~ <-- BANG!}}\\
+}
+
+
+==== Weiterführende Themen ====
+{\Large
+* Besonderheiten mehrdimensionaler Arrays
+* Verkette Listen (and Friends)
+* Character encodings, Unicode, wchar\_t
+* Sicherer Umgang mit Strings
+* Der Typen size\_t
+* Void-Pointer
+* Funktions-Pointer
+* Die Wahrheit über sizeof(char)
+}
+
+
+==== ====
+<[center]
+{\Huge
+Danke!\\
+~\\
+Fragen?\\
+\vfill
+\vfill
+}
+{\LARGE http://blog.hartwork.org/}
+[center]>
+\vspace*{-4ex}
