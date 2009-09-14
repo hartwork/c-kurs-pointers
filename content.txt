@@ -34,7 +34,7 @@
 * Arrays und Pointer
 * Pointer-Arithmetik
 * Strings
-* my\_strlen
+* Längenberechnung
 * const correctness
 * Deklaration von Arrays
 * Strings versus "Memory"
@@ -43,7 +43,7 @@
 }
 
 
-==== Meta-Zeug ====
+==== Organisatorisches ====
 {\LARGE
 Wir haben viel vor.\\
 ~\\
@@ -72,44 +72,45 @@ Eure Fragen...
     ~~int i = 3;\\
     \uncover<2->{~~int *p = \&i;\\}
 ~\\
-    \uncover<3->{~~printf("p == \%u$\backslash$n"\\
-    ~~~~~~"*p == \%d$\backslash$n"\\
-    ~~~~~~"i == \%d$\backslash$n", p, *p, i);\\}
+    \uncover<3->{~~printf(" p == \%\#p$\backslash$n"\\
+    ~~~~~~~~~"*p == \%d$\backslash$n"\\
+    ~~~~~~~~~" i == \%d$\backslash$n", p, *p, i);\\}
 ~\\
     \uncover<4->{~~*p = 14;\\
-    ~~printf("i == \%d$\backslash$n", i);\\}
+    ~~printf(" i == \%d$\backslash$n$\backslash$n", i);\\}
     ~~return 0;\\
     \}
 }
 
 
 ==== Ausgabe ====
-{\ttfamily
-    \# ./hello\_pointer\\
-    \uncover<2->{p == 3218536620\\
+{\ttfamily\Large
+    \# gcc~\,hello\_pointer.c~\,-o hello\_pointer\\
+    \uncover<2->{\# ./hello\_pointer\\
+    \uncover<3->{~p == 0xbfa3ad8c\\
     *p == 3\\
-    i == 3\\
-    i == 14\\
+    ~i == 3\\
+    ~i == 14\\
 ~\\
-    \uncover<3->{\# ./hello\_pointer\\
-    p == 3213159308\uncover<4->{~\textsf{ <-- Andere Adresse!}}\\
+    \uncover<4->{\# ./hello\_pointer\\
+    ~p == 0xbfba66fc\uncover<5->{~\textsf{ <-- Andere Adresse!}}\\
     *p == 3\\
-    i == 3\\
-    i == 14}}
+    ~i == 3\\
+    ~i == 14}}}
 }
 
 
 ==== Zusammenfassung 1/2 ====
 {\LARGE
-Pointer zeigen auf getypte Daten:\\[1ex]
-\ind{}int * == Pointer auf int\\[1ex]
-\ind{}char * == Pointer auf char
+Pointer zeigen auf typisierte Daten:\\[1ex]
+\ind{}\texttt{~int *} == Pointer auf int\\[1ex]
+\ind{}\texttt{char *} == Pointer auf char
 }
 
 ==== Zusammenfassung 2/2 ====
 {\LARGE
 * Prefix-Operator \& liefert Adresse
-* Prefix-Operator * de-referenziert
+* Prefix-Operator * dereferenziert
 
 * \& und * sind komplementär:\\\ind{}*(\&x) == x
 }
@@ -125,9 +126,9 @@ Pointer zeigen auf getypte Daten:\\[1ex]
 
 ==== Wohin mit den Sternen?~~(1/2) ====
 {\ttfamily\Huge
-    abc~**~foo\\
-    abc**~~foo~\textsf{ <-- NO!}\\
-    abc~~**foo\\
+    \only<1-2>{int**~~foo;}\only<3->{\xout{int**~~foo;}}\uncover<2>{~\textsf{ <-- Bitte nicht!}\\}
+    int~**~foo;\\
+    int~~**foo;\\
 }
 
 ==== Wohin mit den Sternen?~~(2/2) ====
@@ -197,25 +198,22 @@ a[n]~\,==\,~*(a + n)
 
 ==== Strings ====
 {\LARGE
-    "ABC"\uncover<2->{~ --> ~41 42 43 \underline{00}\\
-~\\
+    "ABC"\uncover<2->{~ --> ~\{\,65, 66, 67, \underline{00}\,\}\\
+~\\[1ex]
     \uncover<3->{{\ttfamily
         \#include <string.h>\\
+        ...\\
         strlen("ABC");\\[1ex]
     }
     \uncover<4->{ --> 3\\}}}
 }
 
 ==== my\_strlen ====
-{\ttfamily\Large
-    \uncover<3->{\#include <assert.h>\\
-    \#include <stdlib.h>~~/* for NULL */\\}
-~\\
+{\ttfamily\LARGE
     unsigned int\\
     my\_strlen(const char *str) \{\\
     \uncover<2->{~~const char *walker = str;\\}
-    \uncover<3->{~~assert(str != NULL);\\}
-    \uncover<4->{~~while (*walker\only<4>{ != '$\backslash$0'}) \{\\
+    \uncover<3->{~~while (\only<3,5->{'$\backslash$0' != }*walker) \{\\
     ~~~~walker++;\\
     ~~\}\\}
     ~~return \uncover<6->{(walker - str)};\\
@@ -245,7 +243,7 @@ a[n]~\,==\,~*(a + n)
 {\ttfamily\LARGE
 ~~\underline{~~~~~}~char~\underline{~~~~~}~*~\underline{~~~~~}~foo;\\
 \uncover<3->{~~~~|~~~~~~~~~~|}\uncover<2->{~~~~~~~|\\}
-\uncover<3->{~~~~2a~~~~~~~~~2b}\uncover<2->{~~~~~~1\\}
+\uncover<3->{~~~<2a>~~~~~~~<2b>}\uncover<2->{~~~~<1>\\}
 }
 
 ==== const correctness~~(3/5) ====
@@ -316,8 +314,11 @@ a[n]~\,==\,~*(a + n)
 
 ==== NULL-Pointer ====
 {\ttfamily\Large
+    \#include <stdlib.h>~~/* for NULL */\\
+    ...\\
     char *foo = NULL;\\
-    printf("foo = '\%s'$\backslash$n", foo)\uncover<2->{\textsf{~ <-- BANG!}}\\
+    ...\\
+    printf("foo = '\%s'$\backslash$n", foo);\uncover<2->{\textsf{~ <-- BANG!}}\\
 }
 
 
