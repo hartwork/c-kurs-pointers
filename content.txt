@@ -6,7 +6,24 @@
 \newcommand{\highlight}[1]{{\color{yellow} #1}}
 \newcommand{\exclamation}{!}
 \newcommand{\comment}[1]{}
-
+\newcommand{\introslide}[1]{
+    {\setbeamertemplate{footline}{}
+        \begin{frame}%<beamer>
+            \frametitle{}
+            \begin{center}\Huge
+                #1
+            \end{center}
+        \end{frame}
+    }
+}
+\AtBeginSection[] % Do nothing for \section*
+{
+    \introslide{\insertsection}
+}
+\AtBeginSubsection[] % Do nothing for \subsection*
+{
+    \introslide{\insertsubsection}
+}
 
 
 ==== C-Kurs ====
@@ -41,7 +58,8 @@
 * Längenberechnung
 * const correctness
 * argc und argv
-* Deklaration von Arrays
+* Mehrdimensionale Arrays
+* Deklaration von Strings
 * NULL-Pointer\vspace*{1ex}
 * Weiterführende Themen
 }
@@ -235,7 +253,7 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 ==== Zusammenfassung~~(1/2) ====
 {\LARGE
 <[center]
-Pointer~\,\texttt{==}\,~Anfang eines Arrays
+Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 [center]>
 }
 
@@ -388,7 +406,91 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
 }
 
 
-==== Deklaration von Arrays ====
+== Mehrdimensionale Arrays ==
+{
+\subsection*{Variante "Array von Pointern"}
+\introslide{Variante\\"Array von Pointern"}
+}
+
+==== 2D-Array als Array von Pointern ====
+<[center]
+\only<1>{
+<<<graphics/array-deep-minus-4,height=0.7\textheight>>>
+}\only<2>{
+<<<graphics/array-deep-minus-3,height=0.7\textheight>>>
+}\only<3>{
+<<<graphics/array-deep-minus-2,height=0.7\textheight>>>
+}\only<4>{
+<<<graphics/array-deep-minus-1,height=0.7\textheight>>>
+}\only<5>{
+<<<graphics/array-deep-minus-0,height=0.7\textheight>>>
+}
+[center]>
+
+==== 2D-Array als Array von Pointern ====
+{\ttfamily\Large
+    \uncover<4->{void demo\_deep(\highlight{int *} const \highlight{*a}) \{\\
+    ~~a[1][2] *= 2;\\
+    \}\\}
+~\\
+    int main() \{\\
+    \uncover<2->{~~int row0[] = \{0, 1, 2\};\\
+    ~~int row1[] = \{3, 4, 5\};\\
+    ~~int * const d[] = \{row0, row1\};\\
+    \uncover<3->{~~demo\_deep(d);\\}}
+    ~~return 0;\\
+    \}\\
+}
+
+=== Variante "Linear" ===
+
+==== 2D-Array linear ====
+<[center]
+\only<1>{
+<<<graphics/array-flat-minus-3,height=0.7\textheight>>>
+}\only<2>{
+<<<graphics/array-flat-minus-2,height=0.7\textheight>>>
+}\only<3>{
+<<<graphics/array-flat-minus-1,height=0.7\textheight>>>
+}\only<4>{
+<<<graphics/array-flat-minus-0,height=0.7\textheight>>>
+}
+[center]>
+
+==== 2D-Array linear ====
+{\ttfamily\Large
+    \uncover<4->{void demo\_flat(\highlight{int a[][3]}) \{\\
+    ~~a[1][2] *= 2;\\
+    \}\\}
+~\\
+    int main() \{\\
+    \uncover<2->{~~int f[][3] = \{ \{0, 1, 2\},\\
+    ~~~~~~~~~~~~~~~~~\{3, 4, 5\} \};\\
+    \uncover<3->{~~demo\_flat(f);\\}}
+    ~~return 0;\\
+    \}
+}
+
+=== Variante "Hybrid" ===
+
+==== 2D-Array-Hybrid ====
+{\ttfamily\Large
+    \uncover<5->{void demo\_flat(\highlight{int a[][3]});\\
+    void demo\_deep(\highlight{int *} const \highlight{*a});\\}
+~\\
+    int main() \{\\
+    \uncover<2->{~~int f[][3] = \{ \{0, 1, 2\},\\
+    ~~~~~~~~~~~~~~~~~\{3, 4, 5\} \};\\
+    \uncover<3->{~~int * const d[] = \{f[0], f[1]\};\\
+    \uncover<4->{~~demo\_flat(f);\\
+    ~~demo\_deep(d);\\}}}
+    ~~return 0;\\
+    \}
+}
+
+== Deklaration von Strings ==
+
+==== Deklaration von Strings ====
 {\Large
     \uncover<3->{Variante "Mit Array"\\}
     \ind{}\texttt{char a[] = "Hallo";}\\
@@ -422,8 +524,6 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
 
 ==== Weiterführende Themen ====
 {\Large
-* Besonderheiten mehrdimensionaler Arrays
-* Verkette Listen (and friends)
 * Character encodings, Unicode, wchar\_t
 * Sicherer Umgang mit Strings
 * Der Typ size\_t
