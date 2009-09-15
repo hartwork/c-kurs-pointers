@@ -47,6 +47,13 @@
 * Strings
 }
 
+==== Übersicht ====
+{\LARGE
+Grundlagen für ..
+* Multiplikation von Matrizen
+* Speicherverwaltung\\\ind{}(nächste Vorlesung)
+}
+
 
 ==== Themen ====
 {\large
@@ -54,14 +61,14 @@
 * Pointer auf Pointer
 * Arrays und Pointer
 * Pointer-Arithmetik
-* Strings
-* Längenberechnung
+* Strings und Längenberechnung
 * const correctness
 * argc und argv
 * Mehrdimensionale Arrays
 * Deklaration von Strings
 * NULL-Pointer\vspace*{1ex}
 * Weiterführende Themen
+* Zusammenfassung
 }
 %* Strings versus "Memory"
 
@@ -77,6 +84,8 @@ Eure Fragen...
 }
 
 
+== Pointer ==
+
 ==== Pointer ====
 {\LARGE
 * zeigen auf eine Stelle im Speicher
@@ -86,6 +95,8 @@ Eure Fragen...
 *<4-> sind quasi auch Referenzen
 }
 
+
+== Hello pointer ==
 
 ==== Hello pointer ====
 {\ttfamily\large
@@ -133,12 +144,14 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 
 ==== Zusammenfassung 2/2 ====
 {\LARGE
-* Prefix-Operator \& liefert Adresse
-* Prefix-Operator * dereferenziert
+*<1-> Prefix-Operator \& liefert Adresse
+*<2-> Prefix-Operator * dereferenziert
 
-* \& und * sind komplementär:\\\ind{}*(\&x) == x
+*<3-> \& und * sind komplementär:\\\ind{}*(\&x) == x
 }
 
+
+== Pointer auf Pointer ==
 
 ==== Pointer auf Pointer ====
 {\ttfamily\Huge
@@ -167,6 +180,8 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
     int b;\\}}}}}
 }
 
+
+== Arrays und Pointer ==
 
 ==== Arrays und Pointer~~(1/3) ====
 {\ttfamily
@@ -265,6 +280,8 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 }
 
 
+== Pointer-Arithmetik ==
+
 ==== Pointer-Arithmetik ====
 {\Large
     {\ttfamily
@@ -283,6 +300,8 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
     \uncover<6->{\ind{}Sprungweite variiert mit dem Typen!\\}}
 }
 
+
+== Strings ==
 
 ==== Strings ====
 {\LARGE
@@ -319,6 +338,8 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
     \uncover<6->{ --> 3\\}
 }
 
+
+== const correctness ==
 
 ==== const correctness~~(1/5) ====
 {\LARGE
@@ -377,6 +398,8 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
     \uncover<5->{\ind{}my\_strlen("ABC") erlaubt und sicher\\}
 }
 
+
+== argc und argv ==
 
 ==== argc und argv ====
 {\ttfamily\Large
@@ -512,6 +535,8 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 }
 
 
+== NULL-Pointer ==
+
 ==== NULL-Pointer ====
 {\ttfamily\Large
     \#include <stdlib.h>~~/* for NULL */\\
@@ -522,6 +547,8 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 }
 
 
+== Weiterführende Themen ==
+
 ==== Weiterführende Themen ====
 {\Large
 * Character encodings, Unicode, wchar\_t
@@ -529,6 +556,20 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 * Der Typ size\_t
 * Void-Pointer
 * Funktions-Pointer
+}
+
+
+== Zusammenfassung ==
+
+==== Zusammenfassung ====
+{\Large
+* \texttt{sizeof(\emph{x})} liefert die Größe von \texttt{\emph{x}} in Byte
+* \&-Operator liefert eine Adresse
+* *-Operator dereferenziert
+* Pointer sind typisiert
+* Arrays sind auch Pointer auf ihr erstes Element
+* Strings sind nulltermininiert
+* const correctness bei Pointern ist wichtig
 }
 
 
