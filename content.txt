@@ -4,6 +4,7 @@
 \newcommand{\ind}{\hspace*{3ex}}
 \setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertpagenumber\vspace*{0.5ex}\hspace*{0.5ex}}
 \newcommand{\highlight}[1]{{\color{yellow} #1}}
+\newcommand{\exclamation}{!}
 
 
 
@@ -40,7 +41,7 @@
 * const correctness
 * Deklaration von Arrays
 * Strings versus "Memory"
-* NULL-Pointer
+* NULL-Pointer\vspace*{1ex}
 * Weiterführende Themen
 }
 
@@ -52,6 +53,7 @@ Wir haben viel vor.\\
 Eure Fragen...
 * bitte notieren, mit Slidenummer
 * beantworte ich gern am Ende
+* Ausnahme: Verständnisfragen
 }
 
 
@@ -279,10 +281,10 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
     unsigned int\\
     my\_strlen(const char *str) \{\\
     \uncover<2->{~~const char *walker = str;\\}
-    \uncover<3->{~~while (\only<3,5->{'$\backslash$0' != }*walker) \{\\
+    \uncover<3->{~~while (\only<3,6->{'$\backslash$0' \exclamation{}= *walker}\only<4>{\highlight{*walker}}\only<5>{\highlight{'$\backslash$0' \exclamation{}= }*walker}) \{\\
     ~~~~walker++;\\
     ~~\}\\}
-    ~~return \uncover<6->{(walker - str)};\\
+    ~~return \uncover<6->{\highlight{walker - str}};\\
     \}
 }
 
@@ -301,7 +303,7 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
 ==== const correctness~~(1/5) ====
 {\LARGE
 <[center]
-\only<1>{const}\only<2>{\underline{const}} char * \only<1>{const}\only<2>{\underline{const}} foo = "foo";
+\only<1>{const}\only<2>{\highlight{const}} char * \only<1>{const}\only<2>{\highlight{const}} foo = "foo";
 [center]>
 }
 
@@ -331,7 +333,7 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
     ~~~~~~~foo[3] = ...;\\
     ~~~~~~~foo = bar;\\
 ~\\
-\uncover<3->{\textsf{String-Konstanten bitte immer so $\uparrow$}\\}}
+\uncover<3->{\highlight{\textsf{String-Konstanten bitte immer so $\uparrow$}}\\}}
 }
 
 ==== const correctness~~(5/5) ====
@@ -361,12 +363,12 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
     \uncover<3->{Variante "Mit Array"\\}
     \ind{}\texttt{char a[] = "Hallo";}\\
     \uncover<2->{\ind{}\texttt{sizof(a) == sizeof(char)*(5 + 1)}\\}
-    \uncover<4->{\ind{}lesen und schreiben möglich\\}
+    \uncover<4->{\ind{}Inhalt les- und schreibbar\\}
 ~\\
     \uncover<5->{Variante "Nur Pointer"\\}
-    \uncover<6->{\ind{}\texttt{\only<9->{\underline{const} }char *p = "Hallo";}\\}  % gcc -Wwrite-strings 
+    \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char *p = "Hallo";}\\}  % gcc -Wwrite-strings 
     \uncover<7->{\ind{}\texttt{sizof(p) == sizeof(char *)}\\}
-    \uncover<8->{\ind{}nur lesen möglich\\}
+    \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
 }
 
 
@@ -384,7 +386,7 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
     ...\\
     char *foo = NULL;\\
     ...\\
-    printf("foo = '\%s'$\backslash$n", foo);\uncover<2->{\textsf{~ <-- BANG!}}\\
+    printf("foo = '\%s'$\backslash$n", foo);\uncover<2->{\textsf{~\highlight{ <-- BANG!}}}\\
 }
 
 
