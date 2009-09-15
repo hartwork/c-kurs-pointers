@@ -2,7 +2,9 @@
 % Licensed under Creative Commons Attribution-ShareAlike 3.0 License
 %
 \newcommand{\ind}{\hspace*{3ex}}
-\setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertframenumber\vspace*{0.5ex}\hspace*{0.5ex}}
+\setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertpagenumber\vspace*{0.5ex}\hspace*{0.5ex}}
+\newcommand{\highlight}[1]{{\color{yellow} #1}}
+
 
 
 ==== C-Kurs ====
@@ -93,7 +95,7 @@ Eure Fragen...
     ~i == 14\\
 ~\\
     \uncover<4->{\# ./hello\_pointer\\
-    ~p == 0xbfba66fc\uncover<5->{~\textsf{ <-- Andere Adresse!}}\\
+    ~p == 0xbfba66fc\uncover<5->{~\highlight{\textsf{ <-- Andere Adresse!}}}\\
     *p == 3\\
     ~i == 3\\
     ~i == 14}}}
@@ -126,7 +128,7 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 
 ==== Wohin mit den Sternen?~~(1/2) ====
 {\ttfamily\Huge
-    \only<1-2>{int**~~foo;}\only<3->{\xout{int**~~foo;}}\uncover<2>{~\textsf{ <-- Bitte nicht!}\\}
+    \only<1-2>{int**~~foo;}\only<3->{\xout{int**~~foo;}}\uncover<2>{~\highlight{\textsf{ <-- Bitte nicht!}}\\}
     int~**~foo;\\
     int~~**foo;\\
 }
@@ -144,7 +146,7 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 }
 
 
-==== Arrays und Pointer ====
+==== Arrays und Pointer~~(1/3) ====
 {\ttfamily
     \#include <stdio.h>\\
 ~\\
@@ -153,28 +155,90 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
     ~~int primes[] = \{2, 3, 5, 7, 11\};\\
     ~~int i;\\
 ~\\
-    \uncover<2->{~~for (i = 0; i < sizeof(primes) / sizeof(int); ++i) \{\\
-    \uncover<3->{~~~~printf("primes[\%d] via array == \%d$\backslash$n", i,\\
-    ~~~~~~~~primes[i]);\\
-    \uncover<4->{~~~~printf("primes[\%d] via pointer == \%d$\backslash$n", i,\\
-    ~~~~~~~~*(primes + i));\\}}
+    \uncover<2->{~~for (i = 0; i < 5; ++i) \{\\
+    \uncover<3->{~~~~printf("primes[\%d] == \%d$\backslash$n", i,\\
+    ~~~~~~~~primes[i]);\\}
     ~~\}\\}
     ~~return 0;\\
     \}
 }
 
 
-==== Zusammenfassung 1/2 ====
+==== Zusammenfassung ====
 {\LARGE
 <[center]
-Pointer~\,==\,~Anfang eines Arrays
+Zugriff via [\emph{n}] ähnlich Java
 [center]>
 }
 
-==== Zusammenfassung 2/2 ====
-{\Huge
+
+==== Arrays und Pointer~~(2/3) ====
+{\ttfamily
+    \#include <stdio.h>\\
+~\\
+    int\\
+    main() \{\\
+    ~~int primes[] = \{2, 3, 5, 7, 11\};\\
+    ~~int i;\\
+~\\
+    ~~for (i = 0; i < \only<1>{5}\only<2->{\highlight{sizeof(primes) / sizeof(int)}}; ++i) \{\\
+    ~~~~printf("primes[\%d] == \%d$\backslash$n", i,\\
+    ~~~~~~~~primes[i]);\\
+    ~~\}\\
+    ~~return 0;\\
+    \}
+}
+
+
+==== Zusammenfassung~~(1/2) ====
+{\Large
 <[center]
-a[n]~\,==\,~*(a + n)
+\texttt{sizeof(\emph{variable})\\==}\\
+Von \texttt{\emph{variable}} belegter Speicher in Byte
+[center]>
+}
+
+
+==== Zusammenfassung~~(2/2) ====
+{\Large
+<[center]
+\texttt{sizeof(\highlight{\emph{type}})\\==}\\
+Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
+[center]>
+}
+
+
+==== Arrays und Pointer~~(3/3) ====
+{\ttfamily
+    \#include <stdio.h>\\
+~\\
+    int\\
+    main() \{\\
+    ~~int primes[] = \{2, 3, 5, 7, 11\};\\
+    ~~int i;\\
+~\\
+    ~~for (i = 0; i < sizeof(primes) / sizeof(int); ++i) \{\\
+    ~~~~printf("primes[\%d]\only<3->{ via array~~} == \%d$\backslash$n", i,\\
+    ~~~~~~~~\only<1-4>{primes[i]}\only<5->{\highlight{{primes[i]}}});\\
+    \only<2->{\uncover<4->{~~~~printf("primes[\%d] via pointer == \%d$\backslash$n", i,\\
+    ~~~~~~~~\only<4>{*(primes + i)}\only<5->{\highlight{*(primes + i)}});\\}}
+    ~~\}\\
+    ~~return 0;\\
+    \}
+}
+
+
+==== Zusammenfassung~~(1/2) ====
+{\LARGE
+<[center]
+Pointer~\,\texttt{==}\,~Anfang eines Arrays
+[center]>
+}
+
+==== Zusammenfassung~~(2/2) ====
+{\ttfamily\Huge
+<[center]
+\emph{a}[\emph{n}]~==~*(\emph{a} + \emph{n})
 [center]>
 }
 
@@ -187,12 +251,14 @@ a[n]~\,==\,~*(a + n)
     }
 ~\\
     \uncover<2->{Es gilt:\\
-    \ind{}numbers[i] == *(numbers + i)\\
-    \uncover<3->{\ind{}text[j] == *(text + j)\\
-    \uncover<4->{\ind{}sizeof(char) != sizeof(int)\\
+    {\ttfamily
+        \ind{}numbers[i] == *(numbers + i)\\
+        \uncover<3->{\ind{}text[j] == *(text + j)\\}
+        \uncover<4->{\ind{}sizeof(char) != sizeof(int)\\}
+    }
 ~\\
-    \uncover<5->{Für Operatoren +/- auf Pointern folgt:\\
-    \uncover<6->{\ind{}Sprungweite variiert mit dem Typen!\\}}}}}
+    \uncover<5->{Für Operatoren +/- auf Pointern folgt:\\}
+    \uncover<6->{\ind{}Sprungweite variiert mit dem Typen!\\}}
 }
 
 
@@ -235,15 +301,15 @@ a[n]~\,==\,~*(a + n)
 ==== const correctness~~(1/5) ====
 {\LARGE
 <[center]
-\underline{const} char * \underline{const} foo = "foo";
+\only<1>{const}\only<2>{\underline{const}} char * \only<1>{const}\only<2>{\underline{const}} foo = "foo";
 [center]>
 }
 
 ==== const correctness~~(2/5) ====
 {\ttfamily\LARGE
-~~\underline{~~~~~}~char~\underline{~~~~~}~*~\underline{~~~~~}~foo;\\
-\uncover<3->{~~~~|~~~~~~~~~~|}\uncover<2->{~~~~~~~|\\}
-\uncover<3->{~~~<2a>~~~~~~~<2b>}\uncover<2->{~~~~<1>\\}
+~~\underline{~~~~~}~char~\only<3->{\underline{~~~~~}~*~\underline{~~~~~}~}foo;\\
+~~\only<3->{\uncover<4->{~~|~~~~~~~~~~|~~~~~}}\uncover<2->{~~|\\}
+~~\only<3->{\uncover<4->{~<2a>~~~~~~~<2b>~~~}}\uncover<2->{~<1>\\}
 }
 
 ==== const correctness~~(3/5) ====
@@ -255,14 +321,14 @@ a[n]~\,==\,~*(a + n)
     \uncover<3->{<2a> const char *foo;\\
     <2b> char const *foo;\\
     \uncover<4->{~~~~~~~\textsf{Verbietet:}\\
-    ~~~~~~~foo[3] = 'a';\\}}}
+    ~~~~~~~foo[3] = ...;\\}}}
 }
 
 ==== const correctness~~(4/5) ====
 {\ttfamily\LARGE
     <2a,1> const char * const foo;\\
     \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
-    ~~~~~~~foo[3] = 'a';\\
+    ~~~~~~~foo[3] = ...;\\
     ~~~~~~~foo = bar;\\
 ~\\
 \uncover<3->{\textsf{String-Konstanten bitte immer so $\uparrow$}\\}}
@@ -290,16 +356,16 @@ a[n]~\,==\,~*(a + n)
 }
 
 
-==== Deklaration ====
+==== Deklaration von Arrays ====
 {\Large
     \uncover<3->{Variante "Mit Array"\\}
     \ind{}\texttt{char a[] = "Hallo";}\\
-    \uncover<2->{\ind{}reserviert~~sizeof(char)*(5 + 1)~~Byte\\}
+    \uncover<2->{\ind{}\texttt{sizof(a) == sizeof(char)*(5 + 1)}\\}
     \uncover<4->{\ind{}lesen und schreiben möglich\\}
 ~\\
     \uncover<5->{Variante "Nur Pointer"\\}
-    \uncover<6->{\ind{}\texttt{const char *p = "Hallo";}\\}
-    \uncover<7->{\ind{}reserviert~~sizeof(char *)~~Byte\\}
+    \uncover<6->{\ind{}\texttt{\only<9->{\underline{const} }char *p = "Hallo";}\\}  % gcc -Wwrite-strings 
+    \uncover<7->{\ind{}\texttt{sizof(p) == sizeof(char *)}\\}
     \uncover<8->{\ind{}nur lesen möglich\\}
 }
 
@@ -325,13 +391,12 @@ a[n]~\,==\,~*(a + n)
 ==== Weiterführende Themen ====
 {\Large
 * Besonderheiten mehrdimensionaler Arrays
-* Verkette Listen (and Friends)
+* Verkette Listen (and friends)
 * Character encodings, Unicode, wchar\_t
 * Sicherer Umgang mit Strings
-* Der Typen size\_t
+* Der Typ size\_t
 * Void-Pointer
 * Funktions-Pointer
-* Die Wahrheit über sizeof(char)
 }
 
 
