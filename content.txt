@@ -5,6 +5,7 @@
 \setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertpagenumber\vspace*{0.5ex}\hspace*{0.5ex}}
 \newcommand{\highlight}[1]{{\color{yellow} #1}}
 \newcommand{\exclamation}{!}
+\newcommand{\comment}[1]{}
 
 
 
@@ -41,10 +42,10 @@
 * const correctness
 * argc und argv
 * Deklaration von Arrays
-* Strings versus "Memory"
 * NULL-Pointer\vspace*{1ex}
 * Weiterführende Themen
 }
+%* Strings versus "Memory"
 
 
 ==== Organisatorisches ====
@@ -401,8 +402,8 @@ Pointer~\,\texttt{==}\,~Anfang eines Arrays
 }
 
 
-==== Strings versus "Memory" ====
-{\Large
+%==== Strings versus "Memory" ====
+\comment{\Large
     \underline{str}ncpy(\underline{char} *dest, const \underline{char} *src, size\_t n);\\[1.5ex]
     \underline{mem}cpy(\underline{void} *dest, const \underline{void} *src, size\_t n);\\[0.5ex]
     \uncover<2->{ohne Null-Byte-Behandlung}
