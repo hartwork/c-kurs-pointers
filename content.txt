@@ -28,17 +28,18 @@
 
 ==== C-Kurs ====
 {\Large
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Konzepte, Syntax, ...\\
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}printf, scanf\\[1ex]
-\hspace*{2ex}Next --> \hspace*{1ex}Pointers, Arrays, ...\\
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Structs, malloc, ...\\[1ex]
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Compiler, Headers, ...\\
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Debugging I\\[1ex]
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Guter Code\\
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}Debugging II\\[1ex]
-\hspace*{2ex}\phantom{Next --> }\hspace*{1ex}stdlib, Bücher, ...\\
+\begin{tabular}{ll@{~~~}l}
+~        & Mo  & Konzepte, Syntax, ... \\
+~        & ~   & printf, scanf \\[1ex]
+Next --> & Die & Pointers, Arrays, ... \\
+~        & ~   & Structs, malloc, ... \\[1ex]
+~        & Mi  & Compiler, Headers, ... \\
+~        & ~   & Debugging I \\[1ex]
+~        & Do  & Guter Code \\
+~        & ~   & Debugging II \\[1ex]
+~        & Fr  & stdlib, Bücher, ... \\
+\end{tabular}
 }
-
 
 ==== Übersicht ====
 {\LARGE
@@ -71,17 +72,6 @@ Grundlagen für ..
 * Zusammenfassung
 }
 %* Strings versus "Memory"
-
-
-==== Organisatorisches ====
-{\LARGE
-Wir haben viel vor.\\
-~\\
-Eure Fragen...
-* bitte notieren, mit Slidenummer
-* beantworte ich gern am Ende
-* Ausnahme: Verständnisfragen
-}
 
 
 == Pointer ==
