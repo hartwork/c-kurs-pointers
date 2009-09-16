@@ -31,7 +31,7 @@
 \begin{tabular}{ll@{~~~}l}
 ~        & Mo  & Konzepte, Syntax, ... \\
 ~        & ~   & printf, scanf \\[1ex]
-Next --> & Die & Pointers, Arrays, ... \\
+Next --> & Di  & Pointers, Arrays, ... \\
 ~        & ~   & Structs, malloc, ... \\[1ex]
 ~        & Mi  & Compiler, Headers, ... \\
 ~        & ~   & Debugging I \\[1ex]
