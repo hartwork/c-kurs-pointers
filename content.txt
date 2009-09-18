@@ -531,9 +531,9 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 {\ttfamily\Large
     \#include <stdlib.h>~~/* for NULL */\\
     ...\\
-    char *foo = NULL;\\
-    ...\\
-    printf("foo = '\%s'$\backslash$n", foo);\uncover<2->{\textsf{~\highlight{ <-- BANG!}}}\\
+    int *p = NULL;\\
+    \uncover<2->{...\\
+    int b = *p;\uncover<3->{\textsf{~\highlight{ <-- BANG!}}}\\}
 }
 
 
