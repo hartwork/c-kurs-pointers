@@ -43,7 +43,7 @@ Next --> & Di  & Pointers, Arrays, ... \\
 
 ==== Übersicht ====
 {\LARGE
-* Pointers
+* Pointer
 * Arrays
 * Strings
 }
@@ -94,14 +94,14 @@ Grundlagen für ..
 ~\\
     int\\
     main() \{\\
-    ~~int i = 3;\\
-    \uncover<2->{~~int *p = \&i;\\}
+    \uncover<2->{~~int i = 3;\\}
+    \uncover<3->{~~int *p = \&i;\\}
 ~\\
-    \uncover<3->{~~printf(" p == \%\#p$\backslash$n"\\
+    \uncover<4->{~~printf(" p == \%\#p$\backslash$n"\\
     ~~~~~~~~~"*p == \%d$\backslash$n"\\
     ~~~~~~~~~" i == \%d$\backslash$n", p, *p, i);\\}
 ~\\
-    \uncover<4->{~~*p = 14;\\
+    \uncover<5->{~~*p = 14;\\
     ~~printf(" i == \%d$\backslash$n$\backslash$n", i);\\}
     ~~return 0;\\
     \}
@@ -145,9 +145,9 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 
 ==== Pointer auf Pointer ====
 {\ttfamily\Huge
-    int a = 3;\\
-    int *pa = \&a;\\[1ex]
-    \uncover<2->{int **ppa = \&pa;}
+    int i = 3;\\
+    int *p = \&i;\\[1ex]
+    \uncover<2->{int **pp = \&p;}
 }
 
 
@@ -179,11 +179,11 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 ~\\
     int\\
     main() \{\\
-    ~~int primes[] = \{2, 3, 5, 7, 11\};\\
-    ~~int i;\\
+    \uncover<2->{~~int primes[] = \{2, 3, 5, 7, 11\};\\}
+    \uncover<3->{~~int i;\\}
 ~\\
-    \uncover<2->{~~for (i = 0; i < 5; ++i) \{\\
-    \uncover<3->{~~~~printf("primes[\%d] == \%d$\backslash$n", i,\\
+    \uncover<4->{~~for (i = 0; i < 5; ++i) \{\\
+    \uncover<5->{~~~~printf("primes[\%d] == \%d$\backslash$n", i,\\
     ~~~~~~~~primes[i]);\\}
     ~~\}\\}
     ~~return 0;\\
@@ -331,60 +331,73 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 
 == const correctness ==
 
-==== const correctness~~(1/5) ====
+==== const correctness~~(1/7) ====
 {\LARGE
 <[center]
-\only<1>{const}\only<2>{\highlight{const}} char * \only<1>{const}\only<2>{\highlight{const}} foo = "foo";
+char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highlight{const}} foo = "foo";
 [center]>
 }
 
-==== const correctness~~(2/5) ====
+==== const correctness~~(2/7) ====
 {\ttfamily\LARGE
-~~\underline{~~~~~}~char~\only<3->{\underline{~~~~~}~*~\underline{~~~~~}~}foo;\\
-~~\only<3->{\uncover<4->{~~|~~~~~~~~~~|~~~~~}}\uncover<2->{~~|\\}
-~~\only<3->{\uncover<4->{~<2a>~~~~~~~<2b>~~~}}\uncover<2->{~<1>\\}
+~~\underline{~~~~~} int \underline{~~~~~} foo;
 }
 
-==== const correctness~~(3/5) ====
+==== const correctness~~(3/7) ====
 {\ttfamily\LARGE
-    <1>~~char * const foo;\\
-    \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
-    ~~~~~~~foo = bar;\\
+~~int const~~x = 3;\\
 ~\\
-    \uncover<3->{<2a> const char *foo;\\
-    <2b> char const *foo;\\
+~~const int~~y = 4;
+}
+
+==== const correctness~~(4/7) ====
+{\ttfamily\LARGE
+~~\underline{~~~~~}~int~\underline{~~~~~}\only<2->{~*~\underline{~~~~~}}~foo;\\
+~~\uncover<4->{~~|~~~~~~~~~|~~~~~}\uncover<3->{~~|\\}
+~~\uncover<4->{~<2a>~~~~~~<2b>~~~}\uncover<3->{~<1>\\}
+}
+
+==== const correctness~~(5/7) ====
+{\ttfamily\LARGE
+    <1>~~int * const foo;\\
+    \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
+    ~~~~~~~foo = ...;\\
+~\\
+    \uncover<3->{<2a> const int *foo;\\
+    <2b> int const *foo;\\
     \uncover<4->{~~~~~~~\textsf{Verbietet:}\\
     ~~~~~~~foo[3] = ...;\\}}}
 }
 
-==== const correctness~~(4/5) ====
+==== const correctness~~(6/7) ====
 {\ttfamily\LARGE
-    <2a,1> const char * const foo;\\
-    \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
-    ~~~~~~~foo[3] = ...;\\
-    ~~~~~~~foo = bar;\\
-~\\
-\uncover<3->{\highlight{\textsf{String-Konstanten bitte immer so $\uparrow$}}\\}}
-}
-
-==== const correctness~~(5/5) ====
-{\ttfamily\LARGE
-    char const * const * const foo;\\
+    <2a,1> int const * const foo;\\
     \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
     ~~~~~~~foo = ...;\\
-    ~~~~~~~foo[3] = ...;\\
-    ~~~~~~~foo[7][2] = ...;\\}
+    ~~~~~~~foo[5] = ...;\\
+~\\
+\uncover<3->{\highlight{\textsf{String-Konstanten bitte immer so!}}\\[1ex]}}
+\uncover<4->{\highlight{char const * const foo = "foo";}}
+}
+
+==== const correctness~~(7/7) ====
+{\ttfamily\LARGE
+    int const * const * const foo;\\
+    \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
+    ~~~~~~~foo = ...;\\
+    ~~~~~~~foo[7] = ...;\\
+    ~~~~~~~foo[2][4] = ...;\\}
 }
 
 
 ==== const correctness in APIs ====
-{\large
+{\Large
     \texttt{int my\_strlen(char *str);\\}
-    \uncover<2->{\ind{}Funktion darf den \emph{Inhalt} von \texttt{str} verändern\\}
+    \uncover<2->{\ind{}Funktion darf \emph{Inhalt} von \texttt{str} verändern\\}
     \uncover<3->{\ind{}my\_strlen("ABC") gibt Compile-Fehler\\}
 ~\\
     \texttt{int my\_strlen(\underline{const} char *str);\\}
-    \uncover<4->{\ind{}Funktion darf den Inhalt von \texttt{str} nicht verändern\\}
+    \uncover<4->{\ind{}Funktion darf Inhalt von \texttt{str} \emph{nicht} verändern\\}
     \uncover<5->{\ind{}my\_strlen("ABC") erlaubt und sicher\\}
 }
 
