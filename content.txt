@@ -152,26 +152,6 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 }
 
 
-==== Wohin mit den Sternen?~~(1/2) ====
-{\ttfamily\Huge
-    \only<1-2>{int**~~foo;}\only<3->{\xout{int**~~foo;}}\uncover<2>{~\highlight{\textsf{ <-- Bitte nicht!}}\\}
-    int~**~foo;\\
-    int~~**foo;\\
-}
-
-==== Wohin mit den Sternen?~~(2/2) ====
-{\ttfamily\LARGE
-    int x, y, z;\\
-~\\
-    \uncover<2->{int** a, b;\uncover<3->{~~/* Misleading */\\
-    \uncover<4->{int **a, b;\uncover<5->{~~/* Better */\\
-~\\
-    \uncover<6->{/* Best:~*/\\
-    int **a;\\
-    int b;\\}}}}}
-}
-
-
 == Arrays und Pointer ==
 
 ==== Arrays und Pointer~~(1/3) ====
