@@ -29,15 +29,16 @@
 ==== C-Kurs ====
 {\Large
 \begin{tabular}{ll@{~~~}l}
-~        & Mo  & Konzepte, Syntax, ... \\
+~        & Mi  & Konzepte, Syntax, ... \\
 ~        & ~   & printf, scanf \\[1ex]
-Next --> & Di  & Pointers, Arrays, ... \\
-~        & ~   & Structs, malloc, ... \\[1ex]
-~        & Mi  & Compiler, Headers, ... \\
-~        & ~   & Debugging I \\[1ex]
-~        & Do  & Guter Code \\
-~        & ~   & Debugging II \\[1ex]
-~        & Fr  & stdlib, Bücher, ... \\
+Next --> & Do  & Pointer, Arrays, ... \\
+~        & ~   & Compiler, Headers, ... \\[1ex]
+~        & Fr  & Structs, malloc, ... \\
+~        & ~   & Debugging I, ... \\
+~        & ~   & + Vorstellung der Aufgabe \\[3ex]
+~        & Mo  & Lösung der Aufgabe \\[1ex]
+~        & Di  & Debugging II \\
+~        & ~   & stdlib, Bücher, ... \\
 \end{tabular}
 }
 
