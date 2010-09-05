@@ -102,17 +102,15 @@ Ohne Pointer geht nichts.
 {\ttfamily\large
     \#include <stdio.h>\\
 ~\\
-    int\\
-    main() \{\\
+    int main() \{\\
     \uncover<2->{~~int i = 3;\\}
-    \uncover<3->{~~int *p = \&i;\\}
+    \uncover<3->{~~int* p = \&i;\\}
 ~\\
-    \uncover<4->{~~printf(`` p == \%\#p$\backslash$n''\\
-    ~~~~~~~~~``*p == \%d$\backslash$n''\\
-    ~~~~~~~~~`` i == \%d$\backslash$n'', p, *p, i);\\}
+    \uncover<4->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
 ~\\
     \uncover<5->{~~*p = 14;\\
-    ~~printf(`` i == \%d$\backslash$n$\backslash$n'', i);\\}
+    ~~printf(``i == \%d$\backslash$n'', i);\\}
+~\\
     ~~return 0;\\
     \}
 }
@@ -122,16 +120,12 @@ Ohne Pointer geht nichts.
 {\ttfamily\Large
     \# gcc~\,hello\_pointer.c~\,-o hello\_pointer\\
     \uncover<2->{\# ./hello\_pointer\\
-    \uncover<3->{~p == 0xbfa3ad8c\\
-    *p == 3\\
-    ~i == 3\\
-    ~i == 14\\
+    \uncover<3->{i == 3, p == 0xbfa3ad8c\\
+    i == 14\\
 ~\\
     \uncover<4->{\# ./hello\_pointer\\
-    ~p == 0xbfba66fc\uncover<5->{~\highlight{\textsf{ <-- Andere Adresse!}}}\\
-    *p == 3\\
-    ~i == 3\\
-    ~i == 14}}}
+    i == 3, p == 0xbfba66fc\uncover<5->{~\highlight{\textsf{ <-- Andere Adresse!}}}\\
+    i == 14}}}
 }
 
 

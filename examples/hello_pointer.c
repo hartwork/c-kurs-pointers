@@ -1,15 +1,13 @@
 #include <stdio.h>
 
-int
-main() {
+int main() {
   int i = 3;
-  int *p = &i;
+  int* p = &i;
 
-  printf(" p == %#p\n"
-         "*p == %d\n"
-         " i == %d\n", p, *p, i);
+  printf("i == %d, p == %p\n", i, p);
 
   *p = 14;
-  printf(" i == %d\n\n", i);
+  printf("i == %d\n", i);
+
   return 0;
 }
