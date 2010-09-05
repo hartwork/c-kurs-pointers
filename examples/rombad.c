@@ -1,23 +1,13 @@
 #include <stdio.h>
 
 int main() {
-    char a[] = "hallo";
-    char b[] = "hallo";
-    char * c = "hallo";
-    char * d = "hallo";
+  char * a = "hallo";
+  char * b = "hallo";
 
-    printf("sizeof(a)=%u, a=%p\n"
-           "sizeof(b)=%u, b=%p\n"
-           "sizeof(c)=%u, c=%p\n"
-           "sizeof(d)=%u, d=%p\n\n",
-           sizeof(a), a, sizeof(b), b,
-           sizeof(c), c, sizeof(d), d);
+  printf("a=%p\n"
+         "b=%p\n", a, b);
 
-    a[0] = 'X';
-    printf("a = '%s'\n"
-           "b = '%s'\n", a, b);
-    c[0] = 'X';
-    printf("c = '%s'\n", c);
+  a[0] = 'X';
 
-    return 0;
+  return 0;
 }
