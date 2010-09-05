@@ -108,12 +108,12 @@ Grundlagen für ..
     \uncover<2->{~~int i = 3;\\}
     \uncover<3->{~~int *p = \&i;\\}
 ~\\
-    \uncover<4->{~~printf(" p == \%\#p$\backslash$n"\\
-    ~~~~~~~~~"*p == \%d$\backslash$n"\\
-    ~~~~~~~~~" i == \%d$\backslash$n", p, *p, i);\\}
+    \uncover<4->{~~printf(`` p == \%\#p$\backslash$n''\\
+    ~~~~~~~~~``*p == \%d$\backslash$n''\\
+    ~~~~~~~~~`` i == \%d$\backslash$n'', p, *p, i);\\}
 ~\\
     \uncover<5->{~~*p = 14;\\
-    ~~printf(" i == \%d$\backslash$n$\backslash$n", i);\\}
+    ~~printf(`` i == \%d$\backslash$n$\backslash$n'', i);\\}
     ~~return 0;\\
     \}
 }
@@ -174,7 +174,7 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
     \uncover<3->{~~int i;\\}
 ~\\
     \uncover<4->{~~for (i = 0; i < 5; ++i) \{\\
-    \uncover<5->{~~~~printf("primes[\%d] == \%d$\backslash$n", i,\\
+    \uncover<5->{~~~~printf(``primes[\%d] == \%d$\backslash$n'', i,\\
     ~~~~~~~~primes[i]);\\}
     ~~\}\\}
     ~~return 0;\\
@@ -200,7 +200,7 @@ Zugriff via [\emph{n}] ähnlich Java
     ~~int i;\\
 ~\\
     ~~for (i = 0; i < \only<1>{5}\only<2->{\highlight{sizeof(primes) / sizeof(int)}}; ++i) \{\\
-    ~~~~printf("primes[\%d] == \%d$\backslash$n", i,\\
+    ~~~~printf(``primes[\%d] == \%d$\backslash$n'', i,\\
     ~~~~~~~~primes[i]);\\
     ~~\}\\
     ~~return 0;\\
@@ -236,9 +236,9 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
     ~~int i;\\
 ~\\
     ~~for (i = 0; i < sizeof(primes) / sizeof(int); ++i) \{\\
-    ~~~~printf("primes[\%d]\only<3->{ via array~~} == \%d$\backslash$n", i,\\
+    ~~~~printf(``primes[\%d]\only<3->{ via array~~} == \%d$\backslash$n'', i,\\
     ~~~~~~~~\only<1-4>{primes[i]}\only<5->{\highlight{{primes[i]}}});\\
-    \only<2->{\uncover<4->{~~~~printf("primes[\%d] via pointer == \%d$\backslash$n", i,\\
+    \only<2->{\uncover<4->{~~~~printf(``primes[\%d] via pointer == \%d$\backslash$n'', i,\\
     ~~~~~~~~\only<4>{*(primes + i)}\only<5->{\highlight{*(primes + i)}});\\}}
     ~~\}\\
     ~~return 0;\\
@@ -267,7 +267,7 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 {\Large
     {\ttfamily
         int numbers[3];\\
-        char text[] = "software libre";\\
+        char text[] = ``software libre'';\\
     }
 ~\\
     \uncover<2->{Es gilt:\\
@@ -286,12 +286,12 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 
 ==== Strings ====
 {\LARGE
-    "ABC"\uncover<2->{~ --> ~\{\,65, 66, 67, \underline{00}\,\}\\
+    ``ABC''\uncover<2->{~ --> ~\{\,65, 66, 67, \underline{00}\,\}\\
 ~\\[1ex]
     \uncover<3->{{\ttfamily
         \#include <string.h>\\
         ...\\
-        strlen("ABC");\\[1ex]
+        strlen(``ABC'');\\[1ex]
     }
     \uncover<4->{ --> 3\\}}}
 }
@@ -311,11 +311,11 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 
 ==== Strings ====
 {\ttfamily\LARGE
-    strlen("ABC");\\
+    strlen(``ABC'');\\
     \uncover<2->{ --> 3\\[1ex]}
-    \uncover<3->{strlen("A$\backslash$0B$\backslash$0C");\\}
+    \uncover<3->{strlen(``A$\backslash$0B$\backslash$0C'');\\}
     \uncover<4->{ --> 1\\[1ex]}
-    \uncover<5->{strlen("ABC$\backslash$0$\backslash$0");\\}
+    \uncover<5->{strlen(``ABC$\backslash$0$\backslash$0'');\\}
     \uncover<6->{ --> 3\\}
 }
 
@@ -325,7 +325,7 @@ Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
 ==== const correctness~~(1/7) ====
 {\LARGE
 <[center]
-char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highlight{const}} foo = "foo";
+char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highlight{const}} foo = ``foo'';
 [center]>
 }
 
@@ -368,7 +368,7 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
     ~~~~~~~foo[5] = ...;\\
 ~\\
 \uncover<3->{\highlight{\textsf{String-Konstanten bitte immer so!}}\\[1ex]}}
-\uncover<4->{\highlight{char const * const foo = "foo";}}
+\uncover<4->{\highlight{char const * const foo = ``foo'';}}
 }
 
 ==== const correctness~~(7/7) ====
@@ -385,11 +385,11 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
 {\Large
     \texttt{int my\_strlen(char *str);\\}
     \uncover<2->{\ind{}Funktion darf \emph{Inhalt} von \texttt{str} verändern\\}
-    \uncover<3->{\ind{}my\_strlen("ABC") gibt Compile-Fehler\\}
+    \uncover<3->{\ind{}my\_strlen(``ABC'') gibt Compile-Fehler\\}
 ~\\
     \texttt{int my\_strlen(\underline{const} char *str);\\}
     \uncover<4->{\ind{}Funktion darf Inhalt von \texttt{str} \emph{nicht} verändern\\}
-    \uncover<5->{\ind{}my\_strlen("ABC") erlaubt und sicher\\}
+    \uncover<5->{\ind{}my\_strlen(``ABC'') erlaubt und sicher\\}
 }
 
 
@@ -402,9 +402,9 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
     int\\
     main(\only<2->{int argc, char **argv}) \{\\
     \uncover<4->{~~int i = 0;\\}
-    \uncover<3->{~~printf("\%d parameters$\backslash$n", argc - 1);\\}
+    \uncover<3->{~~printf(``\%d parameters$\backslash$n'', argc - 1);\\}
     \uncover<4->{~~for (; i < argc; ++i) \{\\
-    \uncover<5->{~~~~printf("[\%d] \%s$\backslash$n", i, argv[i]);\\}
+    \uncover<5->{~~~~printf(``[\%d] \%s$\backslash$n'', i, argv[i]);\\}
     ~~\}\\}
     ~~return 0;\\
     \}
@@ -425,8 +425,8 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
 
 == Mehrdimensionale Arrays ==
 {
-\subsection*{Variante "Array von Pointern"}
-\introslide{Variante\\"Array von Pointern"}
+\subsection*{Variante \glqq{}Array von Pointern\grqq{}}
+\introslide{Variante\\\glqq{}Array von Pointern\grqq{}}
 }
 
 ==== 2D-Array als Array von Pointern ====
@@ -459,7 +459,7 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
     \}\\
 }
 
-=== Variante "Linear" ===
+=== Variante \glqq{}Linear\grqq{} ===
 
 ==== 2D-Array linear ====
 <[center]
@@ -488,7 +488,7 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
     \}
 }
 
-=== Variante "Hybrid" ===
+=== Variante \glqq{}Hybrid\grqq{} ===
 
 ==== 2D-Array-Hybrid ====
 {\ttfamily\Large
@@ -509,13 +509,13 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
 
 ==== Deklaration von Strings ====
 {\Large
-    \uncover<3->{Variante "Mit Array"\\}
-    \ind{}\texttt{char a[] = "Hallo";}\\
+    \uncover<3->{Variante \glqq{}Mit Array\grqq{}\\}
+    \ind{}\texttt{char a[] = ``Hallo'';}\\
     \uncover<2->{\ind{}\texttt{sizeof(a) == sizeof(char)*(5 + 1)}\\}
     \uncover<4->{\ind{}Inhalt les- und schreibbar\\}
 ~\\
-    \uncover<5->{Variante "Nur Pointer"\\}
-    \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char *p = "Hallo";}\\}  % gcc -Wwrite-strings 
+    \uncover<5->{Variante ``Nur Pointer''\\}
+    \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char *p = ``Hallo'';}\\}  % gcc -Wwrite-strings 
     \uncover<7->{\ind{}\texttt{sizeof(p) == sizeof(char *)}\\}
     \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
 }
