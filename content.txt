@@ -190,8 +190,7 @@ int main() \{\\
 {\ttfamily
     \#include <stdio.h>\\
 ~\\
-    int\\
-    main() \{\\
+    int main() \{\\
     \uncover<2->{~~int primes[] = \{2, 3, 5, 7, 11\};\\}
     \uncover<3->{~~int i;\\}
 ~\\
@@ -216,8 +215,7 @@ Zugriff via [\emph{n}] ähnlich Java
 {\ttfamily
     \#include <stdio.h>\\
 ~\\
-    int\\
-    main() \{\\
+    int main() \{\\
     ~~int primes[] = \{2, 3, 5, 7, 11\};\\
     ~~int i;\\
 ~\\
@@ -252,8 +250,7 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 {\ttfamily
     \#include <stdio.h>\\
 ~\\
-    int\\
-    main() \{\\
+    int main() \{\\
     ~~int primes[] = \{2, 3, 5, 7, 11\};\\
     ~~int i;\\
 ~\\
@@ -421,8 +418,7 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
 {\ttfamily\Large
     \#include <stdio.h>\\
 ~\\
-    int\\
-    main(\only<2->{int argc, char **argv}) \{\\
+    int main(\only<2->{int argc, char **argv}) \{\\
     \uncover<4->{~~int i = 0;\\}
     \uncover<3->{~~printf(``\%d parameters$\backslash$n'', argc - 1);\\}
     \uncover<4->{~~for (; i < argc; ++i) \{\\
