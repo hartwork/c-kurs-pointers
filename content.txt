@@ -93,13 +93,13 @@ Grundlagen für ..
 [center]>
 
 
-==== Pointer ====
+==== ====
 {\LARGE
-* zeigen auf eine Stelle im Speicher
-
-*<2-> sind Adressen
-*<3-> sind Zahlen
-*<4-> sind quasi auch Referenzen
+\glqq{}Pointer\grqq{} kann meinen eine...\\[1ex]
+\begin{itemize}
+\item[A)]$\,$\uncover<2->{Adresse}\\
+\item[B)]$\,$\uncover<3->{Variable, die eine Adresse speichert}
+\end{itemize}
 }
 
 
