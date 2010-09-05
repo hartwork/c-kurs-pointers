@@ -42,18 +42,11 @@ Next --> & Do  & Pointer, Arrays, ... \\
 \end{tabular}
 }
 
-==== Übersicht ====
-{\LARGE
-* Pointer
-* Arrays
-* Strings
-}
-
-==== Übersicht ====
-{\LARGE
-Grundlagen für ..
-* Multiplikation von Matrizen
-* Speicherverwaltung\\\ind{}(nächste Vorlesung)
+==== ====
+{\Huge
+<[center]
+Ohne Pointer geht nichts.
+[center]>
 }
 
 
