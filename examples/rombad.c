@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 int main() {
-  char * a = "hallo";
-  char * b = "hallo";
+  char* a = "hallo";
+  char* b = "hallo";
 
   printf("a=%p\n"
          "b=%p\n", a, b);
