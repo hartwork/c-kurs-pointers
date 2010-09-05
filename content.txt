@@ -53,6 +53,7 @@ Ohne Pointer geht nichts.
 ==== Themen ====
 {\large
 * Hello pointer
+* Call by Reference
 * Pointer auf Pointer
 * Arrays und Pointer
 * Pointer-Arithmetik
@@ -146,7 +147,34 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 }
 
 
-*<3-> \& und * sind komplementär:\\\ind{}*(\&x) == x
+== Call by Reference ==
+
+==== Call by Reference ====
+{\ttfamily\large
+\#include <stdio.h>\\
+~\\
+\uncover<4->{void by\_value~~~~(int~~j) \{~~j += 3; \}\\
+void by\_reference(int* p)~\{~*p += 4; \}}\\
+~\\
+int main() \{\\
+~~int i = 0;\\
+~\\
+~~\uncover<2->{by\_value(i);\\
+~~by\_reference(\&i);}\\
+~\\
+~~\uncover<3->{printf(``i == \%d$\backslash$n'', i);}\\
+~\\
+~~return 0;\\
+\}
+}
+
+
+==== Ausgabe ====
+{\ttfamily\Large
+    \# gcc~\,call\_by\_reference.c $\backslash$\\
+    ~~~~~~-o call\_by\_reference\\
+    \# ./call\_by\_reference\\
+    i == 4
 }
 
 
