@@ -78,10 +78,16 @@ Grundlagen für ..
 == Pointer ==
 
 
-==== Pointer ====
+==== Variablen im RAM ====
 <[center]
 \vspace*{-5ex}%
 \only<1>{
+<<<graphics/ram-minus-3,height=0.95\textheight>>>
+}\only<2>{
+<<<graphics/ram-minus-2,height=0.95\textheight>>>
+}\only<3>{
+<<<graphics/ram-minus-1,height=0.95\textheight>>>
+}\only<4>{
 <<<graphics/ram-minus-0,height=0.95\textheight>>>
 }
 [center]>
