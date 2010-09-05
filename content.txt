@@ -179,8 +179,8 @@ int main() \{\\
 ==== Pointer auf Pointer ====
 {\ttfamily\Huge
     int i = 3;\\
-    int *p = \&i;\\[1ex]
-    \uncover<2->{int **pp = \&p;}
+    int* p = \&i;\\[1ex]
+    \uncover<2->{int** pp = \&p;}
 }
 
 
