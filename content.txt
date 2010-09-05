@@ -532,7 +532,7 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
     \uncover<2->{\ind{}\texttt{sizeof(a) == sizeof(char)*(5 + 1)}\\}
     \uncover<4->{\ind{}Inhalt les- und schreibbar\\}
 ~\\
-    \uncover<5->{Variante ``Nur Pointer''\\}
+    \uncover<5->{Variante \glqq{}Nur Pointer\grqq{}\\}
     \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char *p = ``Hallo'';}\\}  % gcc -Wwrite-strings 
     \uncover<7->{\ind{}\texttt{sizeof(p) == sizeof(char *)}\\}
     \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
