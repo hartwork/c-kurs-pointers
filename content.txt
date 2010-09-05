@@ -131,15 +131,20 @@ Ohne Pointer geht nichts.
 
 ==== Zusammenfassung 1/2 ====
 {\LARGE
-Pointer zeigen auf typisierte Daten:\\[1ex]
-\ind{}\texttt{~int *} == Pointer auf int\\[1ex]
-\ind{}\texttt{char *} == Pointer auf char
+*$\,$\uncover<1->{Jede Variable hat eine Adresse}
+*$\,$\uncover<2->{Operator \texttt{\&} liefert diese Adresse}
+*$\,$\uncover<3->{Operator \texttt{*} folgt einer Adresse\\\ind{}(er \emph{dereferenziert})}
+*$\,$\uncover<4->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) == x}}
 }
+
 
 ==== Zusammenfassung 2/2 ====
 {\LARGE
-*<1-> Prefix-Operator \& liefert Adresse
-*<2-> Prefix-Operator * dereferenziert
+Pointer zeigen auf typisierte Daten:\\[1ex]
+\ind{}\texttt{~int*} == Pointer auf int\\[1ex]
+\ind{}\texttt{char*} == Pointer auf char
+}
+
 
 *<3-> \& und * sind komplementär:\\\ind{}*(\&x) == x
 }
