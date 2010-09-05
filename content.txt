@@ -77,6 +77,16 @@ Grundlagen für ..
 
 == Pointer ==
 
+
+==== Pointer ====
+<[center]
+\vspace*{-5ex}%
+\only<1>{
+<<<graphics/ram-minus-0,height=0.95\textheight>>>
+}
+[center]>
+
+
 ==== Pointer ====
 {\LARGE
 * zeigen auf eine Stelle im Speicher
