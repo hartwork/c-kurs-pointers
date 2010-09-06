@@ -347,10 +347,7 @@ char \only<1>{const}\only<2>{\highlight{const}} * \only<1>{const}\only<2>{\highl
     <2a,1> int const * const foo;\\
     \uncover<2->{~~~~~~~\textsf{Verbietet:}\\
     ~~~~~~~foo = ...;\\
-    ~~~~~~~foo[5] = ...;\\
-~\\
-\uncover<3->{\highlight{\textsf{String-Konstanten bitte immer so!}}\\[1ex]}}
-\uncover<4->{\highlight{char const * const foo = ``foo'';}}
+    ~~~~~~~foo[5] = ...;}
 }
 
 ==== const correctness~~(7/7) ====
