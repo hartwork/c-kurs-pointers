@@ -14,10 +14,13 @@ $(pdfs): %.pdf: %.svg
 $(base).pdf: $(tempdir)/$(base).pdf
 	cp "$(tempdir)/$(base).pdf" "$(base).pdf"
 
-$(tempdir)/$(base).pdf: $(base).tex content.tex beamerthemeManhattan.sty $(pdfs)
+$(tempdir)/$(base).pdf: $(base).tex content.tex beamerthemeManhattan.sty $(pdfs) VERSION.tex
 	mkdir -p $(tempdir)
 	pdflatex -halt-on-error -output-directory $(tempdir) $(base).tex
 	pdflatex -halt-on-error -output-directory $(tempdir) $(base).tex
+
+VERSION.tex: .git
+	git describe --tags | sed 's/-\([0-9]\+\)-.*/.\1/' > VERSION.tex
 
 content.tex: content.txt
 	wiki2beamer content.txt > content.tex
