@@ -55,7 +55,7 @@ Ohne Pointer geht nichts.
 * Hello pointer
 * Call by Reference
 * Pointer auf Pointer
-* Arrays und Pointer
+* Von Pointern zu Arrays
 * Pointer-Arithmetik
 * Strings und Längenberechnung
 * const correctness
@@ -184,51 +184,48 @@ int main() \{\\
 }
 
 
-== Arrays und Pointer ==
+== Von Pointern zu Arrays ==
 
-==== Arrays und Pointer~~(1/3) ====
-{\ttfamily
-    \#include <stdio.h>\\
+==== Von Pointern zu Arrays ====
+{\ttfamily\large
+\#include <stdio.h>\\
 ~\\
-    int main() \{\\
-    \uncover<2->{~~int primes[] = \{2, 3, 5, 7, 11\};\\}
-    \uncover<3->{~~int i;\\}
+\uncover<2->{void dump(const int* data, int count) \{\\
+~~\uncover<3->{int i = 0;\\
+~~for (; i < count; ++i) \{\\
+~~~~\uncover<4->{printf(``Field \%d: \%d$\backslash$n'', i + 1, \only<4>{\highlight{*(data + i)}}\only<5>{\highlight{data[i]}}\only<6->{data[i]});}\\
+~~\}}\\
+\}}\\
 ~\\
-    \uncover<4->{~~for (i = 0; i < 5; ++i) \{\\
-    \uncover<5->{~~~~printf(``primes[\%d] == \%d$\backslash$n'', i,\\
-    ~~~~~~~~primes[i]);\\}
-    ~~\}\\}
-    ~~return 0;\\
-    \}
+int main() \{\\
+~~\uncover<6->{int const primes[] = \{2, 3, 5, 7, 11\};\\
+~~\uncover<7->{dump(primes, \only<7>{5}\only<8->{\highlight{sizeof(primes) / sizeof(int)}});}}\\
+~~return 0;\\
+\}
 }
 
-
-==== Zusammenfassung ====
+==== Zusammenfassung~~(1/5) ====
 {\LARGE
 <[center]
-Zugriff via [\emph{n}] ähnlich Java
+Array-Zugriff via \texttt{[\emph{n}]} ähnlich Java
 [center]>
 }
 
-
-==== Arrays und Pointer~~(2/3) ====
-{\ttfamily
-    \#include <stdio.h>\\
-~\\
-    int main() \{\\
-    ~~int primes[] = \{2, 3, 5, 7, 11\};\\
-    ~~int i;\\
-~\\
-    ~~for (i = 0; i < \only<1>{5}\only<2->{\highlight{sizeof(primes) / sizeof(int)}}; ++i) \{\\
-    ~~~~printf(``primes[\%d] == \%d$\backslash$n'', i,\\
-    ~~~~~~~~primes[i]);\\
-    ~~\}\\
-    ~~return 0;\\
-    \}
+==== Zusammenfassung~~(2/5) ====
+{\LARGE
+<[center]
+Array~\,\texttt{==}\,~Pointer auf das erste Element
+[center]>
 }
 
+==== Zusammenfassung~~(3/5) ====
+{\ttfamily\Huge
+<[center]
+\emph{a}[\emph{n}]~==~*(\emph{a} + \emph{n})
+[center]>
+}
 
-==== Zusammenfassung~~(1/2) ====
+==== Zusammenfassung~~(4/5) ====
 {\Large
 <[center]
 \texttt{sizeof(\emph{variable})\\==}\\
@@ -236,8 +233,7 @@ Von \texttt{\emph{variable}} belegter Speicher in Byte
 [center]>
 }
 
-
-==== Zusammenfassung~~(2/2) ====
+==== Zusammenfassung~~(5/5) ====
 {\Large
 <[center]
 \texttt{sizeof(\highlight{\emph{type}})\\==}\\
@@ -245,39 +241,6 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 [center]>
 }
 
-
-==== Arrays und Pointer~~(3/3) ====
-{\ttfamily
-    \#include <stdio.h>\\
-~\\
-    int main() \{\\
-    ~~int primes[] = \{2, 3, 5, 7, 11\};\\
-    ~~int i;\\
-~\\
-    ~~for (i = 0; i < sizeof(primes) / sizeof(int); ++i) \{\\
-    ~~~~printf(``primes[\%d]\only<3->{ via array~~} == \%d$\backslash$n'', i,\\
-    ~~~~~~~~\only<1-4>{primes[i]}\only<5->{\highlight{{primes[i]}}});\\
-    \only<2->{\uncover<4->{~~~~printf(``primes[\%d] via pointer == \%d$\backslash$n'', i,\\
-    ~~~~~~~~\only<4>{*(primes + i)}\only<5->{\highlight{*(primes + i)}});\\}}
-    ~~\}\\
-    ~~return 0;\\
-    \}
-}
-
-
-==== Zusammenfassung~~(1/2) ====
-{\LARGE
-<[center]
-Array~\,\texttt{==}\,~Pointer auf den Anfang des Arrays
-[center]>
-}
-
-==== Zusammenfassung~~(2/2) ====
-{\ttfamily\Huge
-<[center]
-\emph{a}[\emph{n}]~==~*(\emph{a} + \emph{n})
-[center]>
-}
 
 
 == Pointer-Arithmetik ==
