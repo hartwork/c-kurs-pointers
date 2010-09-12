@@ -546,7 +546,7 @@ int main() \{\\
 ~~printf(``a=\%p$\backslash$n''\\
 ~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
 ~\\
-~~\only<3>{\highlight{a[0] = `X';}}\only<-2,4->{a[0] = `X';}\\
+~~\only<3>{\highlight{a[0] = `X';}}\only<-2>{a[0] = `X';}\\
 ~\\
 ~~return 0;\\
 \}
