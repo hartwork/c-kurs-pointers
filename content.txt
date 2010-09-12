@@ -62,7 +62,7 @@ Ohne Pointer geht nichts.
 * Const Correctness
 * Initialisierung von Strings
 * Mehrdimensionale Arrays
-* \texttt{argc} und \texttt{argv}\vspace*{1ex}
+* Programm-Argumente: \texttt{argc} und \texttt{argv}\vspace*{1ex}
 * Weiterführende Themen
 * Zusammenfassung
 }
