@@ -281,12 +281,12 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 ==== my\_strlen ====
 {\ttfamily\LARGE
     unsigned int\\
-    my\_strlen(const char *str) \{\\
-    \uncover<2->{~~const char *walker = str;\\}
-    \uncover<3->{~~while (\only<3,6->{'$\backslash$0' \exclamation{}= *walker}\only<4>{\highlight{*walker}}\only<5>{\highlight{'$\backslash$0' \exclamation{}= }*walker}) \{\\
-    ~~~~walker++;\\
+    my\_strlen(const char * str) \{\\
+    \uncover<2->{~~char const * const begin = str;\\}
+    \uncover<3->{~~while (*str) \{\\
+    ~~~~str++;\\
     ~~\}\\}
-    ~~return \uncover<6->{\highlight{walker - str}};\\
+    ~~return (\uncover<4->{\highlight{str - begin}});\\
     \}
 }
 
