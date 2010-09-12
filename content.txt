@@ -60,9 +60,9 @@ Ohne Pointer geht nichts.
 * Pointer-Arithmetik
 * Strings und Längenberechnung
 * Const Correctness
+* Initialisierung von Strings
 * \texttt{argc} und \texttt{argv}
-* Mehrdimensionale Arrays
-* Initialisierung von Strings\vspace*{1ex}
+* Mehrdimensionale Arrays\vspace*{1ex}
 * Weiterführende Themen
 * Zusammenfassung
 }
@@ -395,6 +395,76 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 }
 
 
+== Initialisierung von Strings ==
+
+==== Initialisierung von Strings ====
+{\Large
+    \uncover<3->{Variante \glqq{}Mit Array\grqq{}\\}
+    \ind{}\texttt{char a[] = ``Hallo'';}\\
+    \uncover<2->{\ind{}\texttt{sizeof(a) = sizeof(char)*(5 + 1)}\\}
+    \uncover<4->{\ind{}Inhalt les- und schreibbar\\}
+~\\
+    \uncover<5->{Variante \glqq{}Nur Pointer\grqq{}\\}
+    \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char * p = ``Hallo'';}\\}  % gcc -Wwrite-strings
+    \uncover<7->{\ind{}\texttt{sizeof(p) = sizeof(char *)}\\}
+    \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
+}
+
+==== Variante \glqq{}Nur Pointer\grqq{} ====
+{\ttfamily\large
+\#include <stdio.h>\\
+~\\
+int main() \{\\
+~~char * a = ``hallo'';\\
+~~char * b = ``hallo'';\\
+~\\
+~~\uncover<2->{printf(``a=\%p$\backslash$n''\\
+~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
+~\\
+~~\uncover<3->{a[0] = `X';\\}}
+~\\
+~~return 0;\\
+\}
+}
+
+==== Ausgabe ====
+{\ttfamily\Large
+    \# gcc~\,rombad.c~\,-o rombad\\
+    \uncover<2->{\# ./rombad\\
+    \uncover<3->{a=\only<3,5->{0x80484dc}\only<4>{0x\highlight{80484dc}}\\
+    b=\only<3,5->{0x80484dc}\only<4>{0x\highlight{80484dc}}\\
+    \uncover<5->{Segmentation fault}}}
+}
+
+==== GCC Flag \texttt{-Wwrite-strings} ====
+{\ttfamily\large
+    \# gcc~\,-Wall -Wextra \highlight{-Wwrite-strings} $\backslash$\\
+    ~~~~~~rombad.c~\,-o rombad\\
+    \uncover<2->{rombad.c: In function `main':\\
+    rombad.c:4: warning: initialization discards\\
+    ~~~~qualifiers from pointer target type\\
+    rombad.c:5: warning: initialization discards\\
+    ~~~~qualifiers from pointer target type}
+}
+
+==== Variante \glqq{}Nur Pointer\grqq{} ====
+{\ttfamily\large
+\#include <stdio.h>\\
+~\\
+int main() \{\\
+~~\only<2>{\highlight{const~}}\only<3->{const~}char * a = ``hallo'';\\
+~~\only<2>{\highlight{const~}}\only<3->{const~}char * b = ``hallo'';\\
+~\\
+~~printf(``a=\%p$\backslash$n''\\
+~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
+~\\
+~~\only<3>{\highlight{a[0] = `X';}}\only<-2>{a[0] = `X';}\\
+~\\
+~~return 0;\\
+\}
+}
+
+
 == \texttt{argc} und \texttt{argv} ==
 
 ==== \texttt{argc} und \texttt{argv} ====
@@ -505,76 +575,6 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~return 0;\\
     \}
 }
-
-== Initialisierung von Strings ==
-
-==== Initialisierung von Strings ====
-{\Large
-    \uncover<3->{Variante \glqq{}Mit Array\grqq{}\\}
-    \ind{}\texttt{char a[] = ``Hallo'';}\\
-    \uncover<2->{\ind{}\texttt{sizeof(a) = sizeof(char)*(5 + 1)}\\}
-    \uncover<4->{\ind{}Inhalt les- und schreibbar\\}
-~\\
-    \uncover<5->{Variante \glqq{}Nur Pointer\grqq{}\\}
-    \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char * p = ``Hallo'';}\\}  % gcc -Wwrite-strings
-    \uncover<7->{\ind{}\texttt{sizeof(p) = sizeof(char *)}\\}
-    \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
-}
-
-==== Variante \glqq{}Nur Pointer\grqq{} ====
-{\ttfamily\large
-\#include <stdio.h>\\
-~\\
-int main() \{\\
-~~char * a = ``hallo'';\\
-~~char * b = ``hallo'';\\
-~\\
-~~\uncover<2->{printf(``a=\%p$\backslash$n''\\
-~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
-~\\
-~~\uncover<3->{a[0] = `X';\\}}
-~\\
-~~return 0;\\
-\}
-}
-
-==== Ausgabe ====
-{\ttfamily\Large
-    \# gcc~\,rombad.c~\,-o rombad\\
-    \uncover<2->{\# ./rombad\\
-    \uncover<3->{a=\only<3,5->{0x80484dc}\only<4>{0x\highlight{80484dc}}\\
-    b=\only<3,5->{0x80484dc}\only<4>{0x\highlight{80484dc}}\\
-    \uncover<5->{Segmentation fault}}}
-}
-
-==== GCC Flag \texttt{-Wwrite-strings} ====
-{\ttfamily\large
-    \# gcc~\,-Wall -Wextra \highlight{-Wwrite-strings} $\backslash$\\
-    ~~~~~~rombad.c~\,-o rombad\\
-    \uncover<2->{rombad.c: In function `main':\\
-    rombad.c:4: warning: initialization discards\\
-    ~~~~qualifiers from pointer target type\\
-    rombad.c:5: warning: initialization discards\\
-    ~~~~qualifiers from pointer target type}
-}
-
-==== Variante \glqq{}Nur Pointer\grqq{} ====
-{\ttfamily\large
-\#include <stdio.h>\\
-~\\
-int main() \{\\
-~~\only<2>{\highlight{const~}}\only<3->{const~}char * a = ``hallo'';\\
-~~\only<2>{\highlight{const~}}\only<3->{const~}char * b = ``hallo'';\\
-~\\
-~~printf(``a=\%p$\backslash$n''\\
-~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
-~\\
-~~\only<3>{\highlight{a[0] = `X';}}\only<-2>{a[0] = `X';}\\
-~\\
-~~return 0;\\
-\}
-}
-
 
 %==== Strings versus "Memory" ====
 \comment{\Large
