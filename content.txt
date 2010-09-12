@@ -105,12 +105,13 @@ Ohne Pointer geht nichts.
 ~\\
     int main() \{\\
     \uncover<2->{~~int i = 3;\\}
-    \uncover<3->{~~int* p = \&i;\\}
+    \uncover<3->{~~int * p = \&i;\\}
 ~\\
-    \uncover<4->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
-~\\
-    \uncover<5->{~~*p = 14;\\
-    ~~printf(``i == \%d$\backslash$n'', i);\\}
+    \uncover<6->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
+    \uncover<4->{~~*p = 0;\\}
+    \uncover<6->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
+    \uncover<5->{~~p = 0;\\}
+    \uncover<6->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
 ~\\
     ~~return 0;\\
     \}
@@ -122,7 +123,8 @@ Ohne Pointer geht nichts.
     \# gcc~\,hello\_pointer.c~\,-o hello\_pointer\\
     \uncover<2->{\# ./hello\_pointer\\
     \uncover<3->{i == 3, p == 0xbfa3ad8c\\
-    \uncover<4->{i == 14}}}
+    \uncover<4->{i == 0, p == 0xbfa3ad8c\\
+    \uncover<5->{i == 0, p == (nil)\\}}}}
 }
 
 
