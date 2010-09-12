@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-unsigned int
-my_strlen(const char * str) {
+int my_strlen(const char * str) {
   char const * const begin = str;
   while (*str) {
     str++;

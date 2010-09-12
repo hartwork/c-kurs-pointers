@@ -295,8 +295,7 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 
 ==== my\_strlen ====
 {\ttfamily\LARGE
-    unsigned int\\
-    my\_strlen(const char * str) \{\\
+    int my\_strlen(const char * str) \{\\
     \uncover<2->{~~char const * const begin = str;\\}
     \uncover<3->{~~while (*str) \{\\
     ~~~~str++;\\
