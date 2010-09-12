@@ -139,8 +139,8 @@ Ohne Pointer geht nichts.
 ==== Zusammenfassung 2/2 ====
 {\LARGE
 Pointer zeigen auf typisierte Daten:\\[1ex]
-\ind{}\texttt{~int*} == Pointer auf int\\[1ex]
-\ind{}\texttt{char*} == Pointer auf char
+\ind{}\texttt{~int *} == Pointer auf int\\[1ex]
+\ind{}\texttt{char *} == Pointer auf char
 }
 
 
@@ -150,8 +150,8 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 {\ttfamily\large
 \#include <stdio.h>\\
 ~\\
-\uncover<4->{void by\_value~~~~(int~~j) \{~~~j += 3;~~\}\\
-void by\_reference(int* p)~\{~~*p += 4;~~\}}\\
+\uncover<4->{void by\_value~~~~(int~~~j) \{~~~j += 3;~~\}\\
+void by\_reference(int * p)~\{~~*p += 4;~~\}}\\
 ~\\
 int main() \{\\
 ~~int i = 0;\\
@@ -182,7 +182,7 @@ int main() \{\\
 {\ttfamily\Large
     \#include <stdlib.h>~~/* for NULL */\\
     ...\\
-    int *p = NULL;\\
+    int * p = NULL;\\
     \uncover<2->{...\\
     int b = *p;\uncover<3->{\textsf{~\highlight{ <-- BANG!}}}\\}
 }
@@ -193,8 +193,8 @@ int main() \{\\
 ==== Pointer auf Pointer ====
 {\ttfamily\Huge
     int i = 3;\\
-    int* p = \&i;\\[1ex]
-    \uncover<2->{int** pp = \&p;}
+    int * p = \&i;\\[1ex]
+    \uncover<2->{int ** pp = \&p;}
 }
 
 ==== Anwendungen ====
@@ -227,7 +227,7 @@ SYNOPSIS\\
 {\ttfamily\large
 \#include <stdio.h>\\
 ~\\
-\uncover<2->{void dump(const int* data, int count) \{\\
+\uncover<2->{void dump(const int * data, int count) \{\\
 ~~\uncover<3->{int i = 0;\\
 ~~for (; i < count; ++i) \{\\
 ~~~~\uncover<4->{printf(``Field \%d: \%d$\backslash$n'', i + 1, \only<4>{\highlight{*(data + i)}}\only<5>{\highlight{data[i]}}\only<6->{data[i]});}\\
@@ -414,7 +414,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 {\ttfamily\Large
     \#include <stdio.h>\\
 ~\\
-    int main(\only<2->{int argc, char **argv}) \{\\
+    int main(\only<2->{int argc, char ** argv}) \{\\
     \uncover<4->{~~int i = 0;\\}
     \uncover<3->{~~printf(``\%d parameters$\backslash$n'', argc - 1);\\}
     \uncover<4->{~~for (; i < argc; ++i) \{\\
@@ -460,7 +460,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 
 ==== 2D-Array als Array von Pointern ====
 {\ttfamily\Large
-    \uncover<4->{void demo\_deep(\highlight{int *} const \highlight{*a}) \{\\
+    \uncover<4->{void demo\_deep(\highlight{int *} const \highlight{* a}) \{\\
     ~~a[1][2] *= 2;\\
     \}\\}
 ~\\
@@ -507,7 +507,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 ==== 2D-Array-Hybrid ====
 {\ttfamily\Large
     \uncover<5->{void demo\_flat(\highlight{int a[][3]});\\
-    void demo\_deep(\highlight{int *} const \highlight{*a});\\}
+    void demo\_deep(\highlight{int *} const \highlight{* a});\\}
 ~\\
     int main() \{\\
     \uncover<2->{~~int f[][3] = \{ \{0, 1, 2\},\\
@@ -529,7 +529,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<4->{\ind{}Inhalt les- und schreibbar\\}
 ~\\
     \uncover<5->{Variante \glqq{}Nur Pointer\grqq{}\\}
-    \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char *p = ``Hallo'';}\\}  % gcc -Wwrite-strings 
+    \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char * p = ``Hallo'';}\\}  % gcc -Wwrite-strings
     \uncover<7->{\ind{}\texttt{sizeof(p) == sizeof(char *)}\\}
     \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
 }
@@ -539,8 +539,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 \#include <stdio.h>\\
 ~\\
 int main() \{\\
-~~char* a = ``hallo'';\\
-~~char* b = ``hallo'';\\
+~~char * a = ``hallo'';\\
+~~char * b = ``hallo'';\\
 ~\\
 ~~\uncover<2->{printf(``a=\%p$\backslash$n''\\
 ~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
@@ -576,8 +576,8 @@ int main() \{\\
 \#include <stdio.h>\\
 ~\\
 int main() \{\\
-~~\only<2>{\highlight{const~}}\only<3->{const~}char* a = ``hallo'';\\
-~~\only<2>{\highlight{const~}}\only<3->{const~}char* b = ``hallo'';\\
+~~\only<2>{\highlight{const~}}\only<3->{const~}char * a = ``hallo'';\\
+~~\only<2>{\highlight{const~}}\only<3->{const~}char * b = ``hallo'';\\
 ~\\
 ~~printf(``a=\%p$\backslash$n''\\
 ~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
