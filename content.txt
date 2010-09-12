@@ -59,7 +59,7 @@ Ohne Pointer geht nichts.
 * Von Pointern zu Arrays
 * Pointer-Arithmetik
 * Strings und Längenberechnung
-* const correctness
+* Const Correctness
 * argc und argv
 * Mehrdimensionale Arrays
 * Initialisierung von Strings\vspace*{1ex}
@@ -330,28 +330,28 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 }
 
 
-== const correctness ==
+== Const Correctness ==
 
-==== const correctness~~(1/6) ====
+==== Const Correctness~~(1/6) ====
 {\LARGE
 <[center]
 Modifikator \texttt{const}\\verbietet Schreibzugriff
 [center]>
 }
 
-==== const correctness~~(2/6) ====
+==== Const Correctness~~(2/6) ====
 {\ttfamily\LARGE
 ~~\only<1,3->{\underline{~~~~~}}\only<2>{\underline{\highlight{const}}} int \only<-2>{\underline{~~~~~}}\only<3->{\underline{\highlight{const}}} foo;\\~\\\phantom{<2a>}
 }
 
-==== const correctness~~(3/6) ====
+==== Const Correctness~~(3/6) ====
 {\ttfamily\LARGE
 ~~\underline{~~~~~}~int~\underline{~~~~~}~*~\underline{~~~~~}~foo;\\
 ~~\uncover<3->{~~|~~~~~~~~~|~~~~~}\uncover<2->{~~|\\}
 ~~\uncover<3->{~<2a>~~~~~~<2b>~~~}\uncover<2->{~<1>\\}
 }
 
-==== const correctness~~(4/6) ====
+==== Const Correctness~~(4/6) ====
 {\ttfamily\LARGE
     <1>~~\underline{~~~~~}~int~\underline{~~~~~}~*~\underline{const}~foo;\\
     \uncover<2->{~~~~~~~\textsf{Verboten:}\\
@@ -363,7 +363,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0] = \ldots{};\\}}}
 }
 
-==== const correctness~~(5/6) ====
+==== Const Correctness~~(5/6) ====
 {\ttfamily\LARGE
     <2a,1>~\underline{const}~int~\underline{~~~~~}~*~\underline{const}~foo;\\
     <2b,1>~\underline{~~~~~}~int~\underline{const}~*~\underline{const}~foo;\\
@@ -372,7 +372,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0]~= \ldots{};}
 }
 
-==== const correctness~~(6/6) ====
+==== Const Correctness~~(6/6) ====
 {\ttfamily\LARGE
     ~~~~const int * const * foo;\\
     \uncover<2->{~~~~~~~\textsf{Erlaubt:}\\
@@ -383,7 +383,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 }
 
 
-==== const correctness in APIs ====
+==== Const Correctness in APIs ====
 {\Large
     \texttt{int my\_strlen(\phantom{const}~char * str);\\}
     \uncover<2->{\ind{}Funktion darf \emph{Inhalt} von \texttt{str} verändern\\}
@@ -606,7 +606,7 @@ int main() \{\\
 * Pointer sind typisiert
 * Arrays sind Pointer auf ihr erstes Element
 * Strings sind nulltermininiert
-* const correctness bei Pointern ist wichtig
+* Const Correctness bei Pointern ist wichtig
 }
 
 
