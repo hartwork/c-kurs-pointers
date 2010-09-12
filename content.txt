@@ -66,7 +66,6 @@ Ohne Pointer geht nichts.
 * Weiterführende Themen
 * Zusammenfassung
 }
-%* Strings versus "Memory"
 
 
 == Pointer ==
@@ -545,13 +544,6 @@ int main() \{\\
     ~~demo\_deep(d);\\}}}
     ~~return 0;\\
     \}
-}
-
-%==== Strings versus "Memory" ====
-\comment{\Large
-    \underline{str}ncpy(\underline{char} *dest, const \underline{char} *src, size\_t n);\\[1.5ex]
-    \underline{mem}cpy(\underline{void} *dest, const \underline{void} *src, size\_t n);\\[0.5ex]
-    \uncover<2->{ohne Null-Byte-Behandlung}
 }
 
 
