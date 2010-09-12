@@ -332,31 +332,26 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 
 == const correctness ==
 
-==== const correctness~~(1/XXXX) ====
+==== const correctness~~(1/6) ====
 {\LARGE
 <[center]
 Modifikator \texttt{const}\\verbietet Schreibzugriff
 [center]>
 }
 
-==== const correctness~~(2/XXXX) ====
+==== const correctness~~(2/6) ====
 {\ttfamily\LARGE
 ~~\only<1,3->{\underline{~~~~~}}\only<2>{\underline{\highlight{const}}} int \only<-2>{\underline{~~~~~}}\only<3->{\underline{\highlight{const}}} foo;\\~\\\phantom{<2a>}
 }
 
-%==== const correctness~~(2/XXXX) ====
-%{\ttfamily\LARGE
-%~~\underline{~~~~~} int \underline{\highlight{const}} foo = \ldots
-%}
-
-==== const correctness~~(4/XXXX) ====
+==== const correctness~~(3/6) ====
 {\ttfamily\LARGE
 ~~\underline{~~~~~}~int~\underline{~~~~~}~*~\underline{~~~~~}~foo;\\
 ~~\uncover<3->{~~|~~~~~~~~~|~~~~~}\uncover<2->{~~|\\}
 ~~\uncover<3->{~<2a>~~~~~~<2b>~~~}\uncover<2->{~<1>\\}
 }
 
-==== const correctness~~(5/XXXX) ====
+==== const correctness~~(4/6) ====
 {\ttfamily\LARGE
     <1>~~\underline{~~~~~}~int~\underline{~~~~~}~*~\underline{const}~foo;\\
     \uncover<2->{~~~~~~~\textsf{Verboten:}\\
@@ -368,7 +363,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0] = \ldots{};\\}}}
 }
 
-==== const correctness~~(6/XXXX) ====
+==== const correctness~~(5/6) ====
 {\ttfamily\LARGE
     <2a,1>~\underline{const}~int~\underline{~~~~~}~*~\underline{const}~foo;\\
     <2b,1>~\underline{~~~~~}~int~\underline{const}~*~\underline{const}~foo;\\
@@ -377,7 +372,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0]~= \ldots{};}
 }
 
-==== const correctness~~(7/XXXX) ====
+==== const correctness~~(6/6) ====
 {\ttfamily\LARGE
     ~~~~const int * const * foo;\\
     \uncover<2->{~~~~~~~\textsf{Erlaubt:}\\
