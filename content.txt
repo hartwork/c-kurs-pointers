@@ -52,7 +52,7 @@ Ohne Pointer geht nichts.
 
 ==== Themen ====
 {\large
-* Hello pointer
+* Hello Pointer
 * Call by Reference
 * \texttt{NULL}-Pointer
 * Pointer auf Pointer
@@ -96,9 +96,9 @@ Ohne Pointer geht nichts.
 }
 
 
-== Hello pointer ==
+== Hello Pointer ==
 
-==== Hello pointer ====
+==== Hello Pointer ====
 {\ttfamily\large
     \#include <stdio.h>\\
 ~\\
