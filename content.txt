@@ -198,6 +198,29 @@ int main() \{\\
     \uncover<2->{int** pp = \&p;}
 }
 
+==== Anwendungen ====
+{\LARGE
+* $\,$Mehrdimensionale Arrays
+* $\,$\uncover<2->{Call by Reference \emph{von} Pointern}
+}
+
+
+==== Anwendungen ====
+{\ttfamily\large
+STRTOD(3)\hfill{}Linux Programmer's Manual\hfill{}STRTOD(3)\\
+~\\
+NAME\\
+\ind{}strtod, strtof, strtold - convert ASCII string\\\hfill{}to floating-point number\\
+~\\
+SYNOPSIS\\
+\ind{}\#include <stdlib.h>\\
+~\\
+\ind{}double strtod(const char *nptr, \only<1>{char **endptr}\only<2>{\highlight{char **endptr}});\\
+\ind{}float strtof(const char *nptr, \only<1>{char **endptr}\only<2>{\highlight{char **endptr}});\\
+~\\
+\ldots{}
+}
+
 
 == Von Pointern zu Arrays ==
 
