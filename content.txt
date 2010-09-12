@@ -132,15 +132,16 @@ Ohne Pointer geht nichts.
 {\LARGE
 *$\,$\uncover<1->{Operator \texttt{\&} liefert eine Adresse}
 *$\,$\uncover<2->{Operator \texttt{*} folgt einer Adresse\\\ind{}(er \emph{dereferenziert})}
-*$\,$\uncover<3->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) == x}}
+*$\,$\uncover<3->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) = x}}
 }
 
 
 ==== Zusammenfassung 2/2 ====
 {\LARGE
+<[center]
 Pointer zeigen auf typisierte Daten:\\[1ex]
-\ind{}\texttt{~int *} == Pointer auf int\\[1ex]
-\ind{}\texttt{char *} == Pointer auf char
+\texttt{~int *}~~$\neq$~~\texttt{char *}
+[center]>
 }
 
 
@@ -251,21 +252,21 @@ Array-Zugriff via \texttt{[\emph{n}]} ähnlich Java
 ==== Zusammenfassung~~(2/5) ====
 {\LARGE
 <[center]
-Array~\,\texttt{==}\,~Pointer auf das erste Element
+Array~\,=\,~Pointer auf das erste Element
 [center]>
 }
 
 ==== Zusammenfassung~~(3/5) ====
 {\ttfamily\Huge
 <[center]
-\emph{a}[\emph{n}]~==~*(\emph{a} + \emph{n})
+\emph{a}[\emph{n}]~\,\textsf{=}\,~*(\emph{a} + \emph{n})
 [center]>
 }
 
 ==== Zusammenfassung~~(4/5) ====
 {\Large
 <[center]
-\texttt{sizeof(\emph{variable})\\==}\\
+\texttt{sizeof(\emph{variable})}\\=\\
 Von \texttt{\emph{variable}} belegter Speicher in Byte
 [center]>
 }
@@ -273,7 +274,7 @@ Von \texttt{\emph{variable}} belegter Speicher in Byte
 ==== Zusammenfassung~~(5/5) ====
 {\Large
 <[center]
-\texttt{sizeof(\highlight{\emph{type}})\\==}\\
+\texttt{sizeof(\highlight{\emph{type}})}\\=\\
 Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 [center]>
 }
@@ -291,9 +292,9 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 ~\\
     \uncover<2->{Es gilt:\\
     {\ttfamily
-        \ind{}numbers[i] == *(numbers + i)\\
-        \uncover<3->{\ind{}text[j] == *(text + j)\\}
-        \uncover<4->{\ind{}sizeof(char) != sizeof(int)\\}
+        \ind{}1.~numbers[i]~\,\textsf{=}\,~*(numbers + i)\\
+        \ind{}2.~\uncover<3->{text[j]~\,\textsf{=}\,~*(text + j)\\}
+        \ind{}3.~\uncover<4->{sizeof(char)~\,$\neq$\,~sizeof(int)\\}
     }
 ~\\
     \uncover<5->{Für Operatoren +/- auf Pointern folgt:\\}
@@ -525,12 +526,12 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 {\Large
     \uncover<3->{Variante \glqq{}Mit Array\grqq{}\\}
     \ind{}\texttt{char a[] = ``Hallo'';}\\
-    \uncover<2->{\ind{}\texttt{sizeof(a) == sizeof(char)*(5 + 1)}\\}
+    \uncover<2->{\ind{}\texttt{sizeof(a) = sizeof(char)*(5 + 1)}\\}
     \uncover<4->{\ind{}Inhalt les- und schreibbar\\}
 ~\\
     \uncover<5->{Variante \glqq{}Nur Pointer\grqq{}\\}
     \uncover<6->{\ind{}\texttt{\only<9->{\highlight{const} }char * p = ``Hallo'';}\\}  % gcc -Wwrite-strings
-    \uncover<7->{\ind{}\texttt{sizeof(p) == sizeof(char *)}\\}
+    \uncover<7->{\ind{}\texttt{sizeof(p) = sizeof(char *)}\\}
     \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
 }
 
