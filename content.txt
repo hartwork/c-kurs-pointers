@@ -157,10 +157,10 @@ void by\_reference(int* p)~\{~*p += 4; \}}\\
 int main() \{\\
 ~~int i = 0;\\
 ~\\
-~~\uncover<2->{by\_value(i);\\
-~~by\_reference(\&i);}\\
-~\\
-~~\uncover<3->{printf(``i == \%d$\backslash$n'', i);}\\
+~~\uncover<2->{by\_value(i);\\}
+~~\uncover<5->{printf(``i == \%d$\backslash$n'', i);\\}
+~~\uncover<3->{by\_reference(\&i);\\}
+~~\uncover<5->{printf(``i == \%d$\backslash$n'', i);\\}
 ~\\
 ~~return 0;\\
 \}
@@ -171,8 +171,9 @@ int main() \{\\
 {\ttfamily\Large
     \# gcc~\,call\_by\_reference.c $\backslash$\\
     ~~~~~~-o call\_by\_reference\\
-    \# ./call\_by\_reference\\
-    i == 4
+    \uncover<2->{\# ./call\_by\_reference\\
+    \uncover<3->{i == 0\\
+    i == 4}}
 }
 
 

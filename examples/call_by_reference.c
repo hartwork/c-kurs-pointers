@@ -7,8 +7,8 @@ int main() {
   int i = 0;
 
   by_value(i);
+  printf("i == %d\n", i);
   by_reference(&i);
-
   printf("i == %d\n", i);
 
   return 0;
