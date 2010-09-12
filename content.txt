@@ -60,7 +60,7 @@ Ohne Pointer geht nichts.
 * Pointer-Arithmetik
 * Strings und Längenberechnung
 * Const Correctness
-* argc und argv
+* \texttt{argc} und \texttt{argv}
 * Mehrdimensionale Arrays
 * Initialisierung von Strings\vspace*{1ex}
 * Weiterführende Themen
@@ -395,9 +395,9 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 }
 
 
-== argc und argv ==
+== \texttt{argc} und \texttt{argv} ==
 
-==== argc und argv ====
+==== \texttt{argc} und \texttt{argv} ====
 {\ttfamily\Large
     \#include <stdio.h>\\
 ~\\
