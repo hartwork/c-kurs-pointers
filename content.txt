@@ -140,7 +140,7 @@ Ohne Pointer geht nichts.
 {\LARGE
 <[center]
 Pointer zeigen auf typisierte Daten:\\[1ex]
-\texttt{~int *}~~$\neq$~~\texttt{char *}
+\texttt{int *}~~$\neq$~~\texttt{char *}
 [center]>
 }
 
