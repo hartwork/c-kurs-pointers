@@ -604,7 +604,7 @@ int main() \{\\
 {\Large
 * Character encodings, Unicode, wchar\_t
 * Sicherer Umgang mit Strings
-* Der Typ size\_t
+* Der Typ \texttt{size\_t}
 * Void-Pointer
 * Funktions-Pointer
 }
