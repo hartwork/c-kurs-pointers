@@ -130,10 +130,9 @@ Ohne Pointer geht nichts.
 
 ==== Zusammenfassung 1/2 ====
 {\LARGE
-*$\,$\uncover<1->{Jede Variable hat eine Adresse}
-*$\,$\uncover<2->{Operator \texttt{\&} liefert diese Adresse}
-*$\,$\uncover<3->{Operator \texttt{*} folgt einer Adresse\\\ind{}(er \emph{dereferenziert})}
-*$\,$\uncover<4->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) == x}}
+*$\,$\uncover<1->{Operator \texttt{\&} liefert eine Adresse}
+*$\,$\uncover<2->{Operator \texttt{*} folgt einer Adresse\\\ind{}(er \emph{dereferenziert})}
+*$\,$\uncover<3->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) == x}}
 }
 
 
