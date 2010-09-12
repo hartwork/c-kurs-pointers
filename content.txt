@@ -593,10 +593,10 @@ int main() \{\\
 ==== Zusammenfassung ====
 {\Large
 * \texttt{sizeof(\emph{x})} liefert die Größe von \texttt{\emph{x}} in Byte
-* \&-Operator liefert eine Adresse
-* *-Operator dereferenziert
+* Operator \texttt{\&} liefert eine Adresse
+* Operator \texttt{*} folgt einer Adresse\\\hfill{}(er \emph{dereferenziert})
 * Pointer sind typisiert
-* Arrays sind auch Pointer auf ihr erstes Element
+* Arrays sind Pointer auf ihr erstes Element
 * Strings sind nulltermininiert
 * const correctness bei Pointern ist wichtig
 }
