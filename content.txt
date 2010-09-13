@@ -216,7 +216,7 @@ int main() \{\\
 }
 
 
-==== Anwendungen ====
+==== man strtod ====
 {\ttfamily\large
 STRTOD(3)\hfill{}Linux Programmer's Manual\hfill{}STRTOD(3)\\
 ~\\
