@@ -9,11 +9,11 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="808.57141"
-   height="665.71429"
+   width="780.19543"
+   height="659.40942"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.0 r9654"
    sodipodi:docname="ram-minus-0.svg">
   <title
      id="title3151">Pointers in RAM</title>
@@ -307,9 +307,9 @@
      borderopacity="1"
      inkscape:pageopacity="0.80784314"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="391.70147"
-     inkscape:cy="324.61432"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="288.00536"
+     inkscape:cy="312.70423"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -317,7 +317,12 @@
      inkscape:window-height="996"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     units="cm"
+     fit-margin-top="1"
+     fit-margin-right="1"
+     fit-margin-left="1"
+     fit-margin-bottom="2" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -364,10 +369,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-51.285704,-339.07648)">
+     transform="translate(27.348661,-324.12423)">
     <g
        id="g3156"
-       transform="translate(-2.2360776,3.5714488)">
+       transform="translate(-84.05843,-14.533236)">
       <rect
          y="390.98813"
          x="465.49805"
@@ -429,11 +434,11 @@
        inkscape:flatsided="true"
        inkscape:rounded="0"
        inkscape:randomized="0"
-       d="m 848.54397,490.14285 13.96972,-8.06542 0,16.13084 -13.96972,-8.06542 z"
-       transform="matrix(2.0737509,0,0,1,-1079.8839,26.839105)" />
+       d="m 848.54397,490.14285 13.96972,-8.06542 0,16.13084 z"
+       transform="matrix(2.0737509,0,0,1,-1161.7063,8.73442)" />
     <g
        id="g3192"
-       transform="translate(-2.2360776,3.5714488)">
+       transform="translate(-84.05843,-14.533236)">
       <g
          id="g3171">
         <flowRoot
@@ -471,7 +476,7 @@
              id="rect3965-3" /></flowRegion><flowPara
            style="text-align:end;text-anchor:end;fill:#ffffff;stroke:none"
            id="flowPara3967-0">12-15</flowPara></flowRoot>      <flowRoot
-         transform="translate(-39.905726,179.24666)"
+         transform="translate(-55.905726,179.24666)"
          style="font-size:40px;font-style:normal;font-weight:normal;text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          id="flowRoot3961-62-1"
          xml:space="preserve"><flowRegion
@@ -484,7 +489,7 @@
              id="rect3965-3-0" /></flowRegion><flowPara
            style="text-align:end;text-anchor:end;fill:#ffffff;stroke:none"
            id="flowPara3967-0-4">i</flowPara></flowRoot>      <flowRoot
-         transform="translate(-8.814187,179.89259)"
+         transform="translate(-30.814187,179.89259)"
          style="font-size:40px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          id="flowRoot3961-62-1-6"
          xml:space="preserve"><flowRegion
@@ -499,15 +504,16 @@
            id="flowPara3967-0-4-4">int</flowPara></flowRoot>    </g>
     <g
        id="g2976"
-       transform="translate(106.36105,51.139633)">
+       transform="translate(24.538698,33.034948)">
       <path
+         inkscape:connector-curvature="0"
          id="rect4486-0"
          transform="translate(0,284.36218)"
          d="m 573.4375,386.625 0,3 50.15625,0 c 17.00209,0 30.625,13.62291 30.625,30.625 l 0,31.28125 c 0,17.00209 -13.62291,30.65625 -30.625,30.65625 l -25.34375,0 0,3 25.34375,0 c 18.6122,0 33.625,-15.04405 33.625,-33.65625 l 0,-31.28125 c 0,-18.6122 -15.0128,-33.625 -33.625,-33.625 l -50.15625,0 z"
          style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans" />
       <path
          transform="matrix(2.0737509,0,0,1,-1186.2449,277.39329)"
-         d="m 848.54397,490.14285 13.96972,-8.06542 0,16.13084 -13.96972,-8.06542 z"
+         d="m 848.54397,490.14285 13.96972,-8.06542 0,16.13084 z"
          inkscape:randomized="0"
          inkscape:rounded="0"
          inkscape:flatsided="true"
@@ -523,7 +529,8 @@
          sodipodi:type="star" />
     </g>
     <g
-       id="g3431">
+       id="g3431"
+       transform="translate(-81.822352,-18.104685)">
       <g
          transform="translate(-2.2360776,3.5714488)"
          id="g3178">
@@ -562,7 +569,7 @@
              id="rect3965-3-6" /></flowRegion><flowPara
            style="text-align:end;text-anchor:end;fill:#ffffff;stroke:none"
            id="flowPara3967-0-7">28-31</flowPara></flowRoot>      <flowRoot
-         transform="translate(-43.684774,388.42008)"
+         transform="translate(-59.684774,388.42008)"
          style="font-size:40px;font-style:normal;font-weight:normal;text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          id="flowRoot3961-62-1-4"
          xml:space="preserve"><flowRegion
@@ -575,7 +582,7 @@
              id="rect3965-3-0-7" /></flowRegion><flowPara
            style="text-align:end;text-anchor:end;fill:#ffffff;stroke:none"
            id="flowPara3967-0-4-5">pp</flowPara></flowRoot>      <flowRoot
-         transform="translate(-11.050265,389.41329)"
+         transform="translate(-33.050265,389.41329)"
          style="font-size:40px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          id="flowRoot3961-62-1-4-3"
          xml:space="preserve"><flowRegion
@@ -587,13 +594,15 @@
              width="191.92899"
              id="rect3965-3-0-7-0" /></flowRegion><flowPara
            style="text-align:start;text-anchor:start;fill:#ffffff;stroke:none"
-           id="flowPara3967-0-4-5-8">int**</flowPara></flowRoot>    </g>
+           id="flowPara3967-0-4-5-8">int **</flowPara></flowRoot>    </g>
     <path
+       inkscape:connector-curvature="0"
        style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
-       d="m 701.86105,515.84556 0,3 63.75,0 c 17.00209,0 30.625,13.65416 30.625,30.65625 l 0,252 c 0,17.00209 -13.62291,30.65625 -30.625,30.65625 l -85.8125,0 0,3 85.8125,0 c 18.6122,0 33.625,-15.04405 33.625,-33.65625 l 0,-252 c 0,-18.6122 -15.0128,-33.65625 -33.625,-33.65625 l -63.75,0 z"
+       d="m 620.0387,497.74087 0,3 63.75,0 c 17.00209,0 30.625,13.65416 30.625,30.65625 l 0,252 c 0,17.00209 -13.62291,30.65625 -30.625,30.65625 l -85.8125,0 0,3 85.8125,0 c 18.6122,0 33.625,-15.04405 33.625,-33.65625 l 0,-252 c 0,-18.6122 -15.0128,-33.65625 -33.625,-33.65625 l -63.75,0 z"
        id="rect4486" />
     <g
-       id="g3470">
+       id="g3470"
+       transform="translate(-81.822352,-18.104685)">
       <g
          transform="translate(-2.2360776,3.5714488)"
          id="g3185">
@@ -632,7 +641,7 @@
              id="rect3965-3-63" /></flowRegion><flowPara
            id="flowPara4266"
            style="text-align:end;text-anchor:end;fill:#ffffff;stroke:none">36-39</flowPara></flowRoot>      <flowRoot
-         transform="translate(-43.684774,491.08768)"
+         transform="translate(-59.684774,491.08768)"
          style="font-size:40px;font-style:normal;font-weight:normal;text-align:end;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          id="flowRoot3961-62-1-4-4"
          xml:space="preserve"><flowRegion
@@ -645,7 +654,7 @@
              id="rect3965-3-0-7-6" /></flowRegion><flowPara
            style="text-align:end;text-anchor:end;fill:#ffffff;stroke:none"
            id="flowPara3967-0-4-5-7">p</flowPara></flowRoot>      <flowRoot
-         transform="translate(-11.050265,492.38791)"
+         transform="translate(-33.050265,492.38791)"
          style="font-size:40px;font-style:normal;font-weight:normal;text-align:start;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
          id="flowRoot3961-62-1-4-4-8"
          xml:space="preserve"><flowRegion
@@ -657,6 +666,6 @@
              width="191.92899"
              id="rect3965-3-0-7-6-0" /></flowRegion><flowPara
            style="text-align:start;text-anchor:start;fill:#ffffff;stroke:none"
-           id="flowPara3967-0-4-5-7-9">int*</flowPara></flowRoot>    </g>
+           id="flowPara3967-0-4-5-7-9">int *</flowPara></flowRoot>    </g>
   </g>
 </svg>
