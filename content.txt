@@ -592,7 +592,7 @@ int main() \{\\
 
 ==== Weiterführende Themen ====
 {\Large
-* Character encodings, Unicode, wchar\_t
+* Character Encodings, Unicode, \texttt{wchar\_t}
 * Sicherer Umgang mit Strings
 * Der Typ \texttt{size\_t}
 * Void-Pointer
