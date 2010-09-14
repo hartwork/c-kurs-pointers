@@ -26,6 +26,13 @@
 }
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%	Willkommen zum zweiten Tag des C-Kurses.
+%	Mein Name ist Sebastian Pipping.  In der nächsten Stunde
+%	werde ich versuchen, euch Pointer in C näherzubringen.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 ==== C-Kurs ====
 {\Large
 \begin{tabular}{ll@{~~~}l}
@@ -41,6 +48,12 @@ Next --> & Do  & Pointer, Arrays, ... \\
 ~        & ~   & stdlib, Bücher, ... \\
 \end{tabular}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Gestern haben wir uns mit den Grundbausteinen von C
+	und mit Ein- und Ausgabe beschäftigt.
+	Dabei haben wir an mehreren Stellen bereits Pointer verwendet.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== ====
 {\Huge
@@ -48,6 +61,10 @@ Next --> & Do  & Pointer, Arrays, ... \\
 Ohne Pointer geht nichts.
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Das ist auch nicht weiter verwunderlich:
+	Ohne Pointer geht in C wirklich nichts.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Themen ====
@@ -66,6 +83,54 @@ Ohne Pointer geht nichts.
 * Weiterführende Themen
 * Zusammenfassung
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Und weil in C nichts ohne Pointer geht, gibt es -
+	die lange Liste an Themen spiegelt das wieder -
+	einiges Wichtiges über sie zu erzählen.
+
+	In "Hello Pointer" möchte ich Pointer an einem Minimalbeispiel
+	vorstellen:
+	- Was ist das Konzept?
+	- Wie lautet die Syntax?
+	- Wo ist der Bezug zum Arbeitsspeicher?
+
+	Danach möchte unter Verwendung von Pointern Call by Reference
+	nachbauen, also Funktionen erlauben, ausgewählten Variablen der
+	Welt um sie herum zu verändern.
+
+	Dann werde ich einen speziellen Wert - den NULL-Pointer -
+	einführen und kurz auf seine Verwendung eingehen.
+
+	Gelegentlich zeigen Pointer auch auf andere Pointer.
+	Dazu werde ich ein Beispiel aus der realen Welt vorstellen.
+
+	In "Von Pointern zu Arrays" werden wir die Funktionsweise von
+	Arrays näher kennenlernen.
+
+	Damit sind wir direkt beim Thema "Pointer-Arithmetik" und
+	was sich hinter diesem Begriff verbirgt.
+
+	Aufbauend auf unserem Wissen über Arrays werde ich dann
+	Strings als spezielle Arrays vorstellen und warum und wie
+	wir ihre Länge berechnen müssen.
+
+	Bevor ich die zwei verschiedenen Arten der Initialisierung von
+	Strings vorstellen kann, muss ich in "Const Correctness"
+	ein paar Grundlagen aufbauen: An ein paar Stellen ist die
+	Frage "konstant oder nicht konstant" mehr als nur Geschmack,
+	sondern macht einen echten Unterschied.
+
+	Auch für die Repräsentation von mehrdimensionalen Arrays
+	gibt es in C zwei Varianten.  Hilfe für diese Stolperfalle
+	mit auf den Weg zu geben, ist mir wichtig.
+
+	Mit dem bis dahin aufgebauten Verständnis sind wir dann auch
+	in der Lage, Programm-Argumente auszulesen, was	ich mit
+	passendem Code demonstrieren werde.
+
+	Danach möchte ich mit einem Ausblick und einer Zusammenfassung
+	schließen.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Pointer ==
@@ -96,6 +161,28 @@ Ohne Pointer geht nichts.
 <<<graphics/ram-minus-0,height=0.94\textheight>>>
 }
 [center]>
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Dieses Rechteck ist der Arbeitsspeicher einer 32-Bit-Machine.
+
+	Wenn wir im Code eine Variable Deklarieren, belegt die
+	Speicher.  In unserem Fall hält i den Wert 5 und liegt an
+	Adresse 12 bis 15, belegt also 4 Byte.
+
+	Nun könnten wir doch auch die Adresse von i - also 12 -
+	in den Speicher schreiben, diesen Speicher also auf i
+	verweisen oder "zeigen" lassen.
+
+	In unserem Fall liegt die 12 an Adresse 36 bis 39, belegt also
+	ebenfalls 4 Byte oder 32 Bit.  Im Code könnte das eine Variable
+	p von Typ int * - Pointer auf einen int - sein.
+
+	Auch auf p lässt sich verweisen.  Die Adresse von p ist 36.
+	Hier liegt auch die 36 in den Speicher, konkret an Adresse
+	28 bis 31.  Im Code könnte das eine Variable pp sein,
+	ein Pointer auf einen Pointer auf einen int.
+
+	Gibt es dazu Fragen?
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== ====
@@ -104,6 +191,11 @@ Ohne Pointer geht nichts.
 Was ist ein \glqq{}Pointer\grqq{}?
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Also was ist ein "Pointer"?
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 
 ==== ====
@@ -114,9 +206,24 @@ Was ist ein \glqq{}Pointer\grqq{}?
 \item[B)]$\,$\uncover<3->{Variable, die eine Adresse speichert}
 \end{itemize}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	"Pointer" meint entweder eine Adresse oder eine Variable,
+	die eine Adresse speichert.  Diese Mehrdeutigkeit ist gar nichts
+	wirklich neues: Das Wort "Integer" verwenden wir ganz
+	selbstverständlich zum einen für ganze Zahlen - sagen wir die 3 -
+	und zum anderen für Variablen die Integer speichern:
+	i ist ein Integer.
+
+	"Pointer" meint also eine Adresse oder eine Variable,
+	die eine Adresse speichert.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Hello Pointer ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Hello Pointer - lasst uns dazu etwas Code ansehen.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Hello Pointer ====
 {\ttfamily\large
@@ -135,6 +242,27 @@ Was ist ein \glqq{}Pointer\grqq{}?
     ~~return 0;\\
     \}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Fangen wir an mit einem Gerüst, dass euch inzwischen
+	sehr bekannt vorkommen wollte.
+
+	Wir definieren einen Integer i, bisher nichts Neues.
+
+	Als nächstes definieren wir einen Pointer p, der auf i zeigt.
+	der &-Operator liefert hierbei die Adresse von i.
+	p ist vom Typ int *, Pointer auf einen int.
+
+	Danach schreiben wir den Wert 4 nach *p.  Der *-Operator folgt
+	der Adresse in p - wir schreiben also effektiv in den Speicher
+	von i!
+
+	p selbst ist auch schreibbar - hier schreiben wir den Wert 5.
+
+	Als letztes fügen wir noch ein paar printf()s ein, um die Werte
+	von i und p auszugeben.
+
+	Lasst uns das doch mal ausführen...
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Ausgabe ====
@@ -147,6 +275,26 @@ Was ist ein \glqq{}Pointer\grqq{}?
     \uncover<6->{~~~~~~~~~~~~~~~~~~~~~~~~~|~p = 5;\\}
     \uncover<7->{i == 4, p == 0x5\\}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Erstmal kompilieren wir das.
+
+	Dann ausführen...
+
+	i ist drei - so wie wir es initialisiert hatten - und p
+	zeigt auf i, das an Adresse "bfa und weiter" liegt.
+	Nebenbei: Diese Adresse kann bei jeden Aufruf verschieden sein.
+
+	Zur Erinnerung: Dann kam "*p = 4;".
+
+	Weil der *-Operator der Adresse in p folgt, landet die 4 in i.
+	p selbst bleibt unverändert.
+
+	Dann kam "p = 5;".
+
+	Diesmal wird p selbst verändert: p zeigt jetzt auf Adresse 5.
+
+	Lasst mich das kurz zusammenfassen...
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Zusammenfassung 1/2 ====
@@ -155,6 +303,16 @@ Was ist ein \glqq{}Pointer\grqq{}?
 *$\,$\uncover<2->{Operator \texttt{*} folgt einer Adresse\\\ind{}(er \emph{dereferenziert})}
 *$\,$\uncover<3->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) = x}}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Operator & liefert eine Adresse.
+
+	Operator * folgt einer Adresse.  Man sagt auch "er dereferenziert".
+
+	Besonders für die Mathematiker unter euch:
+	Diese beiden Operatoren sind komplementär.
+	Wenn ich nach der Adresse von x frage und dann dieser Adresse
+	folge erhalte ich wieder x.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Zusammenfassung 2/2 ====
@@ -164,9 +322,24 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 \texttt{int *}~~$\neq$~~\texttt{char *}
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Pointer zeigen auf typisierte Daten.
+	Es gibt einen Unterschied zwischen Pointern auf ints
+	und Pointern auch chars.  Diese Unterscheidung ist die
+	Grundlage für Pointer-Arithmetik - dazu später mehr.
+
+	Zuvor möchte ich euch zeigen, wie man mithilfe von Pointern
+	Call by Reference in C nachbaut.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Call by Reference ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Zur Erinnerung: Call by Reference bedeutet, einer Funktion
+	zu erlauben, ausgewählten Variablen der Welt um sie herum
+	zu verändern.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Call by Reference ====
 {\ttfamily\large
@@ -186,6 +359,25 @@ int main() \{\\
 ~~return 0;\\
 \}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Fangen wir an mit einem bekannten Gerüst: mit einer
+	main-Funktion und einem Integer i.
+
+	Übergeben wir i nun an eine Funktion "by_value" und
+	eine Funktion "by_reference".
+
+	by_value() verändert Paramater x, arbeitet somit auf dem
+	einem kopierten Wert von i.
+
+	by_reference() dagegen schreibt in den Speicher der kopierten
+	Adresse von &i und verändert damit den Wert von i.
+
+	Welchen Wert hat i also am Ende von main()?
+
+	<PAUSE>
+
+	Fügen wir noch ein paar printf()s hinzu und lassen es laufen...
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Ausgabe ====
@@ -196,9 +388,18 @@ int main() \{\\
     \uncover<3->{i == 0\\
     i == 4}}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Kompilieren, ausführen, i ist 0 und dann 4.
+
+	TODO 36
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == \texttt{NULL}-Pointer ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Einen besonderen Wert kann ein Pointer annehmen: NULL.
+	Man spricht dann von einem Null-Pointer.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ==== \texttt{NULL}-Pointer ====
 {\ttfamily\Large
@@ -208,6 +409,15 @@ int main() \{\\
     \uncover<2->{...\\
     int b = *p;\uncover<3->{\textsf{~\highlight{ <-- BANG!}}}\\}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Um das Symbol NULL verwenden zu können, müssen wir
+	stdlib.h inkludieren.
+
+	Mit NULL markieren wir, dass ein Pointer auf nichts zeigt.
+
+	Probleme gibt das, wenn wir einem Null-Pointer folgen,
+	so wie hier: Das knallt.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Zusammenfassung ====
@@ -216,9 +426,25 @@ int main() \{\\
 * \,\uncover<2->{\texttt{NULL}-Pointern darf nicht gefolgt\\\hspace*{0ex}werden}
 * \,\uncover<3->{Wir müssen wissen, ob ein Pointer\\\hspace*{0ex}\texttt{NULL} ist, bevor wir ihm folgen}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Der Wert NULL markiert Abwesenheit.
+
+	Null-Pointern darf nicht gefolgt werden, sonst knallt es.
+
+	Und... wir müssen wissen, ob ein Pointer NULL ist, bevor wir
+	ihm folgen.  Wenn wir nicht sicher sind, weil wir das
+	nicht vorher schon irgendwo überprüft haben, dann müssen wir
+	das vorm Zugriff nachholen.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Pointer auf Pointer ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Auch Pointer auf Pointer, manchmal "Doppelpointer" genannt,
+	werden regelmäßig gebraucht.
+
+	Zum Beispiel für...
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Anwendungen ====
@@ -226,6 +452,13 @@ int main() \{\\
 * $\,$Mehrdimensionale Arrays
 * $\,$\uncover<2->{Call by Reference \emph{von} Pointern}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	... Mehrdimensionale Arrays oder, wenn Pointer selbst
+	mittels Call by Reference verändert werden sollen.
+
+	Eine Funktion, die ihr sicher mal brauchen werdet, macht
+	Gebrauch davon: ...
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== man strtod ====
@@ -243,6 +476,20 @@ SYNOPSIS\\
 ~\\
 \ldots{}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	... die Funktion strtod().
+
+	Hier seht ihr einen Ausschnitt aus der Manpage von
+	strtod().
+
+	Unten rechts seht ihr einen Pointer auf einen Pointer.
+	strtod() arbeitet mit Call by Reference.
+	In einer unserer Übungsaufgaben könnt ihr genau
+	mit dieser Funktion herumexperimentieren.
+
+	Wirklich schwer sind Doppelpointer nicht; außer einem weiteren
+	Stern erwartet euch syntaktisch nichts Neues.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Pointer auf Pointer ====
@@ -251,6 +498,19 @@ SYNOPSIS\\
     int * p = \&i;\\[1ex]
     \uncover<2->{int ** pp = \&p;}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Das kennt ihr schon: Pointer p wird mit der Adresse von i
+	initialisiert.
+
+	p ist ein einfacher Pointer.
+
+	Hier wird nun Doppelpointer pp mit der Adresse von p
+	initialisiert: Wir setzen also eine weitere Indirektionsschicht
+	oben drauf.
+
+	Wenn ihr euch an meine Darstellung des Arbeitsspeichers
+	von vorhin erinnert: das waren i, p und pp.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 ==== Variablen im RAM~~(Wiederholung) ====
@@ -258,9 +518,18 @@ SYNOPSIS\\
 \vspace*{-3ex}%
 <<<graphics/ram-minus-0,height=0.94\textheight>>>
 [center]>
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Gibt es Fragen bis hierher?
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Von Pointern zu Arrays ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	In C hängen Arrays und Pointer zusammen.
+
+	Schauen wir uns an, wie dieser Zusammenhang genau aussieht.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Von Pointern zu Arrays ====
 {\ttfamily\large
@@ -279,6 +548,51 @@ int main() \{\\
 ~~return 0;\\
 \}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Diese Gerüst kennt ihr schon.
+
+	Hier definiere ich eine Funktion "dump" die Daten ausgeben soll.
+	Die Daten sind Integer, die im Speicher direkt
+	hintereinanderliegen: ein Array von ints.
+
+	Von diesen ints gibt es count viele, der erste von ihnen
+	liegt an Adresse data.
+
+	Was ich jetzt machen kann, ist, mit einer simplen for-Schleife
+	über die Daten iterieren und jedes Datum einzeln ausgeben.
+
+	An den jeweiligen Wert gelangen wir, indem wir auf die
+	Basisadresse data i drauf addieren und dann der resultierenden
+	Adresse folgen.
+
+	Sind alle einverstanden, dass das so funktioniert?
+	
+	<PAUSE>
+
+	Wenn ihr jetzt denkt, dass diese Syntax unnötig hässlich ist:
+	Ihr habt recht, dafür gibt es eine Kurzschreibweise.
+	Diese Syntax kennt ihr vermutlich bereits von Java.
+
+	Lasst uns nun die Funktion mit Daten füttern.
+
+	Hier definieren wir ein Array, das die 5 kleinsten Primzahlen
+	enthält und rufen dump() damit auf.
+
+	Dass wir explizit sagen müssen, dass unser Array 5 Einträge
+	lang ist, ist etwas unschön.
+
+	Vermeiden lässt sich das hier mihilfe von des sizeof-Operators.
+	sizeof erkennt zur Compilezeit, wieviele Byte Speicher sein
+	Argument belegt.  Auf meiner 32-Bit-Machine belegt das Array
+	primes 20 Byte, ein int belegt 4 Byte.  20 durch 4 sind 5.
+
+	Durch diesen Trick könnten wir nun die sechste Primzahl an
+	primes anhängen, ohne den Aufruf von dump() aktualisieren zu
+	müssen.
+
+	Lasst mich das eben zusammenfassen...
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Zusammenfassung~~(1/5) ====
 {\LARGE
@@ -286,6 +600,11 @@ int main() \{\\
 Array-Zugriff via \texttt{[\emph{n}]} ähnlich Java
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Der Array-Zugriff funktioniert mit eckigen Klammern und einem
+	Index n wie auch in Java.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Zusammenfassung~~(2/5) ====
 {\LARGE
@@ -293,6 +612,12 @@ Array-Zugriff via \texttt{[\emph{n}]} ähnlich Java
 Array~\,=\,~Pointer auf das erste Element
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Ein Array ist auch ein Pointer auf sein erstes Element.
+	Mit dieser Adresse können wir auch direkt arbeiten,
+	zum Beispiel darauf addieren.  Mehr dazu später.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Zusammenfassung~~(3/5) ====
 {\ttfamily\Huge
@@ -300,6 +625,15 @@ Array~\,=\,~Pointer auf das erste Element
 \emph{a}[\emph{n}]~\,\textsf{=}\,~*(\emph{a} + \emph{n})
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Die Syntax mit den eckigen Klammern ist eine syntaktische
+	Abkürzung.  Eigentlich wird die Adresse des ersten Elements
+	genommen, darauf addiert und dann der resultierenden
+	Adresse gefolgt.
+
+	Array-Zugriff ist also auch dereferenzieren!
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Zusammenfassung~~(4/5) ====
 {\Large
@@ -308,6 +642,13 @@ Array~\,=\,~Pointer auf das erste Element
 Von \texttt{\emph{variable}} belegter Speicher in Byte
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Der Operator sizeof liefert die Anzahl Byte, die eine
+	Variable im Speicher belegen wird.
+
+	Diese Auswertung geschieht zur Compilezeit.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Zusammenfassung~~(5/5) ====
 {\Large
@@ -316,10 +657,26 @@ Von \texttt{\emph{variable}} belegter Speicher in Byte
 Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 [center]>
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Desweiteren kann sizeof auch die Größe von Typen bestimmen:
+	wieviele Byte Speicher wird Typ xy belegen.
 
+	sizeof() kann noch ein bisschen mehr, aber weitere Details
+	sind im Augenblick nicht wichtig.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Pointer-Arithmetik ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Kommen wir nun zu Pointer-Arithmetik, die wir vorhin
+	bereits mehrfach verwendet haben.
+
+	Mit Pointern kann man Rechnen, daher Arithmetik.
+
+	Beim Array-Zugriff passiert das automatisch.
+	Aber was passiert da eigentlich genau?
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Pointer-Arithmetik ====
 {\Large
