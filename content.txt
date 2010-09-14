@@ -73,27 +73,27 @@ Ohne Pointer geht nichts.
 
 ==== Variablen im RAM ====
 <[center]
-\vspace*{-5ex}%
+\vspace*{-3ex}%
 \only<1>{
-<<<graphics/ram-minus-9,height=0.95\textheight>>>
+<<<graphics/ram-minus-9,height=0.94\textheight>>>
 }\only<2>{
-<<<graphics/ram-minus-8,height=0.95\textheight>>>
+<<<graphics/ram-minus-8,height=0.94\textheight>>>
 }\only<3>{
-<<<graphics/ram-minus-7,height=0.95\textheight>>>
+<<<graphics/ram-minus-7,height=0.94\textheight>>>
 }\only<4>{
-<<<graphics/ram-minus-6,height=0.95\textheight>>>
+<<<graphics/ram-minus-6,height=0.94\textheight>>>
 }\only<5>{
-<<<graphics/ram-minus-5,height=0.95\textheight>>>
+<<<graphics/ram-minus-5,height=0.94\textheight>>>
 }\only<6>{
-<<<graphics/ram-minus-4,height=0.95\textheight>>>
+<<<graphics/ram-minus-4,height=0.94\textheight>>>
 }\only<7>{
-<<<graphics/ram-minus-3,height=0.95\textheight>>>
+<<<graphics/ram-minus-3,height=0.94\textheight>>>
 }\only<8>{
-<<<graphics/ram-minus-2,height=0.95\textheight>>>
+<<<graphics/ram-minus-2,height=0.94\textheight>>>
 }\only<9>{
-<<<graphics/ram-minus-1,height=0.95\textheight>>>
+<<<graphics/ram-minus-1,height=0.94\textheight>>>
 }\only<10>{
-<<<graphics/ram-minus-0,height=0.95\textheight>>>
+<<<graphics/ram-minus-0,height=0.94\textheight>>>
 }
 [center]>
 
