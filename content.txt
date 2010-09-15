@@ -164,8 +164,8 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 {\ttfamily\large
 \#include <stdio.h>\\
 ~\\
-\uncover<4->{void by\_value~~~~(int~~~j) \{~~~j += 3;~~\}\\
-void by\_reference(int * p)~\{~~*p += 4;~~\}}\\
+\uncover<4->{void by\_value~~~~(int~~~x) \{~~~x += 3;~~\}\\
+void by\_reference(int * x)~\{~~*x += 4;~~\}}\\
 ~\\
 int main() \{\\
 ~~int i = 0;\\

@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-void by_value    (int  j) {  j += 3; }
-void by_reference(int* p) { *p += 4; }
+void by_value    (int  x) {  x += 3; }
+void by_reference(int* x) { *x += 4; }
 
 int main() {
   int i = 0;
