@@ -202,6 +202,14 @@ int main() \{\\
 }
 
 
+==== Zusammenfassung ====
+{\LARGE
+* \,\texttt{NULL} markiert Abwesenheit
+* \,\uncover<2->{\texttt{NULL}-Pointern darf nicht gefolgt\\\hspace*{0ex}werden}
+* \,\uncover<3->{Wir müssen wissen, ob ein Pointer\\\hspace*{0ex}\texttt{NULL} ist, bevor wir ihm folgen}
+}
+
+
 == Pointer auf Pointer ==
 
 ==== Pointer auf Pointer ====
