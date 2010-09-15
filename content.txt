@@ -30,6 +30,9 @@
 %	Willkommen zum zweiten Tag des C-Kurses.
 %	Mein Name ist Sebastian Pipping.  In der nächsten Stunde
 %	werde ich versuchen, euch Pointer in C näherzubringen.
+%
+%	Die Folien und alle Code Beispiele sind übrigens im Netz.
+%	Ihr könnt gerne mitschreiben, müsst aber nicht.
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
