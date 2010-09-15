@@ -578,10 +578,15 @@ int main() \{\\
 	Hier definieren wir ein Array, das die 5 kleinsten Primzahlen
 	enthält und rufen dump() damit auf.
 
+	Die Länge des Arrays müssen wir explizit übergeben, weil
+	die Funktion dump() einem Pointer allein nicht ansehen kann,
+	wie lang das Array dahinter ist: die Länge von Arrays
+	mit explizit mitherumgeschleppt werden!
+
 	Dass wir explizit sagen müssen, dass unser Array 5 Einträge
 	lang ist, ist etwas unschön.
 
-	Vermeiden lässt sich das hier mihilfe von des sizeof-Operators.
+	Vermeiden lässt sich das hier mithilfe von des sizeof-Operators.
 	sizeof erkennt zur Compilezeit, wieviele Byte Speicher sein
 	Argument belegt.  Auf meiner 32-Bit-Machine belegt das Array
 	primes 20 Byte, ein int belegt 4 Byte.  20 durch 4 sind 5.
@@ -1112,6 +1117,11 @@ Zwei Varianten:
 * Array von Arrays (\glqq{}deep array\grqq{})
 * linear (\glqq{}flat array\grqq{})
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Mehrdimensionale Arrays sind im Speicher entweder
+	ein Array von Arrays (deep arrays) oder linear -
+	quasi ein-dimensional - (flat arrays).
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 [frame]>
 
@@ -1121,7 +1131,7 @@ Zwei Varianten:
 \introslide{Variante\\\glqq{}Array von Arrays\grqq{}}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	Die erste Variante nenne ich mal "Array von Pointern".
+	Schauen wir uns zuerst die Variante "Array von Arrays" an.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -1190,7 +1200,7 @@ Zwei Varianten:
 
 === Variante \glqq{}Linear\grqq{} ===
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 9
+	Die Variante "linear" sieht im Speicher völlig anders aus:
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ==== 2D-Array linear ====
@@ -1206,7 +1216,18 @@ Zwei Varianten:
 }
 [center]>
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 8
+	... Beide Zeilen liegen an einem Stück hintereinander
+	im Speicher.
+
+	a zeigt auf das erste Element.
+	Die Ausdrücke "a[0]", "a[1]", "a[1][2]" funktionieren wie
+	erwartet, dereferenzieren aber nicht wie erwartet.
+
+	a ist kein Doppelpointer.  Wäre er das, müsste bei a im
+	Speicher ein Pointer liegen.  Dort liegt aber ein Datum
+	unseren Matrix.
+
+	Wie sieht das im Code aus?
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -1224,11 +1245,22 @@ Zwei Varianten:
     \}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 7
+	Wir initialisieren die Matrix in einem Stück ...
+	und übergeben sie dann dan demo_flat.
+
+	Auffällig ist der Paramater a dieser Funktion:
+	das ist kein Doppelpointer.  Und die 3 ist nötig,
+	damit der Code kompiliert.  Der Kompiler weiß sonst nicht,
+	wieviele Elemente er für eine Zeile überspringen muss.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 === Variante \glqq{}Hybrid\grqq{} ===
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Eine dritte "hybride" Variante ergibt sich, wenn man beide
+	Varianten kombiniert.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== 2D-Array-Hybrid ====
 {\ttfamily\Large
@@ -1245,11 +1277,30 @@ Zwei Varianten:
     \}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 6
+	Wir initialisieren f als Flat Array wie zuvor.
+
+	Oben drauf setzen wir dann ein Zeilen-Pointer-Array,
+	das in f Zeigt.  Die Ausdrücke f[0] und f[1] liefern,
+	was wir dazu brauchen.
+
+	Das resultierende Array d ist mit unserer früheren
+	Funktion demo_deep kompatibel, während f selbst weiterhin
+	demo_flat bedienen kann.
+
+	Zur Erinnerung: So sahen die Prototypen aus.
+
+	Fragen hierzu würde ich aus Zeitgründen gern erst am Ende
+	des Vortrags oder nach dem Vortrag klären.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == \texttt{argc} und \texttt{argv} ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Zu guter Letzt möchte ich vorstellen, wie man auf
+	Programmargumente zugreifen kann, die beim Aufruf
+	übergeben wurden.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== \texttt{argc} und \texttt{argv} ====
 {\ttfamily\Large
@@ -1265,7 +1316,26 @@ Zwei Varianten:
     \}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 5
+	Das ist die main()-Funktion, wie ihr sie inzwischen
+	Dutzende Male gesehen habt.
+
+	Das hier ist eine Alternative, die Zugriff auf Programmargumente
+	erlaubt.
+
+	Für die, die wissen, was Overloading ist:
+	Mit Overloading hat das nichts zu tun - C unterstützt kein Overloading.
+
+	argc ist die Anzahl der Parameter, die wir übergeben bekommen:
+	es ist die Anzahl der Einträge in argv.
+
+	Weil das erste Element unser Programmename ist, gibt es also
+	argc - 1 echte Parameter.
+
+	In einer Schleife laufen wir über das Array, dass ein echtes
+	\glqq{}Deep Array\grqq{} aus Zeilen-Pointern ist.
+
+	argv[i] ist vom Typ char *, was mit Nullterminierung Strings sind.
+	Diese übergeben wir direkt an printf().
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -1280,11 +1350,21 @@ Zwei Varianten:
     {}[3] software\\}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 4
+	Kompilieren, ausführen, ... 3 Parameter.
+
+	Die Shell hat wegen der Anführungszeichen "open" und "source"
+	als ein Element verstanden.
+
+	Element 0 enthält den Namen des Programms, so wie es
+	aufgerufen wurde.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Weiterführende Themen ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Weiterführende Themen: Ein paar Dinge habe ich absichtlich
+	ausgelassen:
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ==== Weiterführende Themen ====
 {\Large
@@ -1295,11 +1375,33 @@ Zwei Varianten:
 * Funktions-Pointer
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 3
+	... Wir haben uns nicht mit Character Encodings und Unicode
+	beschäftigt.  Für uns war Text ASCII-enkodiert.
+	Das ist nicht immer so.
+
+	Die dynamische Berechnung von Strings kann zu einem
+	Sicherheits-Problem werden, wenn man nicht sorgfältig damit
+	umgeht.  Aus das haben wir ausgeblendet.
+
+	Der Rückgabetyp unserer Funktion my_strlen() hätte size_t
+	sein sollen, nicht int.  Was es damit auf sich hat,
+	hat hier keinen Platz mehr gefunden.
+
+	Auch Void- und Funktions-Pointer haben wir außen vorgelassen.
+	Beides sind einfache Themen, die ihr euch schnell selbst
+	aneignet.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Zusammenfassung ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Wir haben aber auch viel geschafft.
+	Wir haben Grundlagen aufgebaut und einige Stolpersteine
+	umgedreht.
+
+	Was ihr unbedingt mitnehmen müsst:
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Zusammenfassung ====
 {\Large
@@ -1312,7 +1414,30 @@ Zwei Varianten:
 * Const Correctness bei Pointern ist wichtig
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 2
+	... sizeof(x) liefert die Größe von x in Byte.
+
+	Der Operator & liefert eine Adresse, der Operator * dagegen
+	folgt einer Adresse.  Man sagt er dereferenziert.
+
+	Pointer sind typisiert.  Wir haben gesehen, wie sich die
+	Pointer-Arithmetik das zu nutze macht.
+
+	Arrays sind auch Pointer auf ihr erstes Element.
+	Ihr erinnert euch an die Formel von vorhin: a[n] = *(a + n).
+
+	Strings sind nullterminiert, ihre Größe wird dynamisch
+	berechnet.  Auch das haben wir uns genau angesehen.
+
+	Const Correctness bei Pointern ist mehr als nur Geschmack
+	sondern macht einen echten Unterschied.
+
+	Wenn ihr das was auf dieser Folie steht wirklich verstanden
+	habt, vielleicht sogar anderen erklären könnt, dann bin ich
+	stolz darauf, euch das beigebracht zu haben.
+
+	Eine letzte Bitte an euch: wenn ihr Code schreibt,
+	veröffentlicht ihn als Freie Software.  Für Fragen
+	zu diesem Thema bin ich immer haben.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -1329,5 +1454,7 @@ Fragen?\\
 [center]>
 \vspace*{-4ex}
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 1
+	Damit bedanke ich mich für eure Aufmerksamkeit.
+
+	Gibt es Fragen?
 }
