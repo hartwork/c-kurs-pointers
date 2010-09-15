@@ -257,8 +257,8 @@ SYNOPSIS\\
 \}}\\
 ~\\
 int main() \{\\
-~~\uncover<6->{int const primes[] = \{2, 3, 5, 7, 11\};\\
-~~\uncover<7->{dump(primes, \only<7>{5}\only<8->{\highlight{sizeof(primes) / sizeof(int)}});}}\\
+~~\uncover<6->{int const primes[] = \{2, 3, 5, 7, 11\only<9>{, \highlight{13}}\};\\
+~~\uncover<7->{dump(primes, \only<7>{5}\only<8>{\highlight{sizeof(primes) / sizeof(int)}}\only<9->{sizeof(primes) / sizeof(int)});}}\\
 ~~return 0;\\
 \}
 }
