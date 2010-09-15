@@ -1105,15 +1105,15 @@ int main() \{\\
 	möchte ich daher kurz auf diese zwei Repräsentationen eingehen.
 } %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 {
-\subsection*{Variante \glqq{}Array von Pointern\grqq{}}
-\introslide{Variante\\\glqq{}Array von Pointern\grqq{}}
+\subsection*{Variante \glqq{}Array von Arrays\grqq{}}
+\introslide{Variante\\\glqq{}Array von Arrays\grqq{}}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	Die erste Variante nenne ich mal "Array von Pointern".
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-==== 2D-Array als Array von Pointern ====
+==== 2D-Array als Array von Arrays ====
 <[center]
 \only<1>{
 <<<graphics/array-deep-minus-4,height=0.7\textheight>>>
@@ -1146,7 +1146,7 @@ int main() \{\\
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-==== 2D-Array als Array von Pointern ====
+==== 2D-Array als Array von Arrays ====
 {\ttfamily\Large
     \uncover<4->{void demo\_deep(\highlight{int *} const \highlight{* a}) \{\\
     ~~a[1][2] *= 2;\\
