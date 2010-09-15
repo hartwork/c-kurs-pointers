@@ -245,6 +245,13 @@ SYNOPSIS\\
 }
 
 
+==== Variablen im RAM~~(Wiederholung) ====
+<[center]
+\vspace*{-3ex}%
+<<<graphics/ram-minus-0,height=0.94\textheight>>>
+[center]>
+
+
 == Von Pointern zu Arrays ==
 
 ==== Von Pointern zu Arrays ====
