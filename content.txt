@@ -119,9 +119,9 @@ Ohne Pointer geht nichts.
     \uncover<3->{~~int * p = \&i;\\}
 ~\\
     \uncover<6->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
-    \uncover<4->{~~*p = 0;\\}
+    \uncover<4->{~~*p = 4;\\}
     \uncover<6->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
-    \uncover<5->{~~p = 0;\\}
+    \uncover<5->{~~p = 5;\\}
     \uncover<6->{~~printf(``i == \%d, p == \%p$\backslash$n'', i, p);\\}
 ~\\
     ~~return 0;\\
@@ -132,10 +132,12 @@ Ohne Pointer geht nichts.
 ==== Ausgabe ====
 {\ttfamily\Large
     \# gcc~\,hello\_pointer.c~\,-o hello\_pointer\\
-    \uncover<2->{\# ./hello\_pointer\\
-    \uncover<3->{i == 3, p == 0xbfa3ad8c\\
-    \uncover<4->{i == 0, p == 0xbfa3ad8c\\
-    \uncover<5->{i == 0, p == (nil)\\}}}}
+    \uncover<2->{\# ./hello\_pointer\\}
+    \uncover<3->{i == 3, p == 0xbfa3ad8c\\}
+    \uncover<4->{~~~~~~~~~~~~~~~~~~~~~~~~~|~*p = 4;\\}
+    \uncover<5->{i == 4, p == 0xbfa3ad8c\\}
+    \uncover<6->{~~~~~~~~~~~~~~~~~~~~~~~~~|~p = 5;\\}
+    \uncover<7->{i == 4, p == 0x5\\}
 }
 
 
