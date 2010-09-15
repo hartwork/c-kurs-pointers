@@ -696,11 +696,37 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
     \uncover<6->{\ind{}Sprungweite variiert mit dem Typen!\\}}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 25
+	Angenommen wir haben zwei Arrays: numbers und text.
+	Eins von denen ist ein String, aber das stört nicht weiter.
+
+	Ein paar Dinge müssen dann gelten:
+	1.	Der Array-Zugriff auf Array "numbers" gehorcht dieser Formel;
+		das hatte ich ja vorhin eingeführt.
+	2.	Auch der Array-Zugriff auf Array "text" gehorcht dieser
+		Formel.
+	3.	char und int sind auf den meisten Maschinen nicht gleich groß.
+
+	Gibt es da nicht ein Problem - kann das funktionieren?
+	Ich geb die Frage mal an euch weiter: kann das funktionieren?
+
+	<PAUSE>
+
+	Für die Operatoren "+" und "-" auf Pointern folgt:
+	Die Sprungweite variiert mit dem Typen.
+	Auf einer 32-Bit-machine liegt "numbers + 1" springt
+	4 Byte wegen sizeof(int) gleich 4, aber "text + 1" springt
+	nur 1 Byte weiter wegen sizeof(char) gleich 1.
+
+	Das ist der Grund, warum int * und char * nicht das gleiche sind.
+	Diese Information braucht der Compiler für die Pointer-Arithmetik.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Strings ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Kommen wir nun zu ganz speziellen Arrays, zu Strings.
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Strings ====
 {\ttfamily\LARGE
@@ -716,7 +742,28 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
     \uncover<8->{\textsf{=}\,~3\\}}}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 24
+	Wenn der Compiler diesen String "ABC" sieht, macht er daraus
+	folgendes Array: 65, 66, 67, 0.
+
+	Die Null markiert das Ende.  Irgendwie müssen wir codieren,
+	wie lang ein String ist.  Die Länge in einem Integer mitzuführen
+	hätte auch funktioniert, aber diese Variante benötigt weniger
+	Speicher.  Jedenfalls haben sich die Erfinder von C entschieden,
+	Strings nullzuterminieren und so ihre Länge zu codieren.
+
+	Dass die Null das Ende des Strings markiert heißt aber nicht,
+	dass wir die zahl Null nicht in einen String schreiben dürfen:
+
+	Dieser String - "012" - wird ersetzt durch 48, 49, 50, 0.
+	Der Ascii-Wert des Zeichens "0" ist 48.
+
+	Künstlich den Wert Null einfügen können wir auch:
+	Aus 0, 1, 2, Backslash 0 wird 48, 49, 50, 0 und nochmal 0.
+
+	Die Länge eines Strings müssen wir nicht per Hand berechnen.
+	Das macht die Funktion "strlen" aus string.h für uns.
+
+	strlen von "ABC" liefert den Wert 3.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -731,11 +778,39 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
     \}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 23
+	Ich möchte nun mit euch unser eigenes strlen() programmieren.
+
+	Ich habe unsere Funktion "my_strlen" genannt.
+
+	Sie arbeitet auf einem char-Pointer "str", zu dem const
+	kommen wir später.
+
+	Zunächst merken wir uns den Wert von str in einer eigenen
+	Variable "begin".  Wir werden str verändern - quasi mit
+	str über den String laufen - und würden diesen Wert sonst
+	verlieren.
+
+	Nun laufen wir in einer Schleife solange im String
+	vorwärts, wie das aktuelle Zeichen nicht 0 ist, also
+	nicht das Ende des Strings markiert.
+
+	Nach dieser Schleife zeigt str also genau auf dem Terminator.
+
+	Was müssen wir nun zurückgeben um die Länge des Strings zu
+	erhalten?
+
+	<PAUSE>
+
+	Richtig, "str - begin".  Auch das ist wieder Pointer-Arithmetik.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Const Correctness ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Kommen wir nun zu Const Correctness, zu korrekter
+	Verwendung des Modifikators "const".
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== Const Correctness~~(1/6) ====
 {\LARGE
@@ -744,7 +819,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 [center]>
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 22
+	Zu allererst sollte ich erwähnen was const eigentlich
+	tut: const verbietet Schreibzugriff auf bestimmte Variablen.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -753,7 +829,10 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 ~~\only<1,3->{\underline{~~~~~}}\only<2>{\underline{\highlight{const}}} int \only<-2>{\underline{~~~~~}}\only<3->{\underline{\highlight{const}}} foo;\\~\\\phantom{<2a>}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 21
+	Bei dieser Deklaration des Integers foo wäre const
+	an zwei Stellen erlaubt: links vom int und rechts vom int.
+
+	Auf welcher Seite man es schreibt, ist hier Geschmacksache.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -764,7 +843,10 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 ~~\uncover<3->{~<2a>~~~~~~<2b>~~~}\uncover<2->{~<1>\\}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 20
+	Bei einfachen Pointern kommt nun eine wietere Stelle hinzu,
+	an der const stehen darf.
+
+	Ich benenne diese Stellen mal eben mit "1", "2a" und "2b".
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -780,7 +862,13 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0] = \ldots{};\\}}}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 19
+	Steht const an Position 1 - also ganz rechts beim foo -
+	darf der Wert von foo selbst nicht mehr verändert werden.
+
+	Steht const hingegen beim int so darf der Inhalt hinter foo
+	nicht geschrieben werden.
+
+	Diese beiden Fälle lassen sich auch kombinieren ...
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -793,7 +881,10 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0]~= \ldots{};}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 18
+	Steht beim int und bei foo const, so darf weder foo selbst
+	noch der Inhalt hinter foo verändert werden.
+
+	Schauen wir uns noch ein Beispiel mit Doppelpointern an ...
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -807,7 +898,21 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0][0]~= \ldots{};\\}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 16
+	Was darf ich mit dieser Variable machen?
+
+	<PAUSE>
+
+	Richtig, ich darf foo selbst verändern.
+
+	Was ich nicht verändern darf, ist der Inhalt hinter foo und
+	der Inhalt hinter dem Inhalt von foo.
+
+	Gibt es Fragen dazu?
+
+	<PAUSE>
+
+	Ich schulde euch noch eine Erklärung zu unserer Funktionen
+	my_strlen() von vorhin ...
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -822,11 +927,30 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<5->{\ind{}\texttt{my\_strlen(``ABC'')} erlaubt und sicher\\}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 16
+	Hier seht ihr zwei verschiedene Prototypen von my_strlen():
+	einen mit const und einen ohne.  Wo liegt der Unterschied?
+
+	Aus Sicht des Compilers darf die Variante ohne const den
+	Inhalt von str verändern.  Wenn wir diese Funktion mit der
+	String-Konstante "ABC" aufrufen, wirft der Compiler einen Fehler.
+
+	Der Typ von String-Konstanten ist "const char *".
+	Diese Variante von my_strlen() erwartet zuviel vom übergegen String:
+	sie erwartet, schreiben zu dürfen.
+
+	Bei der Variante mit const darf die Funktion den Inhalt von
+	str nicht ändern.  Ein Aufruf mit der String-Konstante "ABC"
+	ist daher erlaubt und sicher.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Initialisierung von Strings ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Kommen wir nun zur Initialisierung von Strings.
+
+	In C ist das auf zwei sehr verschiedene Arten möglich.
+	Sehen wir uns das näher an ...
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ==== Initialisierung von Strings ====
 {\Large
@@ -841,7 +965,23 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 15
+	Hier initialisieren wir einen String a mit "Hallo".
+	im Speicher belegt a dann 5 + 1 Byte, 5 Byte für jeden
+	Buchstaben, 1 Byte extra für den Nullterminator.
+
+	Diese Variante möchte ich "Mit Array" nennen.
+	a ist ein vollwertiges Array, sein Inhalt ist les- und schreibbar.
+
+	Die Zweite Variante nenne ich "Nur Pointer".
+	Ihre Syntax ist anders: syntaktisch deklarieren wir hier einen
+	ganz normalen Pointer.  Und das ist p auch im Hinblick auf
+	seine Größe: ein ganz normal Pointer: auf einer 32-Bit-Machine
+	4 Byte groß.  Sein inhalt ist _nicht_ schreibbar.
+
+	Weil sein Inhalt nicht schreibbar ist, fehlt von der
+	Const Correctness her bei dieser Variante auch ein const.
+
+	Schauen wir uns dazu noch einmal etwas Code an ...
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -862,7 +1002,15 @@ int main() \{\\
 \}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 14
+	Hier definieren wir zwei Strings in der Variante "Nur Pointer",
+	beide mit dem Text "hallo".
+
+	Dann geben wir ihre Adressen aus.
+	Zur Erinnerung: "\%p" im Format-String steht für Pointer.
+	Für ihren Inhalt hätten wir "\%s" geschrieben.
+
+	Danach überschreiben wir den ersten Buchstaben von a mit
+	einem großen "X".  Schauen wir uns an, was passiert ...
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -875,7 +1023,21 @@ int main() \{\\
     \uncover<5->{Segmentation fault}}}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 13
+	Kompilieren, ausführen, ... da sind a und b.
+
+	Wie ihr seht - sie haben dieselbe Adresse!
+
+	a und b zeigen also auf den gleichen Speicherbereich.
+	Wenn wir nun den Text hinter a verändern, ändert sich auch b.
+
+	Aber dazu kommt es nicht: Es knallt - wir bekommen einen
+	Segmentation Fault.
+
+	Dieser Speicher ist nicht schreibbar, ich sagte es ja bereits.
+
+	Warum warnt uns der Compiler nicht?
+	Wir hatten ihn bisher nicht darum gebeten.
+	Tun wir das doch mal...
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -890,7 +1052,13 @@ int main() \{\\
     ~~~~qualifiers from pointer target type}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 12
+	Compilieren wir also noch einmal.
+	-Wall und -Wextra möchte ich generell empfehlen,
+	für dieses Beispiel wird aber noch -Wwrite-strings benötigt.
+	Ja, wirklich.
+
+	Und da sind die Warnungen, die wir erwarten können.
+	"discards qualifiers" bedeutet: Da fehlt const.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -911,15 +1079,39 @@ int main() \{\\
 \}
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 11
+	So sah unser Code eben aus.
+
+	Hier gehört eigentlich const hin.
+
+	Wenn wir dieses const einfügen, merkt der Compiler
+	hier unten, dass wir böse Dinge tun, und verbietet uns das.
+
+	Damit wissen sie jetzt ausgezeichnet Bescheid über die
+	Initialisierung von Strings.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 == Mehrdimensionale Arrays ==
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Für die Repräsentation von mehrdimensionalen Arrays
+	gibt es in C zwei Varianten, die sich stark unterscheiden.
+
+	Wenn man über diesen Unterschied stolpert, steht man relativ
+	im Dunklen: Zu diesem Thema schweigen tielweise auch dickere
+	C-Bücher.  Im Internet dazu etwas zu finden, ist auch nicht
+	einfach.
+
+	Nicht zuletzt auch, weil ich dieses Thema spannend finde,
+	möchte ich daher kurz auf diese zwei Repräsentationen eingehen.
+} %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 {
 \subsection*{Variante \glqq{}Array von Pointern\grqq{}}
 \introslide{Variante\\\glqq{}Array von Pointern\grqq{}}
 }
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	Die erste Variante nenne ich mal "Array von Pointern".
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 ==== 2D-Array als Array von Pointern ====
 <[center]
@@ -936,7 +1128,21 @@ int main() \{\\
 }
 [center]>
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 10
+	Speichern wollen wir eine 2x3 Matrix, also ein Array
+	mit 2 Zeilen und 3 Spalten.
+
+	Bei dieser Variante liegen beide Zeilen als je ein 1D-Array
+	im Speicher.
+
+	Oben drauf setzen wir dann ein 1D-Array aus Pointern,
+	die auf die Zeilen zeigen.  Dieses Zeilen-Pointer-Array
+	ist das eigentliche Array, hier a genannt.
+
+	a[0] zeigt auf die erste Zeile, a[1] auf die zweite.
+
+	Hier unten sitzt a[1][2].
+
+	Im Code sieht das dann so aus:
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -955,11 +1161,25 @@ int main() \{\\
     \}\\
 }
 \note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	TODO 9
+	Wieder das Gerüst, dann definieren wir die zwei Zeilen
+	und dann das Zeilen-Pointer-Array.
+
+	Dieses Array d kann ich dann an eine Funktion "demo_deep"
+	übergeben.
+
+	Diese Funktion tut nicht viel Sinnvolles:
+	sie verändert einfach einen der Einträge unserer Matrix.
+
+	Das const habe ich eingefügt, weil demo_deep sonst erlaubt
+	wäre, die Struktur der matrix zu verändern, zum Beispiel
+	Zeilen der Matrix zu vertauschen.
 } %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 === Variante \glqq{}Linear\grqq{} ===
+\note{ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	TODO 9
+} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 ==== 2D-Array linear ====
 <[center]
