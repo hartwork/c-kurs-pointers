@@ -99,6 +99,14 @@ Ohne Pointer geht nichts.
 
 
 ==== ====
+{\Huge
+<[center]
+Was ist ein \glqq{}Pointer\grqq{}?
+[center]>
+}
+
+
+==== ====
 {\LARGE
 \glqq{}Pointer\grqq{} kann meinen eine...\\[1ex]
 \begin{itemize}
