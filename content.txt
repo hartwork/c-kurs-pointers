@@ -1104,6 +1104,18 @@ int main() \{\\
 	Nicht zuletzt auch, weil ich dieses Thema spannend finde,
 	möchte ich daher kurz auf diese zwei Repräsentationen eingehen.
 } %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Mehrdimensionale Arrays ====
+{\LARGE
+Zwei Varianten:
+* Array von Arrays (\glqq{}deep array\grqq{})
+* linear (\glqq{}flat array\grqq{})
+}
+
+[frame]>
+
+
 {
 \subsection*{Variante \glqq{}Array von Arrays\grqq{}}
 \introslide{Variante\\\glqq{}Array von Arrays\grqq{}}
