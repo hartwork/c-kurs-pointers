@@ -1220,15 +1220,15 @@ int main() \{\\
 
 ==== 2D-Array-Hybrid ====
 {\ttfamily\Large
-    \uncover<5->{void demo\_flat(\highlight{int a[][3]});\\
-    void demo\_deep(\highlight{int *} const \highlight{* a});\\}
+    \uncover<5->{void demo\_deep(\highlight{int *} const \highlight{* a});\\
+    void demo\_flat(\highlight{int a[][3]});\\}
 ~\\
     int main() \{\\
     \uncover<2->{~~int f[][3] = \{ \{0, 1, 2\},\\
     ~~~~~~~~~~~~~~~~~\{3, 4, 5\} \};\\
     \uncover<3->{~~int * const d[] = \{f[0], f[1]\};\\
-    \uncover<4->{~~demo\_flat(f);\\
-    ~~demo\_deep(d);\\}}}
+    \uncover<4->{~~demo\_deep(d);\\
+    ~~demo\_flat(f);\\}}}
     ~~return 0;\\
     \}
 }
