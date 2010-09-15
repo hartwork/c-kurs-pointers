@@ -19,7 +19,7 @@ $(tempdir)/$(base).pdf: $(base).tex content.tex beamerthemeManhattan.sty $(pdfs)
 	pdflatex -halt-on-error -output-directory $(tempdir) $(base).tex
 	pdflatex -halt-on-error -output-directory $(tempdir) $(base).tex
 
-VERSION.tex: .git
+VERSION.tex: .git .git/refs/tags
 	git describe --tags | sed 's/-\([0-9]\+\)-.*/.\1/' > VERSION.tex
 
 content.tex: content.txt
