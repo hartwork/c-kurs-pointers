@@ -212,12 +212,6 @@ int main() \{\\
 
 == Pointer auf Pointer ==
 
-==== Pointer auf Pointer ====
-{\ttfamily\Huge
-    int i = 3;\\
-    int * p = \&i;\\[1ex]
-    \uncover<2->{int ** pp = \&p;}
-}
 
 ==== Anwendungen ====
 {\LARGE
@@ -240,6 +234,14 @@ SYNOPSIS\\
 \ind{}float strtof(const char *nptr, \only<1>{char **endptr}\only<2>{\highlight{char **endptr}});\\
 ~\\
 \ldots{}
+}
+
+
+==== Pointer auf Pointer ====
+{\ttfamily\Huge
+    int i = 3;\\
+    int * p = \&i;\\[1ex]
+    \uncover<2->{int ** pp = \&p;}
 }
 
 
