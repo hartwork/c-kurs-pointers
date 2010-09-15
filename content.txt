@@ -1210,8 +1210,6 @@ Zwei Varianten:
 }\only<2>{
 <<<graphics/array-flat-minus-2,height=0.7\textheight>>>
 }\only<3>{
-<<<graphics/array-flat-minus-1,height=0.7\textheight>>>
-}\only<4>{
 <<<graphics/array-flat-minus-0,height=0.7\textheight>>>
 }
 [center]>
