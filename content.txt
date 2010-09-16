@@ -252,7 +252,7 @@ Was ist ein \glqq{}Pointer\grqq{}?
 	Wir definieren einen Integer i, bisher nichts Neues.
 
 	Als nächstes definieren wir einen Pointer p, der auf i zeigt.
-	der &-Operator liefert hierbei die Adresse von i.
+	der \&-Operator liefert hierbei die Adresse von i.
 	p ist vom Typ int *, Pointer auf einen int.
 
 	Danach schreiben wir den Wert 4 nach *p.  Der *-Operator folgt
@@ -284,15 +284,15 @@ Was ist ein \glqq{}Pointer\grqq{}?
 	Dann ausführen...
 
 	i ist drei - so wie wir es initialisiert hatten - und p
-	zeigt auf i, das an Adresse "bfa und weiter" liegt.
+	zeigt auf i, das an Adresse \glqq{}bfa und weiter\grqq{} liegt.
 	Nebenbei: Diese Adresse kann bei jeden Aufruf verschieden sein.
 
-	Zur Erinnerung: Dann kam "*p = 4;".
+	Zur Erinnerung: Dann kam \texttt{*p = 4;}.
 
 	Weil der *-Operator der Adresse in p folgt, landet die 4 in i.
 	p selbst bleibt unverändert.
 
-	Dann kam "p = 5;".
+	Dann kam \texttt{p = 5;}.
 
 	Diesmal wird p selbst verändert: p zeigt jetzt auf Adresse 5.
 
@@ -307,9 +307,9 @@ Was ist ein \glqq{}Pointer\grqq{}?
 *$\,$\uncover<3->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) = x}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Operator & liefert eine Adresse.
+	Operator \& liefert eine Adresse.
 
-	Operator * folgt einer Adresse.  Man sagt auch "er dereferenziert".
+	Operator * folgt einer Adresse.  Man sagt auch \glqq{}er dereferenziert\grqq{}.
 
 	Besonders für die Mathematiker unter euch:
 	Diese beiden Operatoren sind komplementär.
@@ -366,14 +366,14 @@ int main() \{\\
 	Fangen wir an mit einem bekannten Gerüst: mit einer
 	main-Funktion und einem Integer i.
 
-	Übergeben wir i nun an eine Funktion "by_value" und
-	eine Funktion "by_reference".
+	Übergeben wir i nun an eine Funktion \texttt{by\_value} und
+	eine Funktion \texttt{by\_reference}.
 
-	by_value() verändert Paramater x, arbeitet somit auf dem
+	\texttt{by\_value} verändert Paramater x, arbeitet somit auf dem
 	einem kopierten Wert von i.
 
-	by_reference() dagegen schreibt in den Speicher der kopierten
-	Adresse von &i und verändert damit den Wert von i.
+	\texttt{by\_reference} dagegen schreibt in den Speicher der kopierten
+	Adresse von \&i und verändert damit den Wert von i.
 
 	Welchen Wert hat i also am Ende von main()?
 
@@ -393,14 +393,12 @@ int main() \{\\
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Kompilieren, ausführen, i ist 0 und dann 4.
-
-	TODO 36
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 == \texttt{NULL}-Pointer ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Einen besonderen Wert kann ein Pointer annehmen: NULL.
+	Einen besonderen Wert kann ein Pointer annehmen: \texttt{NULL}.
 	Man spricht dann von einem Null-Pointer.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -414,9 +412,9 @@ int main() \{\\
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Um das Symbol NULL verwenden zu können, müssen wir
-	stdlib.h inkludieren.
+	\texttt{stdlib.h} inkludieren.
 
-	Mit NULL markieren wir, dass ein Pointer auf nichts zeigt.
+	Mit \texttt{NULL} markieren wir, dass ein Pointer auf nichts zeigt.
 
 	Probleme gibt das, wenn wir einem Null-Pointer folgen,
 	so wie hier: Das knallt.
@@ -430,11 +428,11 @@ int main() \{\\
 * \,\uncover<3->{Wir müssen wissen, ob ein Pointer\\\hspace*{0ex}\texttt{NULL} ist, bevor wir ihm folgen}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Der Wert NULL markiert Abwesenheit.
+	Der Wert \texttt{NULL} markiert Abwesenheit.
 
 	Null-Pointern darf nicht gefolgt werden, sonst knallt es.
 
-	Und... wir müssen wissen, ob ein Pointer NULL ist, bevor wir
+	Und... wir müssen wissen, ob ein Pointer \texttt{NULL} ist, bevor wir
 	ihm folgen.  Wenn wir nicht sicher sind, weil wir das
 	nicht vorher schon irgendwo überprüft haben, dann müssen wir
 	das vorm Zugriff nachholen.
@@ -443,7 +441,7 @@ int main() \{\\
 
 == Pointer auf Pointer ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Auch Pointer auf Pointer, manchmal "Doppelpointer" genannt,
+	Auch Pointer auf Pointer, manchmal \glqq{}Doppelpointer\grqq{} genannt,
 	werden regelmäßig gebraucht.
 
 	Zum Beispiel für...
@@ -554,7 +552,7 @@ int main() \{\\
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Diese Gerüst kennt ihr schon.
 
-	Hier definiere ich eine Funktion "dump" die Daten ausgeben soll.
+	Hier definiere ich eine Funktion \texttt{dump} die Daten ausgeben soll.
 	Die Daten sind Integer, die im Speicher direkt
 	hintereinanderliegen: ein Array von ints.
 
@@ -788,7 +786,7 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Ich möchte nun mit euch unser eigenes strlen() programmieren.
 
-	Ich habe unsere Funktion "my_strlen" genannt.
+	Ich habe unsere Funktion \texttt{my\_strlen} genannt.
 
 	Sie arbeitet auf einem char-Pointer "str", zu dem const
 	kommen wir später.
@@ -920,7 +918,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	<PAUSE>
 
 	Ich schulde euch noch eine Erklärung zu unserer Funktionen
-	my_strlen() von vorhin ...
+	\texttt{my\_strlen} von vorhin ...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -935,7 +933,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<5->{\ind{}\texttt{my\_strlen(``ABC'')} erlaubt und sicher\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Hier seht ihr zwei verschiedene Prototypen von my_strlen():
+	Hier seht ihr zwei verschiedene Prototypen von texttt{my\_strlen}:
 	einen mit const und einen ohne.  Wo liegt der Unterschied?
 
 	Aus Sicht des Compilers darf die Variante ohne const den
@@ -943,7 +941,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	String-Konstante "ABC" aufrufen, wirft der Compiler einen Fehler.
 
 	Der Typ von String-Konstanten ist "const char *".
-	Diese Variante von my_strlen() erwartet zuviel vom übergegen String:
+	Diese Variante von \texttt{my\_strlen} erwartet zuviel vom übergegen String:
 	sie erwartet, schreiben zu dürfen.
 
 	Bei der Variante mit const darf die Funktion den Inhalt von
@@ -984,7 +982,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Ihre Syntax ist anders: syntaktisch deklarieren wir hier einen
 	ganz normalen Pointer.  Und das ist p auch im Hinblick auf
 	seine Größe: ein ganz normal Pointer: auf einer 32-Bit-Machine
-	4 Byte groß.  Sein inhalt ist _nicht_ schreibbar.
+	4 Byte groß.  Sein inhalt ist \emph{nicht} schreibbar.
 
 	Weil sein Inhalt nicht schreibbar ist, fehlt von der
 	Const Correctness her bei dieser Variante auch ein const.
@@ -1189,13 +1187,13 @@ Zwei Varianten:
 	Wieder das Gerüst, dann definieren wir die zwei Zeilen
 	und dann das Zeilen-Pointer-Array.
 
-	Dieses Array d kann ich dann an eine Funktion "demo_deep"
+	Dieses Array d kann ich dann an eine Funktion \texttt{demo\_deep}
 	übergeben.
 
 	Diese Funktion tut nicht viel Sinnvolles:
 	sie verändert einfach einen der Einträge unserer Matrix.
 
-	Das const habe ich eingefügt, weil demo_deep sonst erlaubt
+	Das const habe ich eingefügt, weil \texttt{demo\_deep} sonst erlaubt
 	wäre, die Struktur der matrix zu verändern, zum Beispiel
 	Zeilen der Matrix zu vertauschen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1247,7 +1245,7 @@ Zwei Varianten:
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Wir initialisieren die Matrix in einem Stück ...
-	und übergeben sie dann dan demo_flat.
+	und übergeben sie dann dan \texttt{demo\_flat}.
 
 	Auffällig ist der Paramater a dieser Funktion:
 	das ist kein Doppelpointer.  Und die 3 ist nötig,
@@ -1285,8 +1283,8 @@ Zwei Varianten:
 	was wir dazu brauchen.
 
 	Das resultierende Array d ist mit unserer früheren
-	Funktion demo_deep kompatibel, während f selbst weiterhin
-	demo_flat bedienen kann.
+	Funktion \texttt{demo\_deep} kompatibel, während f selbst weiterhin
+	\texttt{demo\_flat} bedienen kann.
 
 	Zur Erinnerung: So sahen die Prototypen aus.
 
@@ -1384,7 +1382,7 @@ Zwei Varianten:
 	Sicherheits-Problem werden, wenn man nicht sorgfältig damit
 	umgeht.  Aus das haben wir ausgeblendet.
 
-	Der Rückgabetyp unserer Funktion my_strlen() hätte size_t
+	Der Rückgabetyp unserer Funktion \texttt{my\_strlen} hätte \texttt{size\_t}
 	sein sollen, nicht int.  Was es damit auf sich hat,
 	hat hier keinen Platz mehr gefunden.
 
@@ -1417,7 +1415,7 @@ Zwei Varianten:
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	... sizeof(x) liefert die Größe von x in Byte.
 
-	Der Operator & liefert eine Adresse, der Operator * dagegen
+	Der Operator \& liefert eine Adresse, der Operator * dagegen
 	folgt einer Adresse.  Man sagt er dereferenziert.
 
 	Pointer sind typisiert.  Wir haben gesehen, wie sich die
