@@ -151,6 +151,9 @@ Ohne Pointer geht nichts.
 
 
 == Pointer ==
+\disableintroslides{}
+\subsection{Variablen im RAM}
+\enableintroslides{}
 
 
 ==== Variablen im RAM ====
@@ -200,6 +203,11 @@ Ohne Pointer geht nichts.
 
 	Gibt es dazu Fragen?
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Definition}
+\enableintroslides{}
 
 
 ==== ====
@@ -241,6 +249,10 @@ Was ist ein \glqq{}Pointer\grqq{}?
 	Hello Pointer - lasst uns dazu etwas Code ansehen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+\disableintroslides{}
+\subsection{Beispielcode}
+\enableintroslides{}
+
 
 ==== Hello Pointer ====
 {\ttfamily\large
@@ -280,6 +292,11 @@ Was ist ein \glqq{}Pointer\grqq{}?
 
 	Lasst uns das doch mal ausführen...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Ausgabe}
+\enableintroslides{}
 
 
 ==== Ausgabe ====
@@ -312,6 +329,11 @@ Was ist ein \glqq{}Pointer\grqq{}?
 
 	Lasst mich das kurz zusammenfassen...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Zusammenfassung}
+\enableintroslides{}
 
 
 ==== Zusammenfassung 1/2 ====
@@ -357,6 +379,10 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 	zu verändern.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+\disableintroslides{}
+\subsection{Beispielcode}
+\enableintroslides{}
+
 
 ==== Call by Reference ====
 {\ttfamily\large
@@ -395,6 +421,11 @@ int main() \{\\
 
 	Fügen wir noch ein paar printf()s hinzu und lassen es laufen...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Ausgabe}
+\enableintroslides{}
 
 
 ==== Ausgabe ====
@@ -416,6 +447,11 @@ int main() \{\\
 	Man spricht dann von einem Null-Pointer.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+\disableintroslides{}
+\subsection{Beispielcode}
+\enableintroslides{}
+
+
 ==== \texttt{NULL}-Pointer ====
 {\ttfamily\Large
     \#include <stdlib.h>~~/* for NULL */\\
@@ -433,6 +469,11 @@ int main() \{\\
 	Probleme gibt das, wenn wir einem Null-Pointer folgen,
 	so wie hier: Das knallt.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Zusammenfassung}
+\enableintroslides{}
 
 
 ==== Zusammenfassung ====
@@ -461,6 +502,10 @@ int main() \{\\
 	Zum Beispiel für...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+\disableintroslides{}
+\subsection{Anwendungen}
+\enableintroslides{}
+
 
 ==== Anwendungen ====
 {\LARGE
@@ -474,6 +519,11 @@ int main() \{\\
 	Eine Funktion, die ihr sicher mal brauchen werdet, macht
 	Gebrauch davon: ...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{man strtod}
+\enableintroslides{}
 
 
 ==== man strtod ====
@@ -505,6 +555,11 @@ SYNOPSIS\\
 	Wirklich schwer sind Doppelpointer nicht; außer einem weiteren
 	Stern erwartet euch syntaktisch nichts Neues.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Beispielcode}
+\enableintroslides{}
 
 
 ==== Pointer auf Pointer ====
@@ -544,6 +599,10 @@ SYNOPSIS\\
 
 	Schauen wir uns an, wie dieser Zusammenhang genau aussieht.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+\disableintroslides{}
+\subsection{Beispielcode}
+\enableintroslides{}
 
 
 ==== Von Pointern zu Arrays ====
@@ -612,6 +671,11 @@ int main() \{\\
 
 	Lasst mich das eben zusammenfassen...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Zusammenfassung}
+\enableintroslides{}
 
 
 ==== Zusammenfassung~~(1/5) ====
@@ -747,6 +811,10 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 	Kommen wir nun zu ganz speziellen Arrays, zu Strings.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+\disableintroslides{}
+\subsection{Repräsentation}
+\enableintroslides{}
+
 
 ==== Strings ====
 {\ttfamily\LARGE
@@ -785,6 +853,11 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 
 	strlen von "ABC" liefert den Wert 3.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{\texttt{my\_strlen}}
+\enableintroslides{}
 
 
 ==== my\_strlen ====
@@ -830,6 +903,10 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 	Kommen wir nun zu Const Correctness, zu korrekter
 	Verwendung des Modifikators "const".
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+\disableintroslides{}
+\subsection{Einführung}
+\enableintroslides{}
 
 
 ==== Const Correctness~~(1/6) ====
@@ -934,6 +1011,11 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Ich schulde euch noch eine Erklärung zu unserer Funktionen
 	\texttt{my\_strlen} von vorhin ...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Fall \texttt{my\_strlen}}
+\enableintroslides{}
 
 
 ==== Const Correctness in APIs ====
@@ -972,6 +1054,10 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Sehen wir uns das näher an ...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+\disableintroslides{}
+\subsection{Varianten}
+\enableintroslides{}
+
 ==== Initialisierung von Strings ====
 {\Large
     \uncover<3->{Variante \glqq{}Mit Array\grqq{}\\}
@@ -1003,6 +1089,11 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 
 	Schauen wir uns dazu noch einmal etwas Code an ...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Beispielcode}
+\enableintroslides{}
 
 
 ==== Variante \glqq{}Nur Pointer\grqq{} ====
@@ -1032,6 +1123,11 @@ int main() \{\\
 	Danach überschreiben wir den ersten Buchstaben von a mit
 	einem großen "X".  Schauen wir uns an, was passiert ...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Ausgabe}
+\enableintroslides{}
 
 
 ==== Ausgabe ====
@@ -1059,6 +1155,11 @@ int main() \{\\
 	Wir hatten ihn bisher nicht darum gebeten.
 	Tun wir das doch mal...
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Compiler-Warnungen}
+\enableintroslides{}
 
 
 ==== GCC Flag \texttt{-Wwrite-strings} ====
@@ -1124,6 +1225,10 @@ int main() \{\\
 	Nicht zuletzt auch, weil ich dieses Thema spannend finde,
 	möchte ich daher kurz auf diese zwei Repräsentationen eingehen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+\disableintroslides{}
+\subsection{Überblick}
+\enableintroslides{}
 
 
 ==== Mehrdimensionale Arrays ====
@@ -1221,6 +1326,7 @@ Zwei Varianten:
 	Die Variante "linear" sieht im Speicher völlig anders aus:
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+
 ==== 2D-Array linear ====
 <[center]
 \only<1>{
@@ -1317,6 +1423,10 @@ Zwei Varianten:
 	übergeben wurden.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+\disableintroslides{}
+\subsection{Beispielcode}
+\enableintroslides{}
+
 
 ==== \texttt{argc} und \texttt{argv} ====
 {\ttfamily\Large
@@ -1353,6 +1463,11 @@ Zwei Varianten:
 	argv[i] ist vom Typ char *, was mit Nullterminierung Strings sind.
 	Diese übergeben wir direkt an printf().
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+\disableintroslides{}
+\subsection{Ausgabe}
+\enableintroslides{}
 
 
 ==== Ausgabe ====
