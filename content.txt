@@ -16,14 +16,28 @@
         \end{frame}
     }
 }
-\AtBeginSection[] % Do nothing for \section*
-{
-    \introslide{\insertsection}
+
+
+\newcommand{\enableintroslides}[0]{
+	\AtBeginSection[] % Do nothing for \section*
+	{
+		\introslide{\insertsection}
+	}
+	\AtBeginSubsection[] % Do nothing for \subsection*
+	{
+		\introslide{\insertsubsection}
+	}
 }
-\AtBeginSubsection[] % Do nothing for \subsection*
-{
-    \introslide{\insertsubsection}
+
+\newcommand{\disableintroslides}[0]{
+	\AtBeginSection[] % Do nothing for \section*
+	{}
+	\AtBeginSubsection[] % Do nothing for \subsection*
+	{}
 }
+
+\enableintroslides{}
+
 
 
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1128,8 +1142,11 @@ Zwei Varianten:
 
 
 {
-\subsection*{Variante \glqq{}Array von Arrays\grqq{}}
+\disableintroslides{}
+% Subsection mag keine Linebreaks...
+\subsection{Variante \glqq{}Array von Arrays\grqq{}}
 \introslide{Variante\\\glqq{}Array von Arrays\grqq{}}
+\enableintroslides{}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Schauen wir uns zuerst die Variante "Array von Arrays" an.
