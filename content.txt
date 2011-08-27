@@ -147,60 +147,6 @@ Ohne Pointer geht nichts.
 
 == Pointer ==
 \disableintroslides{}
-\subsection{Variablen im RAM}
-\enableintroslides{}
-
-
-==== Variablen im RAM ====
-<[center]
-\vspace*{-3ex}%
-\only<1>{
-<<<graphics/ram-minus-9,height=0.94\textheight>>>
-}\only<2>{
-<<<graphics/ram-minus-8,height=0.94\textheight>>>
-}\only<3>{
-<<<graphics/ram-minus-7,height=0.94\textheight>>>
-}\only<4>{
-<<<graphics/ram-minus-6,height=0.94\textheight>>>
-}\only<5>{
-<<<graphics/ram-minus-5,height=0.94\textheight>>>
-}\only<6>{
-<<<graphics/ram-minus-4,height=0.94\textheight>>>
-}\only<7>{
-<<<graphics/ram-minus-3,height=0.94\textheight>>>
-}\only<8>{
-<<<graphics/ram-minus-2,height=0.94\textheight>>>
-}\only<9>{
-<<<graphics/ram-minus-1,height=0.94\textheight>>>
-}\only<10>{
-<<<graphics/ram-minus-0,height=0.94\textheight>>>
-}
-[center]>
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Dieses Rechteck ist der Arbeitsspeicher einer 32-Bit-Machine.
-
-	Wenn wir im Code eine Variable Deklarieren, belegt die
-	Speicher.  In unserem Fall hält i den Wert 5 und liegt an
-	Adresse 12 bis 15, belegt also 4 Byte.
-
-	Nun könnten wir doch auch die Adresse von i - also 12 -
-	in den Speicher schreiben, diesen Speicher also auf i
-	verweisen oder "zeigen" lassen.
-
-	In unserem Fall liegt die 12 an Adresse 36 bis 39, belegt also
-	ebenfalls 4 Byte oder 32 Bit.  Im Code könnte das eine Variable
-	p von Typ int * - Pointer auf einen int - sein.
-
-	Auch auf p lässt sich verweisen.  Die Adresse von p ist 36.
-	Hier liegt auch die 36 in den Speicher, konkret an Adresse
-	28 bis 31.  Im Code könnte das eine Variable pp sein,
-	ein Pointer auf einen Pointer auf einen int.
-
-	Gibt es dazu Fragen?
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-[frame]>
-
-\disableintroslides{}
 \subsection{Definition}
 \enableintroslides{}
 
