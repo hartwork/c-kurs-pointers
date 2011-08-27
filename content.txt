@@ -1370,6 +1370,8 @@ Zwei Varianten:
 * Der Typ \texttt{size\_t}
 * Void-Pointer
 * Funktions-Pointer
+* Dynamische Speicherverwaltung
+* Komplexe Datenstrukturen
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	... Wir haben uns nicht mit Character Encodings und Unicode
@@ -1387,6 +1389,10 @@ Zwei Varianten:
 	Auch Void- und Funktions-Pointer haben wir außen vorgelassen.
 	Beides sind einfache Themen, die ihr euch schnell selbst
 	aneignet.
+
+	Auf dynamische  Speicherverwaltung wird später im Kurs noch
+	detailliert eingegangen.  Mit ihrer Hilfe lassen sich erst
+	wirklich komlexe Datenstrukturen erzeugen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
