@@ -84,6 +84,20 @@ Ohne Pointer geht nichts.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
+==== ====
+{\LARGE
+Pointer sind Grundlage für:
+* Arrays
+* Strings
+* Call by Reference
+* Komplexe Datentypen
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Pointer sind die Grundlage für Arrays, Strings,
+	Call by Reference und komplexe Datentypen.
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
 ==== Themen ====
 {\large
 * Hello Pointer
