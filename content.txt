@@ -104,7 +104,7 @@ Pointer sind Grundlage für:
 * Call by Reference
 * \texttt{NULL}-Pointer
 * Pointer auf Pointer
-* Von Pointern zu Arrays
+* Vom Pointer zum Array
 * Pointer-Arithmetik
 * Strings und Längenberechnung
 * Const Correctness
@@ -134,7 +134,7 @@ Pointer sind Grundlage für:
 	Gelegentlich zeigen Pointer auch auf andere Pointer.
 	Dazu werde ich ein Beispiel aus der realen Welt vorstellen.
 
-	In "Von Pointern zu Arrays" werden wir die Funktionsweise von
+	In "Vom Pointer zum Array" werden wir die Funktionsweise von
 	Arrays näher kennenlernen.
 
 	Damit sind wir direkt beim Thema "Pointer-Arithmetik" und
@@ -546,7 +546,7 @@ SYNOPSIS\\
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
-== Von Pointern zu Arrays ==
+== Vom Pointer zum Array ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	In C hängen Arrays und Pointer zusammen.
 
@@ -558,7 +558,7 @@ SYNOPSIS\\
 \enableintroslides{}
 
 
-==== Von Pointern zu Arrays ====
+==== Vom Pointer zum Array ====
 {\ttfamily\large
 \#include <stdio.h>\\
 ~\\
