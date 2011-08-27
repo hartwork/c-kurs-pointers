@@ -176,8 +176,6 @@ Was ist ein \glqq{}Pointer\grqq{}?
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
-
-
 ==== ====
 {\LARGE
 \glqq{}Pointer\grqq{} kann meinen eine...\\[1ex]
