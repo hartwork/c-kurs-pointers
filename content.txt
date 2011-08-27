@@ -95,8 +95,7 @@ Ohne Pointer geht nichts.
 * Strings und Längenberechnung
 * Const Correctness
 * Initialisierung von Strings
-* Mehrdimensionale Arrays
-* Programm-Argumente: \texttt{argc} und \texttt{argv}\vspace*{1ex}
+* Mehrdimensionale Arrays\vspace*{1ex}
 * Weiterführende Themen
 * Zusammenfassung
 }
@@ -140,10 +139,6 @@ Ohne Pointer geht nichts.
 	Auch für die Repräsentation von mehrdimensionalen Arrays
 	gibt es in C zwei Varianten.  Hilfe für diese Stolperfalle
 	mit auf den Weg zu geben, ist mir wichtig.
-
-	Mit dem bis dahin aufgebauten Verständnis sind wir dann auch
-	in der Lage, Programm-Argumente auszulesen, was	ich mit
-	passendem Code demonstrieren werde.
 
 	Danach möchte ich mit einem Ausblick und einer Zusammenfassung
 	schließen.
@@ -1413,81 +1408,6 @@ Zwei Varianten:
 
 	Fragen hierzu würde ich aus Zeitgründen gern erst am Ende
 	des Vortrags oder nach dem Vortrag klären.
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-== \texttt{argc} und \texttt{argv} ==
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Zu guter Letzt möchte ich vorstellen, wie man auf
-	Programmargumente zugreifen kann, die beim Aufruf
-	übergeben wurden.
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-\disableintroslides{}
-\subsection{Beispielcode}
-\enableintroslides{}
-
-
-==== \texttt{argc} und \texttt{argv} ====
-{\ttfamily\Large
-    \#include <stdio.h>\\
-~\\
-    int main(\only<2->{int argc, char ** argv}) \{\\
-    \uncover<4->{~~int i = 0;\\}
-    \uncover<3->{~~printf(``\%d parameters$\backslash$n'', argc - 1);\\}
-    \uncover<4->{~~for (; i < argc; ++i) \{\\
-    \uncover<5->{~~~~printf(``[\%d] \%s$\backslash$n'', i, argv[i]);\\}
-    ~~\}\\}
-    ~~return 0;\\
-    \}
-}
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Das ist die main()-Funktion, wie ihr sie inzwischen
-	Dutzende Male gesehen habt.
-
-	Das hier ist eine Alternative, die Zugriff auf Programmargumente
-	erlaubt.
-
-	Für die, die wissen, was Overloading ist:
-	Mit Overloading hat das nichts zu tun - C unterstützt kein Overloading.
-
-	argc ist die Anzahl der Parameter, die wir übergeben bekommen:
-	es ist die Anzahl der Einträge in argv.
-
-	Weil das erste Element unser Programmename ist, gibt es also
-	argc - 1 echte Parameter.
-
-	In einer Schleife laufen wir über das Array, dass ein echtes
-	\glqq{}Deep Array\grqq{} aus Zeilen-Pointern ist.
-
-	argv[i] ist vom Typ char *, was mit Nullterminierung Strings sind.
-	Diese übergeben wir direkt an printf().
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-[frame]>
-
-\disableintroslides{}
-\subsection{Ausgabe}
-\enableintroslides{}
-
-
-==== Ausgabe ====
-{\ttfamily\Large
-    \# gcc~\,print\_args.c~\,-o print\_args\\
-    \uncover<2->{\# ./print\_args~free 'open source' software\\}
-    \uncover<3->{3 parameters\\
-    {}[0] ./print\_args\\
-    {}[1] free\\
-    {}[2] open source\\
-    {}[3] software\\}
-}
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Kompilieren, ausführen, ... 3 Parameter.
-
-	Die Shell hat wegen der Anführungszeichen "open" und "source"
-	als ein Element verstanden.
-
-	Element 0 enthält den Namen des Programms, so wie es
-	aufgerufen wurde.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
