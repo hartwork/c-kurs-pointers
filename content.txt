@@ -51,18 +51,16 @@
 
 
 ==== C-Kurs ====
-{\Large
-\begin{tabular}{ll@{~~~}l}
-~        & Mi  & Konzepte, Syntax, ... \\
-~        & ~   & printf, scanf \\[1ex]
-Next --> & Do  & Pointer, Arrays, ... \\
-~        & ~   & Compiler, Headers, ... \\[1ex]
-~        & Fr  & Structs, malloc, ... \\
-~        & ~   & Debugging I, ... \\
-~        & ~   & + Vorstellung der Aufgabe \\[3ex]
-~        & Mo  & Lösung der Aufgabe \\[1ex]
-~        & Di  & Debugging II \\
-~        & ~   & stdlib, Bücher, ... \\
+{\LARGE
+\hspace*{-1.5ex}\begin{tabular}{ll@{~~~}l}
+~        & Di  & VL: Einführung \\
+~        & ~   & Tutorium 1 \\[1ex]
+Next \sexyarrowrightLarge{} & Mi  & VL: Arrays, Strings, Pointer \\
+~        & ~   & Tutorium 2 \\[1ex]
+~        & Do  & Tutorium 3 \\
+~        & ~   & Tutorium 4 \\[1ex]
+~        & Fr  & Tutorium 5 \\
+~        & ~   & Tutorium 6 \\
 \end{tabular}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
