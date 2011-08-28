@@ -1,5 +1,5 @@
 base = c-kurs-pointers-pipping
-viewer = kpdf
+viewer = okular
 tempdir = tmp
 
 graphics-pdfs = $(patsubst %.svg,%.pdf,$(wildcard graphics/*.svg))
