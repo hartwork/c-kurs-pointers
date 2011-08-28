@@ -765,15 +765,28 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 \disableintroslides{}
-\subsection{Repräsentation}
+\subsection{Längencodierung}
 \enableintroslides{}
+
+
+==== Längencodierung ====
+{\Large
+Pascal Strings\\
+\ind{}{\ttfamily``ABC''~\sexyarrowrightLarge{}~\{\;\highlight{3}, 65, 66, 67\;\}}\\
+~\\
+\uncover<2->{C Strings\\[0.55ex]%workaround
+\ind{}{\ttfamily``ABC''~\sexyarrowrightLarge{}~\{\;65, 66, 67, \highlight{0}\;\}}}
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}
 
 
 ==== Strings ====
 {\ttfamily\LARGE
-    ``ABC''\uncover<2->{~\,\textsf{=}\,~\{\;65, 66, 67, 0\;\}\\
-    \uncover<3->{``012''\uncover<4->{~\,\textsf{=}\,~\{\;48, 49, 50, 0\;\}\\}}
-    \uncover<5->{``012$\backslash$0''\uncover<6->{~\,\textsf{=}\,~\{\;48, 49, 50, 0, 0\;\}\\}}
+    ``ABC''\phantom{$\backslash$0}\uncover<2->{~\sexyarrowrightLARGE{}~\{\;65, 66, 67, 0\;\}\\
+    \uncover<3->{``012''\phantom{$\backslash$0}\uncover<4->{~\sexyarrowrightLARGE{}~\{\;48, 49, 50, 0\;\}\\}}
+    \uncover<5->{``012$\backslash$0''\uncover<6->{~\sexyarrowrightLARGE{}~\{\;48, 49, 50, 0, 0\;\}\\}}
 ~\\[1ex]
     \uncover<7->{{\ttfamily
         \#include <string.h>\\
