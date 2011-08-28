@@ -104,7 +104,7 @@ Pointer sind Grundlage für:
 * Pointer auf Pointer
 * Vom Pointer zum Array
 * Pointer-Arithmetik
-* Strings und Längenberechnung
+* Strings und Längencodierung
 * Const Correctness
 * Initialisierung von Strings
 * Mehrdimensionale Arrays\vspace*{1ex}
@@ -1401,7 +1401,7 @@ Zwei Varianten:
 	beschäftigt.  Für uns war Text ASCII-enkodiert.
 	Das ist nicht immer so.
 
-	Die dynamische Berechnung von Strings kann zu einem
+	Die dynamische Längenberechnung von Strings kann zu einem
 	Sicherheits-Problem werden, wenn man nicht sorgfältig damit
 	umgeht.  Aus das haben wir ausgeblendet.
 
