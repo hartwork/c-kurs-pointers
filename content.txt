@@ -100,7 +100,6 @@ Pointer sind Grundlage für:
 {\large
 * Hello Pointer
 * Call by Reference
-* \texttt{NULL}-Pointer
 * Pointer auf Pointer
 * Vom Pointer zum Array
 * Pointer-Arithmetik
@@ -126,9 +125,6 @@ Pointer sind Grundlage für:
 	Danach möchte unter Verwendung von Pointern Call by Reference
 	nachbauen, also Funktionen erlauben, ausgewählten Variablen der
 	Welt um sie herum zu verändern.
-
-	Dann werde ich einen speziellen Wert - den NULL-Pointer -
-	einführen und kurz auf seine Verwendung eingehen.
 
 	Gelegentlich zeigen Pointer auch auf andere Pointer.
 	Dazu werde ich ein Beispiel aus der realen Welt vorstellen.
@@ -394,59 +390,6 @@ int main() \{\\
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Kompilieren, ausführen, i ist 0 und dann 4.
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-== \texttt{NULL}-Pointer ==
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Einen besonderen Wert kann ein Pointer annehmen: \texttt{NULL}.
-	Man spricht dann von einem Null-Pointer.
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-\disableintroslides{}
-\subsection{Beispielcode}
-\enableintroslides{}
-
-
-==== \texttt{NULL}-Pointer ====
-{\ttfamily\Large
-    \#include <stdlib.h>~~/* for NULL */\\
-    ...\\
-    int * p = NULL;\\
-    \uncover<2->{...\\
-    int b = *p;\uncover<3->{\textsf{~\highlight{ <-- BANG!}}}\\}
-}
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Um das Symbol NULL verwenden zu können, müssen wir
-	\texttt{stdlib.h} inkludieren.
-
-	Mit \texttt{NULL} markieren wir, dass ein Pointer auf nichts zeigt.
-
-	Probleme gibt das, wenn wir einem Null-Pointer folgen,
-	so wie hier: Das knallt.
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-[frame]>
-
-\disableintroslides{}
-\subsection{Zusammenfassung}
-\enableintroslides{}
-
-
-==== Zusammenfassung ====
-{\LARGE
-* \,\texttt{NULL} markiert Abwesenheit
-* \,\uncover<2->{\texttt{NULL}-Pointern darf nicht gefolgt\\\hspace*{0ex}werden}
-* \,\uncover<3->{Wir müssen wissen, ob ein Pointer\\\hspace*{0ex}\texttt{NULL} ist, bevor wir ihm folgen}
-}
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Der Wert \texttt{NULL} markiert Abwesenheit.
-
-	Null-Pointern darf nicht gefolgt werden, sonst knallt es.
-
-	Und... wir müssen wissen, ob ein Pointer \texttt{NULL} ist, bevor wir
-	ihm folgen.  Wenn wir nicht sicher sind, weil wir das
-	nicht vorher schon irgendwo überprüft haben, dann müssen wir
-	das vorm Zugriff nachholen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
