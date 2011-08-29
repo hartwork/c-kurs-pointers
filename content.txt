@@ -103,7 +103,7 @@ Pointer sind Grundlage für:
 * Pointer auf Pointer
 * Vom Pointer zum Array
 * Pointer-Arithmetik
-* Strings und Längencodierung
+* Strings, Längencodierung, String API
 * Const Correctness
 * Initialisierung von Strings
 * Mehrdimensionale Arrays
@@ -136,8 +136,8 @@ Pointer sind Grundlage für:
 	was sich hinter diesem Begriff verbirgt.
 
 	Aufbauend auf unserem Wissen über Arrays werde ich dann
-	Strings als spezielle Arrays vorstellen und warum und wie
-	wir ihre Länge berechnen müssen.
+	Strings als spezielle Arrays vorstellen, wie deren Länge
+	codiert wird und welche Konsequenzen das hat.
 
 	Bevor ich die zwei verschiedenen Arten der Initialisierung von
 	Strings vorstellen kann, muss ich in "Const Correctness"
@@ -807,6 +807,166 @@ Pascal Strings\\
 	<PAUSE>
 
 	Richtig, "str - begin".  Auch das ist wieder Pointer-Arithmetik.
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+== String API ==
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+\disableintroslides{}
+\subsection{Auszug}
+\enableintroslides{}
+
+
+==== String API (Auszug) ====
+{\Large
+Vergleich\\
+\uncover<2->{\ind{}\texttt{strcmp}, \texttt{strncmp}\\}
+Suche\\
+\uncover<2->{\ind{}\texttt{strstr}, \texttt{strchr}\\}
+Formatierung, Verkettung\\
+\uncover<2->{\ind{}\texttt{snprintf}\\}
+Auswertung, Analyse\\
+\uncover<2->{\ind{}\texttt{strtol}, \texttt{sscanf}\\}
+Helfer\\
+\uncover<2->{\ind{}\texttt{strdup}}
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+
+\disableintroslides{}
+\subsection{Manpages}
+\enableintroslides{}
+
+==== Manpages ====
+{\Huge\ttfamily
+\# \highlight{man string}\\
+\# man string.h\\
+\# man stdio.h\\
+\# man stdlib.h\\
+~
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+\disableintroslides{}
+\subsection{Problemfälle}
+\enableintroslides{}
+
+==== Bitte vermeiden: ====
+{\Huge
+* \texttt{atoi}, \texttt{atol}, \texttt{atoll}, \texttt{atoq}
+* \texttt{gets}
+* \texttt{sprintf}, \texttt{vsprintf}
+* \texttt{strcat}, \texttt{strncat}
+* \texttt{strcpy}, \texttt{strncpy}
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== ====
+{\LARGE
+* \texttt{strcat}
+* \texttt{strcpy}
+* \texttt{sprintf}
+* \texttt{vsprintf}
+* \texttt{gets}
+~\\[1ex]
+Buffer-Overflows\\[1ex]
+Besser:\quad{}\texttt{s\underline{n}printf}, \texttt{vs\underline{n}printf}, \texttt{\underline{f}gets}\\
+~
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Beispiel \texttt{sprintf} ====
+{\Large{\ttfamily
+void log\_error(const char * error) \{\\
+\ind{}char text[256];\\
+\ind{}sprintf(text, ``ERROR: \%s'', error);\\
+\ind{}log\_message(text);\\
+\}}\\
+\uncover<2->{~\\
+Buffer-Overflow für\\
+\ind{}$\texttt{strlen(error)} \,>\, 256 - 7 - 1 = 248$\\
+~\\
+\uncover<3->{(Halbherzige) Abhilfe:\\
+\ind{}\texttt{s\highlight{\underline{n}}printf(text, \highlight{sizeof(text)}, .....);}\\
+~
+}}}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== ====
+{\LARGE
+* \texttt{strncpy}
+~\\[12ex]
+Nullterminator nicht garantiert\\[1ex]
+Besser:\quad{}\texttt{snprintf}\\
+~
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Beispiel \texttt{strncpy} ====
+{\Large{\ttfamily
+char text[5];\\
+~\\
+strncpy(text, ``Test'', sizeof(text));}\\
+\uncover<2->{\ind{}\sexyarrowrightLarge~\,schreibt~\,\{\;84, 101, 115, 116, \highlight{0}\;\}\\
+~\\
+\uncover<3->{\texttt{strncpy(text, ``Hallo'', sizeof(text));}\\
+\uncover<4->{\ind{}\sexyarrowrightLarge~\,schreibt~\,\{\;72, 97, 108, 108, \highlight{111}\;\}\\
+\ind{}\sexyarrowrightLarge~\,nicht nullterminiert\\
+~\\
+\uncover<5->{\texttt{s\underline{n}printf(text, sizeof(text), ``\%s'',\\
+\hfill{}``Hallo'');}\\
+\uncover<6->{\ind{}\sexyarrowrightLarge~\,schreibt~\,\{\;72, 97, 108, 108, \highlight{0}\;\}\\
+~
+}}}}}}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== ====
+{\LARGE
+* \texttt{atoi}
+* \texttt{atol}
+* \texttt{atoll}
+* \texttt{atoq}
+~\\[3.8ex]
+Fehlerbehandlung fehlt\\[1ex]
+Besser:\quad{}\texttt{strtol}, \texttt{strtoll}\\
+~
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Beispiel \texttt{atoi} ====
+{\LARGE
+\texttt{atoi(``Hallo'')}\phantom{\texttt{0}}\sexyarrowrightLARGE~\,0\\[1ex]
+\texttt{atoi(``0'')}\phantom{\texttt{Hallo}}\sexyarrowrightLARGE~\,0
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	TODO
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
