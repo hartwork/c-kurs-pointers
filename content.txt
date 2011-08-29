@@ -1460,7 +1460,7 @@ Zwei Varianten:
 * Pointer sind typisiert
 * Arrays sind Pointer auf ihr erstes Element
 * Strings sind nulltermininiert
-* Const Correctness bei Pointern ist wichtig
+* Const Correctness bei Pointern ist \emph{keine}\\\hfill{}Geschmacksfrage
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	... sizeof(x) liefert die Größe von x in Byte.
