@@ -55,9 +55,9 @@
 \hspace*{-1.5ex}\begin{tabular}{ll@{~~~}l}
 ~        & Di  & VL: Einführung \\
 ~        & ~   & Tutorium 1 \\[1ex]
-Next \sexyarrowrightLarge{} & Mi  & VL: Arrays, Strings, Pointer \\
-~        & ~   & Tutorium 2 \\[1ex]
-~        & Do  & Tutorium 3 \\
+~        & Mi  & Tutorium 2 \\
+~        & ~   & Tutorium 3 \\[1ex]
+Next \sexyarrowrightLARGE{} & Do  & VL: Arrays, Strings, Pointer \\
 ~        & ~   & Tutorium 4 \\[1ex]
 ~        & Fr  & Tutorium 5 \\
 ~        & ~   & Tutorium 6 \\
