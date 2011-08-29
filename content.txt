@@ -50,6 +50,10 @@
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
+\disableintroslides{}
+\section{C-Kurs-Fahrplan}
+\enableintroslides{}
+
 ==== C-Kurs ====
 {\LARGE
 \hspace*{-1.5ex}\begin{tabular}{ll@{~~~}l}
@@ -95,6 +99,10 @@ Pointer sind Grundlage für:
 	Call by Reference und komplexe Datentypen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
+
+\disableintroslides{}
+\section{Themen dieser Vorlesung}
+\enableintroslides{}
 
 ==== Themen ====
 {\large
@@ -158,9 +166,8 @@ Pointer sind Grundlage für:
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
-== Pointer ==
 \disableintroslides{}
-\subsection{Definition}
+\section{Definition Pointer}
 \enableintroslides{}
 
 
