@@ -57,14 +57,14 @@
 ==== C-Kurs ====
 {\LARGE
 \hspace*{-1.5ex}\begin{tabular}{ll@{~~~}l}
-~        & Di  & VL: Einführung \\
-~        & ~   & Tutorium 1 \\[1ex]
-~        & Mi  & Tutorium 2 \\
-~        & ~   & Tutorium 3 \\[1ex]
-Next \sexyarrowrightLARGE{} & Do  & VL: Arrays, Strings, Pointer \\
-~        & ~   & Tutorium 4 \\[1ex]
-~        & Fr  & Tutorium 5 \\
-~        & ~   & Tutorium 6 \\
+~        & Di  & Einführung \\
+~        & ~   & I/O, Formatierung\\[1ex]
+~        & Mi  & Structs, Enums, Unions \\
+~        & ~   & Speicherverwaltung\\[1ex]
+Next \sexyarrowrightLARGE{} & Do  & Arrays, Strings, Pointer \\
+~        & ~   & Präprozessor, Makefiles\\[1ex]
+~        & Fr  & Fehlererkennung\\
+~        & ~   & Bibliotheken, SDL, SVN \\
 \end{tabular}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
