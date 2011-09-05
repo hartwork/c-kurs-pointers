@@ -869,11 +869,14 @@ Helfer\\
 
 ==== Bitte vermeiden: ====
 {\Huge
-* \texttt{atoi}, \texttt{atol}, \texttt{atoll}, \texttt{atoq}
-* \texttt{gets}
-* \texttt{sprintf}, \texttt{vsprintf}
-* \texttt{strcat}, \texttt{strncat}
-* \texttt{strcpy}, \texttt{strncpy}
+\begin{itemize}
+\item \texttt{atoi}, \texttt{atol}, \texttt{atoll}, \texttt{atoq}
+\item \texttt{gets}
+\item[($\cdot$\hspace*{-0.125ex}] \texttt{scanf}, \texttt{fscanf}, \ldots{})
+\item \texttt{sprintf}, \texttt{vsprintf}
+\item \texttt{strcat}, \texttt{strncat}
+\item \texttt{strcpy}, \texttt{strncpy}
+\end{itemize}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	TODO
@@ -882,11 +885,11 @@ Helfer\\
 
 ==== ====
 {\LARGE
+* \texttt{gets}
+* \texttt{scanf}, \texttt{fscanf}, \texttt{sscanf}, \texttt{vscanf}, \ldots{}
+* \texttt{sprintf}, \texttt{vsprintf}
 * \texttt{strcat}
 * \texttt{strcpy}
-* \texttt{sprintf}
-* \texttt{vsprintf}
-* \texttt{gets}
 ~\\[1ex]
 Buffer-Overflows\\[1ex]
 Besser:\quad{}\texttt{s\underline{n}printf}, \texttt{vs\underline{n}printf}, \texttt{\underline{f}gets}\\
@@ -895,6 +898,24 @@ Besser:\quad{}\texttt{s\underline{n}printf}, \texttt{vs\underline{n}printf}, \te
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	TODO
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Beispiel \texttt{scanf} ====
+{\Large{\ttfamily
+\#include <stdio.h>\\
+~\\
+void main() \{\\
+\ind{}char text[3];\\
+\ind{}scanf(``\%s'', text);\\
+\}\\
+~\\}
+\uncover<2->{Buffer-Overflow für\\
+\ind{}$\texttt{strlen(\emph{input})} \,\ge\, 3$\\
+~\\
+{\ttfamily
+\uncover<3->{\# echo 123456789012345678901234 | ./crash\\
+Segmentation fault}
+}}}
 
 
 ==== Beispiel \texttt{sprintf} ====
