@@ -690,7 +690,7 @@ Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
         \ind{}3.~\uncover<4->{sizeof(char)~\,$\neq$\,~sizeof(int)\\}
     }
 ~\\
-    \uncover<5->{Für Operatoren +/- auf Pointern folgt:\\}
+    \uncover<5->{Für Operatoren +/- auf Pointern folgt daher:\\}
     \uncover<6->{\ind{}Sprungweite variiert mit dem Typen!\\}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
