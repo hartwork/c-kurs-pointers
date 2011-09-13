@@ -492,7 +492,7 @@ SYNOPSIS\\
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
-==== Variablen im RAM~~(Wiederholung) ====
+==== Variablen im RAM ====
 <[center]
 \vspace*{-3ex}%
 \mode<beamer>{
