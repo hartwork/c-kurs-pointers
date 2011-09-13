@@ -451,8 +451,8 @@ NAME\\
 SYNOPSIS\\
 \ind{}\#include <stdlib.h>\\
 ~\\
-\ind{}double strtod(const char *nptr, \only<1>{char **endptr}\only<2>{\highlight{char **endptr}});\\
-\ind{}float strtof(const char *nptr, \only<1>{char **endptr}\only<2>{\highlight{char **endptr}});\\
+\ind{}double strtod(const char *nptr, \alt<2>{\highlight{char **endptr}}{char **endptr});\\
+\ind{}float strtof(const char *nptr, \alt<2>{\highlight{char **endptr}}{char **endptr});\\
 ~\\
 \ldots{}
 }
@@ -532,13 +532,13 @@ SYNOPSIS\\
 \uncover<2->{void dump(const int * data, int count) \{\\
 ~~\uncover<3->{int i = 0;\\
 ~~for (; i < count; ++i) \{\\
-~~~~\uncover<4->{printf(``Field \%d: \%d$\backslash$n'', i + 1, \only<4>{\highlight{*(data + i)}}\only<5>{\highlight{data[i]}}\only<6->{data[i]});}\\
-~~\}}\\
+~~~~\uncover<4->{printf(``Field \%d: \%d$\backslash$n'', i + 1, \alt<4>{\highlight{*(data + i)}}{\alt<5>{\highlight{data[i]}}{data[i]}});}\\
+~~\}\mode<handout>{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\emph{/* == data[i] */}}}~\\
 \}}\\
 ~\\
 int main() \{\\
-~~\uncover<6->{int const primes[] = \{2, 3, 5, 7, 11\only<9>{, \highlight{13}}\};\\
-~~\uncover<7->{dump(primes, \only<7>{5}\only<8>{\highlight{sizeof(primes) / sizeof(int)}}\only<9->{sizeof(primes) / sizeof(int)});}}\\
+~~\uncover<6->{int const primes[] = \{2, 3, 5, 7, 11\only<9>{, \alt<handout:0>{\highlight{13}}{13}}\};\\
+~~\uncover<7->{dump(primes, \alt<8>{\highlight{sizeof(primes) / sizeof(int)}}{\alt<7>{5}{sizeof(primes) / sizeof(int)}});}}\\
 ~~return 0;\\
 \}
 }
@@ -657,8 +657,10 @@ Von \texttt{\emph{variable}} belegter Speicher in Byte
 ==== Zusammenfassung~~(5/5) ====
 {\Large
 <[center]
-\texttt{sizeof(\highlight{\emph{type}})}\\=\\
-Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte
+\mode<beamer>{\texttt{sizeof(\highlight{\emph{type}})}\\=\\
+Von \highlight{\texttt{\emph{type}}-Instanzen} belegter Speicher in Byte}
+\mode<handout>{\texttt{sizeof(\emph{type})}\\=\\
+Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -947,7 +949,7 @@ Buffer-Overflow für\\
 \ind{}$\texttt{strlen(error)} \,>\, 256 - 7 - 1 = 248$\\
 ~\\
 \uncover<3->{(Halbherzige) Abhilfe:\\
-\ind{}\texttt{s\highlight{\underline{n}}printf(text, \highlight{sizeof(text)}, .....);}\\
+\ind{}\texttt{s\underlinehighlight{n}printf(text, \highlight{sizeof(text)}, .....);}\\
 ~
 }}}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1040,7 +1042,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 
 ==== Const Correctness~~(2/6) ====
 {\ttfamily\LARGE
-~~\only<1,3->{\underline{~~~~~}}\only<2>{\underline{\highlight{const}}} int \only<-2>{\underline{~~~~~}}\only<3->{\underline{\highlight{const}}} foo;\\~\\\phantom{<2a>}
+~~\temporal<2>{\underline{~~~~~}}{\underlinehighlight{const}}{\underline{~~~~~}} int \alt<3>{\underlinehighlight{const}}{\underline{~~~~~}} foo;\\~\\\phantom{<2a>}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Bei dieser Deklaration des Integers foo wäre const
@@ -1251,9 +1253,9 @@ int main() \{\\
 {\ttfamily\Large
     \# gcc~\,rombad.c~\,-o rombad\\
     \uncover<2->{\# ./rombad\\
-    \uncover<3->{a=\only<3,5->{0x80484dc}\only<4>{0x\highlight{80484dc}}\\
-    b=\only<3,5->{0x80484dc}\only<4>{0x\highlight{80484dc}}\\
-    \uncover<5->{Segmentation fault}}}
+    \uncover<3->{a=0x\alt<4>{\highlight{80484dc}}{80484dc}\\
+    b=0x\alt<4>{\highlight{80484dc}}{80484dc}\\
+    \uncover<5->{\highlight{Segmentation fault}}}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Kompilieren, ausführen, ... da sind a und b.
@@ -1305,13 +1307,13 @@ int main() \{\\
 \#include <stdio.h>\\
 ~\\
 int main() \{\\
-~~\only<2>{\highlight{const~}}\only<3->{const~}char * a = ``hallo'';\\
-~~\only<2>{\highlight{const~}}\only<3->{const~}char * b = ``hallo'';\\
+~~\only<2->{\alt<2>{\highlight{const}}{const}~}char * a = ``hallo'';\\
+~~\only<2->{\alt<2>{\highlight{const}}{const}~}char * b = ``hallo'';\\
 ~\\
 ~~printf(``a=\%p$\backslash$n''\\
 ~~~~~~~~~``b=\%p$\backslash$n'', a, b);\\
 ~\\
-~~\only<3>{\highlight{a[0] = `X';}}\only<-2>{a[0] = `X';}\\
+~~\alt<3>{\highlight{a[0] = `X';}}{a[0] = `X';}\\
 ~\\
 ~~return 0;\\
 \}
