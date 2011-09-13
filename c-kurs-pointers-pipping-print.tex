@@ -1,0 +1,20 @@
+% Merge overlays into single frames
+\documentclass[handout]{beamer}
+
+% Setup page layout
+\setbeameroption{show notes}
+\usepackage{pgfpages}
+\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm,landscape]
+\pgfpageslogicalpageoptions{1}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{2}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{3}{border code=\pgfusepath{stroke}}
+\pgfpageslogicalpageoptions{4}{border code=\pgfusepath{stroke}}
+
+% Adjust look to print
+\mode<handout>{\setbeamercolor{background canvas}{bg=black!5}}
+\usecolortheme{dove}
+\setbeamertemplate{items}[circle]
+\setbeamerfont{title}{size=\Huge}
+\setbeamerfont{frametitle}{size=\huge}
+
+\input{c-kurs-pointers-pipping}

@@ -6,18 +6,26 @@ graphics-pdfs = $(patsubst %.svg,%.pdf,$(wildcard graphics/*.svg))
 creative-commons-pdfs = $(patsubst %.svg,%.pdf,$(wildcard creative-commons/*.svg))
 pdfs = $(graphics-pdfs) $(creative-commons-pdfs)
 
-all: $(base).pdf
+all: $(base)-print.pdf $(base)-live.pdf
 
 $(pdfs): %.pdf: %.svg
 	inkscape "--export-pdf=$@" "$<"
 
-$(base).pdf: $(tempdir)/$(base).pdf
-	cp "$(tempdir)/$(base).pdf" "$(base).pdf"
+$(base)-live.pdf: $(tempdir)/$(base)-live.pdf
+	cp "$(tempdir)/$(base)-live.pdf" "$(base)-live.pdf"
 
-$(tempdir)/$(base).pdf: $(base).tex content.tex beamerthemeManhattan.sty $(pdfs) VERSION.tex
+$(base)-print.pdf: $(tempdir)/$(base)-print.pdf
+	cp "$(tempdir)/$(base)-print.pdf" "$(base)-print.pdf"
+
+$(tempdir)/$(base)-live.pdf: $(base)-live.tex $(base).tex content.tex beamerthemeManhattan.sty $(pdfs) VERSION.tex
 	mkdir -p $(tempdir)
-	pdflatex -halt-on-error -output-directory $(tempdir) $(base).tex
-	pdflatex -halt-on-error -output-directory $(tempdir) $(base).tex
+	pdflatex -halt-on-error -output-directory $(tempdir) $(base)-live.tex
+	pdflatex -halt-on-error -output-directory $(tempdir) $(base)-live.tex
+
+$(tempdir)/$(base)-print.pdf: $(base)-print.tex $(base).tex content.tex beamerthemeManhattan.sty $(pdfs) VERSION.tex
+	mkdir -p $(tempdir)
+	pdflatex -halt-on-error -output-directory $(tempdir) $(base)-print.tex
+	pdflatex -halt-on-error -output-directory $(tempdir) $(base)-print.tex
 
 VERSION.tex: .git .git/refs/tags
 	git describe --tags | sed 's/-\([0-9]\+\)-.*/.\1/' > VERSION.tex
