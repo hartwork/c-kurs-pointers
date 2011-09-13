@@ -4,7 +4,9 @@
 \newcommand{\ind}{\hspace*{3ex}}
 \newcommand{\bulletremake}[0]{\small\raise0.5pt\hbox{\textbullet}}
 \setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertpagenumber\vspace*{0.5ex}\hspace*{0.5ex}}
-\newcommand{\highlight}[1]{{\color{yellow} #1}}
+\mode<beamer>{\newcommand{\highlight}[1]{{\color{yellow} #1}}}
+\mode<handout>{\newcommand{\highlight}[1]{\underline{#1}}}
+
 \newcommand{\exclamation}{!}
 \newcommand{\comment}[1]{}
 \newcommand{\introslide}[1]{
