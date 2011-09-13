@@ -595,7 +595,7 @@ int main() \{\\
 ==== Zusammenfassung~~(1/5) ====
 {\LARGE
 <[center]
-Array-Zugriff via \texttt{[\emph{n}]} ähnlich Java
+Array-Zugriff via \texttt{[\emph{k}]} ähnlich Java
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -620,7 +620,7 @@ Array~\,=\,~Pointer auf das erste Element
 ==== Zusammenfassung~~(3/5) ====
 {\ttfamily\Huge
 <[center]
-\emph{a}[\emph{n}]~\,\textsf{=}\,~*(\emph{a} + \emph{n})
+\emph{a}[\emph{k}]~\,\textsf{=}\,~*(\emph{a} + \emph{k})
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1680,7 +1680,7 @@ Zwei Varianten:
 	Pointer-Arithmetik das zu nutze macht.
 
 	Arrays sind auch Pointer auf ihr erstes Element.
-	Ihr erinnert euch an die Formel von vorhin: a[n] = *(a + n).
+	Ihr erinnert euch an die Formel von vorhin: a[k] = *(a + k).
 
 	Strings sind nullterminiert, ihre Größe wird dynamisch
 	berechnet.  Auch das haben wir uns genau angesehen.
