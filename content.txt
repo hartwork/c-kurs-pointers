@@ -2,7 +2,6 @@
 % Licensed under Creative Commons Attribution-ShareAlike 3.0 License
 %
 \newcommand{\ind}{\hspace*{3ex}}
-\newcommand{\bulletremake}[0]{\small\raise0.5pt\hbox{\textbullet}}
 \setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertpagenumber\vspace*{0.5ex}\hspace*{0.5ex}}
 \mode<beamer>{
 	\newcommand{\highlight}[1]{{\color{yellow} #1}}
@@ -885,14 +884,12 @@ Helfer\\
 
 ==== Bitte vermeiden: ====
 {\Huge
-\begin{itemize}
-\item \texttt{atoi}, \texttt{atol}, \texttt{atoll}, \texttt{atoq}
-\item \texttt{gets}
-\item[(\bulletremake\hspace*{-0.125ex}] \texttt{scanf}, \texttt{fscanf}, \ldots{})
-\item \texttt{sprintf}, \texttt{vsprintf}
-\item \texttt{strcat}, \texttt{strncat}
-\item \texttt{strcpy}, \texttt{strncpy}
-\end{itemize}
+* \texttt{atoi}, \texttt{atol}, \texttt{atoll}, \texttt{atoq}
+* \texttt{gets}
+* \texttt{scanf}, \texttt{fscanf}, \ldots{} mit \texttt{\%s}
+* \texttt{sprintf}, \texttt{vsprintf}
+* \texttt{strcat}
+* \texttt{strcpy}, \texttt{strncpy}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	TODO
@@ -902,7 +899,7 @@ Helfer\\
 ==== ====
 {\LARGE
 * \texttt{gets}
-* \texttt{scanf}, \texttt{fscanf}, \texttt{sscanf}, \texttt{vscanf}, \ldots{}
+* \texttt{scanf}, \texttt{fscanf}, \texttt{sscanf}, \ldots{} mit \texttt{\%s}
 * \texttt{sprintf}, \texttt{vsprintf}
 * \texttt{strcat}
 * \texttt{strcpy}
