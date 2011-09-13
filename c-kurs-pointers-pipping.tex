@@ -16,11 +16,21 @@
 
 
 \newcommand{\CcLongnameBySa}{Attribution-ShareAlike}
-\newcommand{\CcImageBy}[1]{%
-	\includegraphics[scale=#1]{creative-commons/cc-by-white.pdf}%
+\mode<beamer>{
+	\newcommand{\CcImageBy}[1]{%
+		\includegraphics[scale=#1]{creative-commons/cc-by-white.pdf}%
+	}
+	\newcommand{\CcImageSa}[1]{%
+		\includegraphics[scale=#1]{creative-commons/cc-sa-white.pdf}%
+	}
 }
-\newcommand{\CcImageSa}[1]{%
-	\includegraphics[scale=#1]{creative-commons/cc-sa-white.pdf}%
+\mode<handout>{
+	\newcommand{\CcImageBy}[1]{%
+		\includegraphics[scale=#1]{creative-commons/cc-by-black.pdf}%
+	}
+	\newcommand{\CcImageSa}[1]{%
+		\includegraphics[scale=#1]{creative-commons/cc-sa-black.pdf}%
+	}
 }
 \newcommand{\CcNote}[1]{% longname
 	This work is licensed under the \textit{Creative Commons #1 3.0 License}.%
@@ -39,6 +49,13 @@
 \newcommand{\citesrc}[1]{\textit{#1}}
 \renewcommand{\emph}[1]{\textit{#1}}
 
+\mode<handout>{%
+	\newcommand{\cwfslogo}[0]{\includegraphics[width=0.3\textwidth]{graphics/cwfs-1-0-0-black-25-degree.pdf}}%
+}
+\mode<beamer>{%
+	\newcommand{\cwfslogo}[0]{\includegraphics[width=0.3\textwidth]{graphics/cwfs-25-degree.pdf}}%
+}
+
 \begin{document}
 %\frame{\titlepage}
 
@@ -51,7 +68,7 @@
 		\vspace*{13ex}
 	\end{center}
 	\vspace*{-5ex}
-	\vspace*{-0.5\textheight}\hspace*{0.65\textwidth}\includegraphics[width=0.3\textwidth]{graphics/cwfs-25-degree.pdf}
+	\vspace*{-0.5\textheight}\hspace*{0.65\textwidth}\cwfslogo{}
 \end{frame}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	TODO

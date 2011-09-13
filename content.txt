@@ -495,7 +495,12 @@ SYNOPSIS\\
 ==== Variablen im RAM~~(Wiederholung) ====
 <[center]
 \vspace*{-3ex}%
+\mode<beamer>{
 <<<graphics/ram-minus-0,height=0.94\textheight>>>
+}
+\mode<handout>{
+<<<graphics/ram-minus-0-black,height=0.94\textheight>>>
+}
 [center]>
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Gibt es Fragen bis hierher?
@@ -1366,6 +1371,7 @@ Zwei Varianten:
 
 ==== 2D-Array als Array von Arrays ====
 <[center]
+\mode<beamer>{
 \only<1>{
 <<<graphics/array-deep-minus-4,height=0.7\textheight>>>
 }\only<2>{
@@ -1376,6 +1382,10 @@ Zwei Varianten:
 <<<graphics/array-deep-minus-1,height=0.7\textheight>>>
 }\only<5>{
 <<<graphics/array-deep-minus-0,height=0.7\textheight>>>
+}
+}
+\mode<handout>{
+<<<graphics/array-deep-minus-0-black,height=0.7\textheight>>>
 }
 [center]>
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1435,12 +1445,16 @@ Zwei Varianten:
 
 ==== 2D-Array linear ====
 <[center]
+\mode<beamer>{
 \only<1>{
 <<<graphics/array-flat-minus-3,height=0.7\textheight>>>
 }\only<2>{
 <<<graphics/array-flat-minus-2,height=0.7\textheight>>>
 }\only<3>{
 <<<graphics/array-flat-minus-0,height=0.7\textheight>>>
+}}
+\mode<handout>{
+<<<graphics/array-flat-minus-0-black,height=0.7\textheight>>>
 }
 [center]>
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
