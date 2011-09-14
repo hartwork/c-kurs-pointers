@@ -71,12 +71,20 @@
 	\vspace*{-5ex}
 	\vspace*{-0.5\textheight}\hspace*{0.65\textwidth}\cwfslogo{}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Willkommen zum zweiten Tag des C-Kurses.
-	Mein Name ist Sebastian Pipping.  In der nächsten Stunde
-	werde ich versuchen, euch Pointer in C näherzubringen.
+	Willkommen zum dritten Tag des C-Kurses.
 
-	Die Folien und alle Code Beispiele sind übrigens im Netz.
-	Ihr könnt gerne mitschreiben, müsst aber nicht.
+	Mein Name ist Sebastian Pipping.  Das dritte Jahr spreche
+	ich nun im Rahmen des C-Kurses über Arrays, Strings und Pointer.
+
+	Viel von dem, was ich die nächste Stunde vermitteln will,
+	haben Sie gestern bereits gesehen, teilweise auch angewandt.
+	Die nächsten 60 Minuten werde ich sowohl Inhalte wiederholen
+	als auch tiefer einsteigen.
+
+	Ganz wichtig zur Vorlesung:
+	Bitte unterbrechen Sie mich, wenn Verständnisfragen auftauchen.
+	Das fördert die Lebendigkeit dieser Vorlesung und trägt dazu bei,
+	das all am Ball bleiben, auch wenn es mal etwas theoretischer wird.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -96,8 +104,9 @@ Ohne Pointer geht nichts.
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Das ist auch nicht weiter verwunderlich:
-	Ohne Pointer geht in C wirklich nichts.
+	Ich möchte beginnen mit dem Statement:
+	\glqq{}Ohne Pointer geht nichts\grqq{}, wenigstens
+	nicht in C.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -113,11 +122,14 @@ Pointer sind Grundlage für:
 	Pointer sind die Grundlage für Arrays, Strings,
 	Call by Reference und komplexe Datentypen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
 
 
 \disableintroslides{}
-\section{Themen dieser Vorlesung}
+\section{Themen}
 \enableintroslides{}
+
+\newcommand{\tocslide}[1]{%
 
 ==== Themen ====
 {\large
@@ -134,16 +146,20 @@ Pointer sind Grundlage für:
 * Weiterführende Themen
 * Zusammenfassung
 }
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Und weil in C nichts ohne Pointer geht, gibt es -
-	die lange Liste an Themen spiegelt das wieder -
-	einiges Wichtiges über sie zu erzählen.
+{#1}
+[frame]>
+}
 
-	In "Hello Pointer" möchte ich Pointer an einem Minimalbeispiel
+\tocslide{%
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Und weil in C nichts ohne Pointer geht, werde ich neben
+	Array und Strings auch Pointer selbst in Detail beleuchten.
+
+	In \glqq{}Hello Pointer\grqq{} möchte ich Pointer an einem Minimalbeispiel
 	vorstellen:
-	- Was ist das Konzept?
-	- Wie lautet die Syntax?
-	- Wo ist der Bezug zum Arbeitsspeicher?
+		Was ist das Konzept?
+		Wie lautet die Syntax?
+		Wie ist der Bezug zum Arbeitsspeicher?
 
 	Danach möchte unter Verwendung von Pointern Call by Reference
 	nachbauen, also Funktionen erlauben, ausgewählten Variablen der
@@ -152,33 +168,40 @@ Pointer sind Grundlage für:
 	Gelegentlich zeigen Pointer auch auf andere Pointer.
 	Dazu werde ich ein Beispiel aus der realen Welt vorstellen.
 
-	In "Vom Pointer zum Array" werden wir die Funktionsweise von
+	In \glqq{}Vom Pointer zum Array\grqq{} werden wir die Funktionsweise von
 	Arrays näher kennenlernen.
 
-	Damit sind wir direkt beim Thema "Pointer-Arithmetik" und
+	Damit sind wir direkt beim Thema \glqq{}Pointer-Arithmetik\grqq{} und
 	was sich hinter diesem Begriff verbirgt.
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+}
 
+\mode<handout>{
+\tocslide{%
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Aufbauend auf unserem Wissen über Arrays werde ich dann
 	Strings als spezielle Arrays vorstellen, wie deren Länge
 	codiert wird und welche Konsequenzen das hat.
 
 	Bevor ich die zwei verschiedenen Arten der Initialisierung von
-	Strings vorstellen kann, muss ich in "Const Correctness"
+	Strings vorstellen kann, muss ich in \glqq{}Const Correctness\grqq{}
 	ein paar Grundlagen aufbauen: An ein paar Stellen ist die
-	Frage "konstant oder nicht konstant" mehr als nur Geschmack,
-	sondern macht einen echten Unterschied.
+	Frage \glqq{}konstant oder nicht konstant\grqq{} \emph{keine}
+	Geschmacksache.
 
 	Auch für die Repräsentation von mehrdimensionalen Arrays
-	gibt es in C zwei Varianten.  Hilfe für diese Stolperfalle
+	gibt es in C zwei Varianten.  Ihnen Hilfe für diese Stolperfalle
 	mit auf den Weg zu geben, ist mir wichtig.
 
-	Mit dem bis dahin aufgebauten Verständnis sind wir dann auch
-	in der Lage, Programm-Argumente auszulesen, was	ich mit
-	passendem Code demonstrieren werde.
+	Mit dem bis dahin aufgebauten Verständnis sind wir dann
+	in der Lage, die Argumente des Programmaufrufs auszulesen,
+	was ich mit passendem Code demonstrieren werde.
 
-	Danach möchte ich mit einem Ausblick und einer Zusammenfassung
+	Danach möchte ich mit einer Zusammenfassung und einem Ausblick
 	schließen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+}
+}
 
 
 \disableintroslides{}
@@ -193,27 +216,49 @@ Was ist ein \glqq{}Pointer\grqq{}?
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Also was ist ein "Pointer"?
+	Also was ist ein \glqq{}Pointer\grqq{}?
+
+	Um diese Frage zu benantworten, möchte
+	ich zuvor definieren, was eine Adresse ist.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 ==== ====
 {\LARGE
-\glqq{}Pointer\grqq{} kann meinen eine...\\[1ex]
+Eine \glqq{}Adresse\grqq{} ist die\\
+\highlight{Beschreibung der Lage eines Ortes}\\
+~\\
+Zum Beispiel:
+* \glqq{}Im Kühlschrank ganz oben, links\grqq{}
+* \glqq{}Speicherzelle 0xbfa3ad8c im RAM\grqq{}
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Eine Adresse beschreibt die Lage eines Ortes.
+	Im echten Leben könnte das im Kühlschrank oben links sein,
+	im Computer eine bestimmte Speicherzelle.
+
+	Nun zum Begriff \glqq{}Pointer\grqq{}.
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== ====
+{\LARGE
+\glqq{}Pointer\grqq{} kann meinen eine \ldots{}\\[1ex]
 \begin{itemize}
 \item[A)]$\,$\uncover<2->{Adresse}\\
 \item[B)]$\,$\uncover<3->{Variable, die eine Adresse speichert}
 \end{itemize}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	"Pointer" meint entweder eine Adresse oder eine Variable,
+	\glqq{}Pointer\grqq{} meint entweder eine Adresse --- einen Wert ---
+	oder eine Variable,
 	die eine Adresse speichert.  Diese Mehrdeutigkeit ist gar nichts
-	wirklich neues: Das Wort "Integer" verwenden wir ganz
-	selbstverständlich zum einen für ganze Zahlen - sagen wir die 3 -
-	und zum anderen für Variablen die Integer speichern:
-	i ist ein Integer.
+	wirklich Neues: Das Wort \glqq{}Integer\grqq{} verwenden wir ganz
+	selbstverständlich zum einen für ganze Zahlen --- sagen wir die 3 ---
+	und zum anderen für Variablen die ganze Zahlen speichern:
+	wir sagen \glqq{}$i$ ist ein Integer\grqq{}.
 
-	"Pointer" meint also eine Adresse oder eine Variable,
+	\glqq{}Pointer\grqq{} meint also eine Adresse oder eine Variable,
 	die eine Adresse speichert.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -246,25 +291,26 @@ Was ist ein \glqq{}Pointer\grqq{}?
     \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Fangen wir an mit einem Gerüst, dass euch inzwischen
+	Fangen wir an mit einem Gerüst, dass Ihnen inzwischen
 	sehr bekannt vorkommen wollte.
 
-	Wir definieren einen Integer i, bisher nichts Neues.
+	Wir definieren einen Integer $i$ --- bisher nichts Neues.
 
-	Als nächstes definieren wir einen Pointer p, der auf i zeigt.
-	der \&-Operator liefert hierbei die Adresse von i.
-	p ist vom Typ int *, Pointer auf einen int.
+	Als Nächstes definieren wir einen Pointer $p$, der auf $i$ zeigt.
+	Der \&-Operator liefert hierbei die Adresse --- den Speicherort ---
+	von $i$.  $p$ ist vom Typ \glqq{}int Stern\grqq{}:
+	ein Pointer auf einen \texttt{int}.
 
-	Danach schreiben wir den Wert 4 nach *p.  Der *-Operator folgt
-	der Adresse in p - wir schreiben also effektiv in den Speicher
-	von i!
+	Danach schreiben wir den Wert 4 nach \texttt{*p}.  Der *-Operator folgt
+	der Adresse in $p$ - wir schreiben also effektiv in den Speicher
+	von $i$!
 
-	p selbst ist auch schreibbar - hier schreiben wir den Wert 5.
+	$p$ selbst ist auch schreibbar --- hier schreiben wir den Wert 5.
 
-	Als letztes fügen wir noch ein paar printf()s ein, um die Werte
-	von i und p auszugeben.
+	Als Letztes fügen wir noch ein paar \text{printf()}s ein,
+	um die Werte von $i$ und $p$ auszugeben.
 
-	Lasst uns das doch mal ausführen...
+	Lasst uns das doch mal ausführen \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -286,22 +332,22 @@ Was ist ein \glqq{}Pointer\grqq{}?
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Erstmal kompilieren wir das.
 
-	Dann ausführen...
+	Dann ausführen \ldots{}
 
-	i ist drei - so wie wir es initialisiert hatten - und p
-	zeigt auf i, das an Adresse \glqq{}bfa und weiter\grqq{} liegt.
+	$i$ ist 3 --- so wie wir es initialisiert hatten --- und $p$
+	zeigt auf $i$, das an Adresse \glqq{}bfa und so weiter\grqq{} liegt.
 	Nebenbei: Diese Adresse kann bei jeden Aufruf verschieden sein.
 
 	Zur Erinnerung: Dann kam \texttt{*p = 4;}.
 
-	Weil der *-Operator der Adresse in p folgt, landet die 4 in i.
-	p selbst bleibt unverändert.
+	Weil der *-Operator der Adresse in $p$ folgt, landet die 4 in $i$.
+	$p$ selbst bleibt unverändert.
 
 	Dann kam \texttt{p = 5;}.
 
-	Diesmal wird p selbst verändert: p zeigt jetzt auf Adresse 5.
+	Diesmal wird $p$ selbst verändert: $p$ zeigt jetzt auf Adresse 5.
 
-	Lasst mich das kurz zusammenfassen...
+	Lasst mich das kurz zusammenfassen \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -321,10 +367,10 @@ Was ist ein \glqq{}Pointer\grqq{}?
 
 	Operator * folgt einer Adresse.  Man sagt auch \glqq{}er dereferenziert\grqq{}.
 
-	Besonders für die Mathematiker unter euch:
+	Besonders für die Mathematiker unter Ihnen:
 	Diese beiden Operatoren sind komplementär.
-	Wenn ich nach der Adresse von x frage und dann dieser Adresse
-	folge erhalte ich wieder x.
+	Wenn ich nach der Adresse von $x$ frage und dann dieser Adresse
+	folge arbeite ich wieder mit $x$ selbst.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -337,11 +383,11 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Pointer zeigen auf typisierte Daten.
-	Es gibt einen Unterschied zwischen Pointern auf ints
-	und Pointern auch chars.  Diese Unterscheidung ist die
-	Grundlage für Pointer-Arithmetik - dazu später mehr.
+	Es gibt einen Unterschied zwischen Pointern auf \texttt{int}s
+	und Pointern auch \texttt{char}s.  Diese Unterscheidung ist die
+	Grundlage für Pointer-Arithmetik --- dazu später mehr.
 
-	Zuvor möchte ich euch zeigen, wie man mithilfe von Pointern
+	Zuvor möchte ich Ihnen zeigen, wie man mithilfe von Pointern
 	Call by Reference in C nachbaut.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -378,22 +424,23 @@ int main() \{\\
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Fangen wir an mit einem bekannten Gerüst: mit einer
-	main-Funktion und einem Integer i.
+	\texttt{main}-Funktion und einem Integer $i$.
 
-	Übergeben wir i nun an eine Funktion \texttt{by\_value} und
+	Übergeben wir $i$ nun an eine Funktion \texttt{by\_value} und
 	eine Funktion \texttt{by\_reference}.
 
-	\texttt{by\_value} verändert Paramater x, arbeitet somit auf dem
-	einem kopierten Wert von i.
+	\texttt{by\_value} verändert Paramater $x$, arbeitet somit auf
+	einem kopierten Wert von $i$.
 
-	\texttt{by\_reference} dagegen schreibt in den Speicher der kopierten
-	Adresse von \&i und verändert damit den Wert von i.
+	\texttt{by\_reference} dagegen schreibt in den Speicher hinter
+	der kopierten Adresse von \texttt{\&i} und verändert
+	damit den Wert von $i$.
 
-	Welchen Wert hat i also am Ende von main()?
+	Welchen Wert hat $i$ also am Ende von \texttt{main()}?
 
 	<PAUSE>
 
-	Fügen wir noch ein paar printf()s hinzu und lassen es laufen...
+	Fügen wir noch ein paar \texttt{printf()}s ein und lassen es laufen \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -411,16 +458,17 @@ int main() \{\\
     i == 4}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Kompilieren, ausführen, i ist 0 und dann 4.
+	Kompilieren, ausführen, $i$ ist 0 und dann 4.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 == Pointer auf Pointer ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Auch Pointer auf Pointer, manchmal \glqq{}Doppelpointer\grqq{} genannt,
+	Auch Pointer auf Pointer, manchmal \glqq{}Doppelpointer\grqq{}
+	oder \glqq{}Pointer-Pointer\grqq{} genannt,
 	werden regelmäßig gebraucht.
 
-	Zum Beispiel für...
+	Zum Beispiel für \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 \disableintroslides{}
@@ -434,11 +482,11 @@ int main() \{\\
 * $\,$\uncover<2->{Call by Reference \emph{von} Pointern}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	... Mehrdimensionale Arrays oder, wenn Pointer selbst
+	\ldots{} mehrdimensionale Arrays oder, wenn Pointer selbst
 	mittels Call by Reference verändert werden sollen.
 
-	Eine Funktion, die ihr sicher mal brauchen werdet, macht
-	Gebrauch davon: ...
+	Eine Funktion, die Sie selbst brauchen werden, macht
+	Gebrauch davon: \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -463,18 +511,18 @@ SYNOPSIS\\
 \ldots{}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	... die Funktion strtod().
+	\ldots{} die Funktion \texttt{strtod()}.
 
-	Hier seht ihr einen Ausschnitt aus der Manpage von
-	strtod().
+	Hier sehen Sie einen Ausschnitt aus der Manpage von
+	\texttt{strtod()}.
 
-	Unten rechts seht ihr einen Pointer auf einen Pointer.
-	strtod() arbeitet mit Call by Reference.
-	In einer unserer Übungsaufgaben könnt ihr genau
+	Unten rechts sehen Sie einen Pointer auf einen Pointer.
+	\texttt{strtod()} arbeitet mit Call by Reference.
+	In einer unserer Übungsaufgaben können Sie genau
 	mit dieser Funktion herumexperimentieren.
 
 	Wirklich schwer sind Doppelpointer nicht; außer einem weiteren
-	Stern erwartet euch syntaktisch nichts Neues.
+	Stern erwartet Sie auch syntaktisch nichts Neues.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -490,17 +538,16 @@ SYNOPSIS\\
     \uncover<2->{int ** pp = \&p;}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Das kennt ihr schon: Pointer p wird mit der Adresse von i
+	Das kennen Sie schon: Pointer $p$ wird mit der Adresse von $i$
 	initialisiert.
 
-	p ist ein einfacher Pointer.
+	$p$ ist ein einfacher Pointer.
 
-	Hier wird nun Doppelpointer pp mit der Adresse von p
+	Hier wird nun Doppelpointer $pp$ mit der Adresse von $p$
 	initialisiert: Wir setzen also eine weitere Indirektionsschicht
 	oben drauf.
 
-	Wenn ihr euch an meine Darstellung des Arbeitsspeichers
-	von vorhin erinnert: das waren i, p und pp.
+	Vielleicht sollten wir uns das auch mal im RAM ansehen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -539,63 +586,104 @@ SYNOPSIS\\
 ~~\uncover<3->{int i = 0;\\
 ~~for (; i < count; ++i) \{\\
 ~~~~\uncover<4->{printf(``Field \%d: \%d$\backslash$n'', i + 1, \alt<4>{\highlight{*(data + i)}}{\alt<5>{\highlight{data[i]}}{data[i]}});}\\
-~~\}\mode<handout>{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\emph{/* == data[i] */}}}~\\
+~~\}}\\
 \}}\\
 ~\\
 int main() \{\\
-~~\uncover<6->{int const primes[] = \{2, 3, 5, 7, 11\only<9>{, \alt<handout:0>{\highlight{13}}{13}}\};\\
-~~\uncover<7->{dump(primes, \alt<8>{\highlight{sizeof(primes) / sizeof(int)}}{\alt<7>{5}{sizeof(primes) / sizeof(int)}});}}\\
+~~\\
+~~\\
 ~~return 0;\\
 \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Diese Gerüst kennt ihr schon.
+	Dieses Gerüst kennen Sie schon.
 
 	Hier definiere ich eine Funktion \texttt{dump} die Daten ausgeben soll.
 	Die Daten sind Integer, die im Speicher direkt
-	hintereinanderliegen: ein Array von ints.
+	hintereinanderliegen: ein Array von \texttt{int}s.
 
-	Von diesen ints gibt es count viele, der erste von ihnen
-	liegt an Adresse data.
+	Von diesen \texttt{int}s gibt es \texttt{count} viele, der erste von ihnen
+	liegt an Adresse \texttt{data}.
 
-	Was ich jetzt machen kann, ist, mit einer simplen for-Schleife
+	Was ich jetzt machen kann, ist, mit einer simplen \texttt{for}-Schleife
 	über die Daten iterieren und jedes Datum einzeln ausgeben.
 
 	An den jeweiligen Wert gelangen wir, indem wir auf die
-	Basisadresse data i drauf addieren und dann der resultierenden
-	Adresse folgen.
+	Basisadresse \texttt{data} $i$ drauf addieren und dann der
+	resultierenden Adresse folgen.
 
-	Sind alle einverstanden, dass das so funktioniert?
+	Sind Sie einverstanden, dass das so funktioniert?
 	
 	<PAUSE>
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
 
-	Wenn ihr jetzt denkt, dass diese Syntax unnötig hässlich ist:
-	Ihr habt recht, dafür gibt es eine Kurzschreibweise.
-	Diese Syntax kennt ihr vermutlich bereits von Java.
+==== Vom Pointer zum Array ====
+{\ttfamily\large
+\#include <stdio.h>\\
+~\\
+void dump(const int * data, int count) \{\\
+~~int i = 0;\\
+~~for (; i < count; ++i) \{\\
+~~~~printf(``Field \%d: \%d$\backslash$n'', i + 1, \alt<1>{\highlight{data[i]}}{data[i]});\\
+~~\}\\
+\}\\
+~\\
+int main() \{\\
+~~\uncover<2->{int const primes[] = \{2, 3, 5, 7, 11\};\\
+~~\uncover<3->{dump(primes, \alt<0| handout:1>{\highlight{5}}{5});}}\\
+~~return 0;\\
+\}
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Wenn Sie jetzt denken, dass diese Syntax unnötig hässlich ist:
+	Sie haben Recht: Dafür gibt es eine Kurzschreibweise.
+	Diese Syntax kennen Sie vermutlich bereits von Java.
 
-	Lasst uns nun die Funktion mit Daten füttern.
+	Lassen Sie uns nun die Funktion mit Daten füttern.
 
 	Hier definieren wir ein Array, das die 5 kleinsten Primzahlen
-	enthält und rufen dump() damit auf.
+	enthält und rufen \texttt{dump()} damit auf.
 
 	Die Länge des Arrays müssen wir explizit übergeben, weil
-	die Funktion dump() einem Pointer allein nicht ansehen kann,
+	die Funktion \texttt{dump()} einem Pointer allein nicht ansehen kann,
 	wie lang das Array dahinter ist: die Länge von Arrays
-	mit explizit mitherumgeschleppt werden!
+	muss mitherumgeschleppt werden!
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
 
+==== Vom Pointer zum Array ====
+{\ttfamily\large
+\#include <stdio.h>\\
+~\\
+void dump(const int * data, int count) \{\\
+~~int i = 0;\\
+~~for (; i < count; ++i) \{\\
+~~~~printf(``Field \%d: \%d$\backslash$n'', i + 1, \alt<0| handout:1>{\highlight{data[i]}}{data[i]});\\
+~~\}\\
+\}\\
+~\\
+int main() \{\\
+~~int const primes[] = \{2, 3, 5, 7, 11\only<2>{, \highlight{13, 17}}\};\\
+~~dump(primes, \alt<1>{\highlight{sizeof(primes) / sizeof(int)}}{sizeof(primes) / sizeof(int)});\\
+~~return 0;\\
+\}
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Dass wir explizit sagen müssen, dass unser Array 5 Einträge
-	lang ist, ist etwas unschön.
+	lang ist, ist unflexibel und fehleranfällig.
 
-	Vermeiden lässt sich das hier mithilfe von des sizeof-Operators.
-	sizeof erkennt zur Compilezeit, wieviele Byte Speicher sein
-	Argument belegt.  Auf meiner 32-Bit-Machine belegt das Array
-	primes 20 Byte, ein int belegt 4 Byte.  20 durch 4 sind 5.
+	Vermeiden lässt sich das hier mithilfe des \texttt{sizeof}-Operators.
+	\texttt{sizeof} erkennt zur Compilezeit, wieviele Byte Speicher sein
+	Argument belegt.  Auf einer 32-Bit-Machine belegt das Array
+	\texttt{primes} 20 Byte, ein \texttt{int} belegt 4 Byte.
+	20 geteilt durch 4 sind 5.
 
-	Durch diesen Trick könnten wir nun die sechste Primzahl an
-	primes anhängen, ohne den Aufruf von dump() aktualisieren zu
-	müssen.
+	Durch diesen Trick könnten wir nun zwei weitere Primzahlen an
+	\texttt{primes} anhängen, ohne den Aufruf von \texttt{dump()}
+	anpassen zu müssen.
 
-	Lasst mich das eben zusammenfassen...
+	Lasst mich das eben zusammenfassen \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -612,7 +700,7 @@ Array-Zugriff via \texttt{[\emph{k}]} ähnlich Java
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Der Array-Zugriff funktioniert mit eckigen Klammern und einem
-	Index n wie auch in Java.
+	Index $k$ wie auch in Java.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -653,7 +741,7 @@ Von \texttt{\emph{variable}} belegter Speicher in Byte
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Der Operator sizeof liefert die Anzahl Byte, die eine
+	Der Operator \texttt{sizeof} liefert die Anzahl Byte, die eine
 	Variable im Speicher belegen wird.
 
 	Diese Auswertung geschieht zur Compilezeit.
@@ -670,10 +758,10 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Desweiteren kann sizeof auch die Größe von Typen bestimmen:
-	wieviele Byte Speicher wird Typ xy belegen.
+	Desweiteren kann \texttt{sizeof} auch die Größe von Typen bestimmen:
+	wieviele Byte Speicher wird Typ \texttt{xy} belegen.
 
-	sizeof() kann noch ein bisschen mehr, aber weitere Details
+	\texttt{sizeof} kann noch ein bisschen mehr, aber weitere Details
 	sind im Augenblick nicht wichtig.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -708,29 +796,34 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
     \uncover<6->{\ind{}Sprungweite variiert mit dem Typen!\\}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Angenommen wir haben zwei Arrays: numbers und text.
+	Angenommen wir haben zwei Arrays: \texttt{numbers} und \texttt{text}.
 	Eins von denen ist ein String, aber das stört nicht weiter.
 
 	Ein paar Dinge müssen dann gelten:
-	1.	Der Array-Zugriff auf Array "numbers" gehorcht dieser Formel;
+	%
+	\vspace*{-2ex}%
+	\begin{enumerate}%
+	\item
+		Der Array-Zugriff auf Array \texttt{numbers} gehorcht dieser Formel;
 		das hatte ich ja vorhin eingeführt.
-	2.	Auch der Array-Zugriff auf Array "text" gehorcht dieser
+	\item
+		Auch der Array-Zugriff auf Array \texttt{text} gehorcht dieser
 		Formel.
-	3.	char und int sind auf den meisten Maschinen nicht gleich groß.
-
+	\item
+		\texttt{char} und \texttt{int} sind meist nicht gleich groß.
+	\end{enumerate}%
+	\vspace*{-1ex}%
+	%
 	Gibt es da nicht ein Problem - kann das funktionieren?
-	Ich geb die Frage mal an euch weiter: kann das funktionieren?
+	Ich geb die Frage mal an Sie weiter: kann das funktionieren?~~<PAUSE>
 
-	<PAUSE>
-
-	Für die Operatoren "+" und "-" auf Pointern folgt:
+	Für die Operatoren Plus und Minus auf Pointern folgt:
 	Die Sprungweite variiert mit dem Typen.
-	Auf einer 32-Bit-machine liegt "numbers + 1" springt
-	4 Byte wegen sizeof(int) gleich 4, aber "text + 1" springt
-	nur 1 Byte weiter wegen sizeof(char) gleich 1.
-
-	Das ist der Grund, warum int * und char * nicht das gleiche sind.
-	Diese Information braucht der Compiler für die Pointer-Arithmetik.
+	Auf einer 32-Bit-Machine springt \texttt{numbers + 1}
+	4 Byte wegen $\texttt{sizeof(int)} = 4$, aber \texttt{text + 1} springt
+	nur 1 Byte weiter wegen $\texttt{sizeof(char)} = 1$.
+	Das ist der Grund, warum \texttt{int *} und \texttt{char *} nicht das
+	Gleiche sind.  Der Compiler braucht diese Information für Pointer-Arithmetik.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -753,7 +846,16 @@ Pascal Strings\\
 \ind{}{\ttfamily``ABC''~\sexyarrowrightLarge{}~\{\;65, 66, 67, \highlight{0}\;\}}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Strings sind in C spezielle Arrays.
+	Das besondere an ihnen ist, dass Sie Ihre Länge verraten.
+
+	In der programmiersprache Pascal sieht der String \glqq{}ABC\grqq{}
+	so aus: 4 Byte, ein Byte für die Länge --- 3 --- gefolgt von
+	den ASCII-Werten für die Großbuchstaben \glqq{}A\grqq{}, \glqq{}B\grqq{} und \glqq{}C\grqq{}.
+
+	In C wird das anders gelöst.  Aus \glqq{}ABC\grqq{} macht der Compiler
+	die ASCII-Werte von \glqq{}A\grqq{}, \glqq{}B\grqq{} und \glqq{}C\grqq{}
+	gefolgt von 0, genannt Nullterminator.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -771,28 +873,21 @@ Pascal Strings\\
     \uncover<8->{\textsf{=}\,~3\\}}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Wenn der Compiler diesen String "ABC" sieht, macht er daraus
-	folgendes Array: 65, 66, 67, 0.
-
-	Die Null markiert das Ende.  Irgendwie müssen wir codieren,
-	wie lang ein String ist.  Die Länge in einem Integer mitzuführen
-	hätte auch funktioniert, aber diese Variante benötigt weniger
-	Speicher.  Jedenfalls haben sich die Erfinder von C entschieden,
-	Strings nullzuterminieren und so ihre Länge zu codieren.
+	Aus \glqq{}ABC\grqq{} wird also das Array: 65, 66, 67, 0.
 
 	Dass die Null das Ende des Strings markiert heißt aber nicht,
-	dass wir die zahl Null nicht in einen String schreiben dürfen:
+	dass wir die Zahl Null nicht in einen String schreiben dürfen:
 
-	Dieser String - "012" - wird ersetzt durch 48, 49, 50, 0.
-	Der Ascii-Wert des Zeichens "0" ist 48.
+	Dieser String - \glqq{}012\grqq{} - wird ersetzt durch 48, 49, 50, 0.
+	Der ASCII-Wert des Zeichens \glqq{}0\grqq{} ist 48.
 
-	Künstlich den Wert Null einfügen können wir auch:
+	Künstlich den ASCII-Wert Null einfügen können wir auch:
 	Aus 0, 1, 2, Backslash 0 wird 48, 49, 50, 0 und nochmal 0.
 
 	Die Länge eines Strings müssen wir nicht per Hand berechnen.
-	Das macht die Funktion "strlen" aus string.h für uns.
+	Das macht die Funktion \glqq{}strlen\grqq{} aus \texttt{string.h} für uns.
 
-	strlen von "ABC" liefert den Wert 3.
+	\texttt{strlen} von \glqq{}ABC\grqq{} liefert den Wert 3.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -812,30 +907,28 @@ Pascal Strings\\
     \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Ich möchte nun mit euch unser eigenes strlen() programmieren.
+	Ich möchte nun mit Ihnen ein eigenes \texttt{strlen()} programmieren.
 
 	Ich habe unsere Funktion \texttt{my\_strlen} genannt.
-
-	Sie arbeitet auf einem char-Pointer "str", zu dem const
-	kommen wir später.
+	Sie arbeitet auf einem \texttt{char}-Pointer \glqq{}str\grqq{}.
+	Zu dem \texttt{const} kommen wir später.
 
 	Zunächst merken wir uns den Wert von str in einer eigenen
-	Variable "begin".  Wir werden str verändern - quasi mit
-	str über den String laufen - und würden diesen Wert sonst
-	verlieren.
+	Variable \texttt{begin}.  Wir werden str verändern --- quasi mit
+	\texttt{str} über den String laufen --- und würden den ursprünglichen
+	Wert sonst verlieren.
 
 	Nun laufen wir in einer Schleife solange im String
 	vorwärts, wie das aktuelle Zeichen nicht 0 ist, also
 	nicht das Ende des Strings markiert.
 
-	Nach dieser Schleife zeigt str also genau auf dem Terminator.
-
+	Nach dieser Schleife zeigt \texttt{str} genau auf den Terminator.
 	Was müssen wir nun zurückgeben um die Länge des Strings zu
 	erhalten?
 
 	<PAUSE>
 
-	Richtig, "str - begin".  Auch das ist wieder Pointer-Arithmetik.
+	Richtig, \texttt{str - begin}.  Auch das ist wieder Pointer-Arithmetik.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1024,7 +1117,7 @@ Besser:\quad{}\texttt{strtol}, \texttt{strtoll}\\
 == Const Correctness ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Kommen wir nun zu Const Correctness, zu korrekter
-	Verwendung des Modifikators "const".
+	Verwendung des Modifikators \texttt{const}.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 \disableintroslides{}
@@ -1066,7 +1159,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Bei einfachen Pointern kommt nun eine wietere Stelle hinzu,
 	an der const stehen darf.
 
-	Ich benenne diese Stellen mal eben mit "1", "2a" und "2b".
+	Ich benenne diese Stellen mal eben mit \glqq{}1\grqq{}, \glqq{}2a\grqq{} und \glqq{}2b\grqq{}.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1088,7 +1181,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Steht const hingegen beim int so darf der Inhalt hinter foo
 	nicht geschrieben werden.
 
-	Diese beiden Fälle lassen sich auch kombinieren ...
+	Diese beiden Fälle lassen sich auch kombinieren \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1104,7 +1197,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Steht beim int und bei foo const, so darf weder foo selbst
 	noch der Inhalt hinter foo verändert werden.
 
-	Schauen wir uns noch ein Beispiel mit Doppelpointern an ...
+	Schauen wir uns noch ein Beispiel mit Doppelpointern an \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1131,8 +1224,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 
 	<PAUSE>
 
-	Ich schulde euch noch eine Erklärung zu unserer Funktionen
-	\texttt{my\_strlen} von vorhin ...
+	Ich schulde Ihnen noch eine Erklärung zu unserer Funktionen
+	\texttt{my\_strlen} von vorhin \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -1152,19 +1245,19 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<5->{\ind{}\texttt{my\_strlen(``ABC'')} erlaubt und sicher\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Hier seht ihr zwei verschiedene Prototypen von texttt{my\_strlen}:
+	Hier sehen Sie zwei verschiedene Prototypen von texttt{my\_strlen}:
 	einen mit const und einen ohne.  Wo liegt der Unterschied?
 
 	Aus Sicht des Compilers darf die Variante ohne const den
 	Inhalt von str verändern.  Wenn wir diese Funktion mit der
-	String-Konstante "ABC" aufrufen, wirft der Compiler einen Fehler.
+	String-Konstante \glqq{}ABC\grqq{} aufrufen, wirft der Compiler einen Fehler.
 
-	Der Typ von String-Konstanten ist "const char *".
+	Der Typ von String-Konstanten ist \texttt{const char *}.
 	Diese Variante von \texttt{my\_strlen} erwartet zuviel vom übergegen String:
 	sie erwartet, schreiben zu dürfen.
 
 	Bei der Variante mit const darf die Funktion den Inhalt von
-	str nicht ändern.  Ein Aufruf mit der String-Konstante "ABC"
+	str nicht ändern.  Ein Aufruf mit der String-Konstante \glqq{}ABC\grqq{}
 	ist daher erlaubt und sicher.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -1174,7 +1267,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Kommen wir nun zur Initialisierung von Strings.
 
 	In C ist das auf zwei sehr verschiedene Arten möglich.
-	Sehen wir uns das näher an ...
+	Sehen wir uns das näher an \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 \disableintroslides{}
@@ -1194,14 +1287,14 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Hier initialisieren wir einen String a mit "Hallo".
+	Hier initialisieren wir einen String a mit \glqq{}Hallo\grqq{}.
 	im Speicher belegt a dann 5 + 1 Byte, 5 Byte für jeden
 	Buchstaben, 1 Byte extra für den Nullterminator.
 
-	Diese Variante möchte ich "Mit Array" nennen.
+	Diese Variante möchte ich \glqq{}Mit Array\grqq{} nennen.
 	a ist ein vollwertiges Array, sein Inhalt ist les- und schreibbar.
 
-	Die Zweite Variante nenne ich "Nur Pointer".
+	Die Zweite Variante nenne ich \glqq{}Nur Pointer\grqq{}.
 	Ihre Syntax ist anders: syntaktisch deklarieren wir hier einen
 	ganz normalen Pointer.  Und das ist p auch im Hinblick auf
 	seine Größe: ein ganz normal Pointer: auf einer 32-Bit-Machine
@@ -1210,7 +1303,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Weil sein Inhalt nicht schreibbar ist, fehlt von der
 	Const Correctness her bei dieser Variante auch ein const.
 
-	Schauen wir uns dazu noch einmal etwas Code an ...
+	Schauen wir uns dazu noch einmal etwas Code an \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -1236,15 +1329,15 @@ int main() \{\\
 \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Hier definieren wir zwei Strings in der Variante "Nur Pointer",
-	beide mit dem Text "hallo".
+	Hier definieren wir zwei Strings in der Variante \glqq{}Nur Pointer\grqq{},
+	beide mit dem Text \glqq{}hallo\grqq{}.
 
 	Dann geben wir ihre Adressen aus.
-	Zur Erinnerung: "\%p" im Format-String steht für Pointer.
-	Für ihren Inhalt hätten wir "\%s" geschrieben.
+	Zur Erinnerung: \texttt{\%p} im Format-String steht für Pointer.
+	Für ihren Inhalt hätten wir \texttt{\%s} geschrieben.
 
 	Danach überschreiben wir den ersten Buchstaben von a mit
-	einem großen "X".  Schauen wir uns an, was passiert ...
+	einem großen \glqq{}X\grqq{}.  Schauen wir uns an, was passiert \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -1262,9 +1355,9 @@ int main() \{\\
     \uncover<5->{\highlight{Segmentation fault}}}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Kompilieren, ausführen, ... da sind a und b.
+	Kompilieren, ausführen, \ldots{} da sind a und b.
 
-	Wie ihr seht - sie haben dieselbe Adresse!
+	Wie Sie sehen --- sie haben dieselbe Adresse!
 
 	a und b zeigen also auf den gleichen Speicherbereich.
 	Wenn wir nun den Text hinter a verändern, ändert sich auch b.
@@ -1276,7 +1369,7 @@ int main() \{\\
 
 	Warum warnt uns der Compiler nicht?
 	Wir hatten ihn bisher nicht darum gebeten.
-	Tun wir das doch mal...
+	Tun wir das doch mal \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -1302,7 +1395,7 @@ int main() \{\\
 	Ja, wirklich.
 
 	Und da sind die Warnungen, die wir erwarten können.
-	"discards qualifiers" bedeutet: Da fehlt const.
+	\glqq{}discards qualifiers\grqq{} bedeutet: Da fehlt \texttt{const}.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1377,7 +1470,7 @@ Zwei Varianten:
 \enableintroslides{}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Schauen wir uns zuerst die Variante "Array von Arrays" an.
+	Schauen wir uns zuerst die Variante \glqq{}Array von Arrays\grqq{} an.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1451,7 +1544,7 @@ Zwei Varianten:
 
 === Variante \glqq{}Linear\grqq{} ===
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Die Variante "linear" sieht im Speicher völlig anders aus:
+	Die Variante \glqq{}linear\grqq{} sieht im Speicher völlig anders aus:
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1470,11 +1563,11 @@ Zwei Varianten:
 }
 [center]>
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	... Beide Zeilen liegen an einem Stück hintereinander
+	\ldots{} Beide Zeilen liegen an einem Stück hintereinander
 	im Speicher.
 
 	a zeigt auf das erste Element.
-	Die Ausdrücke "a[0]", "a[1]", "a[1][2]" funktionieren wie
+	Die Ausdrücke \texttt{a[0]}, \texttt{a[1]}, \texttt{a[1][2]} funktionieren wie
 	erwartet, dereferenzieren aber nicht wie erwartet.
 
 	a ist kein Doppelpointer.  Wäre er das, müsste bei a im
@@ -1499,7 +1592,7 @@ Zwei Varianten:
     \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Wir initialisieren die Matrix in einem Stück ...
+	Wir initialisieren die Matrix in einem Stück \ldots{}
 	und übergeben sie dann dan \texttt{demo\_flat}.
 
 	Auffällig ist der Paramater a dieser Funktion:
@@ -1511,7 +1604,7 @@ Zwei Varianten:
 
 === Variante \glqq{}Hybrid\grqq{} ===
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Eine dritte "hybride" Variante ergibt sich, wenn man beide
+	Eine dritte \glqq{}hybride\grqq{} Variante ergibt sich, wenn man beide
 	Varianten kombiniert.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -1574,8 +1667,8 @@ Zwei Varianten:
     \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Das ist die main()-Funktion, wie ihr sie inzwischen
-	Dutzende Male gesehen habt.
+	Das ist die main()-Funktion, wie Sie sie inzwischen
+	dutzende Male gesehen habt.
 
 	Das hier ist eine Alternative, die Zugriff auf Programmargumente
 	erlaubt.
@@ -1613,9 +1706,9 @@ Zwei Varianten:
     {}[3] software\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Kompilieren, ausführen, ... 3 Parameter.
+	Kompilieren, ausführen, \ldots{} 3 Parameter.
 
-	Die Shell hat wegen der Anführungszeichen "open" und "source"
+	Die Shell hat wegen der Anführungszeichen \glqq{}open\grqq{} und \glqq{}source\grqq{}
 	als ein Element verstanden.
 
 	Element 0 enthält den Namen des Programms, so wie es
@@ -1640,7 +1733,7 @@ Zwei Varianten:
 * Komplexe Datenstrukturen
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	... Wir haben uns nicht mit Character Encodings und Unicode
+	\ldots{} Wir haben uns nicht mit Character Encodings und Unicode
 	beschäftigt.  Für uns war Text ASCII-enkodiert.
 	Das ist nicht immer so.
 
@@ -1653,8 +1746,8 @@ Zwei Varianten:
 	hat hier keinen Platz mehr gefunden.
 
 	Auch Void- und Funktions-Pointer haben wir außen vorgelassen.
-	Beides sind einfache Themen, die ihr euch schnell selbst
-	aneignet.
+	Beides sind einfache Themen, die Sie sich schnell selbst
+	aneignen.
 
 	Auf dynamische  Speicherverwaltung wird später im Kurs noch
 	detailliert eingegangen.  Mit ihrer Hilfe lassen sich erst
@@ -1668,7 +1761,7 @@ Zwei Varianten:
 	Wir haben Grundlagen aufgebaut und einige Stolpersteine
 	umgedreht.
 
-	Was ihr unbedingt mitnehmen müsst:
+	Was Sie unbedingt mitnehmen müssen:
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1683,7 +1776,7 @@ Zwei Varianten:
 * Const Correctness bei Pointern ist \emph{keine}\\\hfill{}Geschmacksfrage
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	... sizeof(x) liefert die Größe von x in Byte.
+	\ldots{} sizeof(x) liefert die Größe von x in Byte.
 
 	Der Operator \& liefert eine Adresse, der Operator * dagegen
 	folgt einer Adresse.  Man sagt er dereferenziert.
@@ -1692,7 +1785,7 @@ Zwei Varianten:
 	Pointer-Arithmetik das zu nutze macht.
 
 	Arrays sind auch Pointer auf ihr erstes Element.
-	Ihr erinnert euch an die Formel von vorhin: a[k] = *(a + k).
+	Sie erinnern sich an die Formel von vorhin: a[k] = *(a + k).
 
 	Strings sind nullterminiert, ihre Größe wird dynamisch
 	berechnet.  Auch das haben wir uns genau angesehen.
@@ -1700,12 +1793,12 @@ Zwei Varianten:
 	Const Correctness bei Pointern ist mehr als nur Geschmack
 	sondern macht einen echten Unterschied.
 
-	Wenn ihr das was auf dieser Folie steht wirklich verstanden
-	habt, vielleicht sogar anderen erklären könnt, dann bin ich
-	stolz darauf, euch das beigebracht zu haben.
+	Wenn Sie das, was auf dieser Folie steht, wirklich verstanden
+	habem, vielleicht sogar anderen erklären können, dann bin ich
+	stolz darauf, Ihnen das beigebracht zu haben.
 
-	Eine letzte Bitte an euch: wenn ihr Code schreibt,
-	veröffentlicht ihn als Freie Software.  Für Fragen
+	Eine letzte Bitte an Sie: wenn Sie Code schreiben,
+	veröffentlichen Sie ihn als Freie Software.  Für Fragen
 	zu diesem Thema bin ich immer haben.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
