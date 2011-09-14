@@ -928,13 +928,13 @@ Pascal Strings\\
 
 	<PAUSE>
 
-	Richtig, \texttt{str - begin}.  Auch das ist wieder Pointer-Arithmetik.
+	Richtig: \texttt{str - begin}.  Auch das ist wieder Pointer-Arithmetik.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 == String API ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Die String-API möchte ich nur kurz anreißen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 \disableintroslides{}
@@ -945,18 +945,20 @@ Pascal Strings\\
 ==== String API (Auszug) ====
 {\Large
 Vergleich\\
-\uncover<2->{\ind{}\texttt{strcmp}, \texttt{strncmp}\\}
+\uncover<2->{\ind{}\texttt{strcmp}, \texttt{strncmp}, \texttt{strcasecmp}\\}
 Suche\\
 \uncover<2->{\ind{}\texttt{strstr}, \texttt{strchr}\\}
 Formatierung, Verkettung\\
 \uncover<2->{\ind{}\texttt{snprintf}\\}
 Auswertung, Analyse\\
 \uncover<2->{\ind{}\texttt{strtol}, \texttt{sscanf}\\}
-Helfer\\
+Clonen\\
 \uncover<2->{\ind{}\texttt{strdup}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Für die elementaren Operationen auf Strings sind
+	Funktionen in der C-Standard-Library vorhanden:
+	Vergleich, Suche, Formatierung, Clonen und mehr.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -974,7 +976,9 @@ Helfer\\
 ~
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Die Liste der verfügbaren Funktionen und deren
+	Anwengung ist in den Manpages \texttt{string}, \texttt{string.h},
+	\texttt{stdio.h} und \texttt{stdlib.h} beschrieben.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -992,7 +996,10 @@ Helfer\\
 * \texttt{strcpy}, \texttt{strncpy}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Ein paar Problemkandidaten möchte ich gerne mit Beispiel
+	vorstellen.  Was ihr hier seht, sind Funktionen,
+	die Sie eigentlich \emph{gar nicht} verwenden solltet.
+	Mehr dazu gleich.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1009,17 +1016,21 @@ Besser:\quad{}\texttt{s\underline{n}printf}, \texttt{vs\underline{n}printf}, \te
 ~
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Beginnen wir mit dieser Gruppe von Funktionen.
+	Buffer-Overflows sind mit Ihnen schwer bis gar nicht
+	vermeidbar.
+
+	Sehen wir uns dazu ein Beispiel an.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
-==== Beispiel \texttt{scanf} ====
+==== Beispiel \texttt{scanf} mit \texttt{\%s} ====
 {\Large{\ttfamily
 \#include <stdio.h>\\
 ~\\
 void main() \{\\
 \ind{}char text[3];\\
-\ind{}scanf(``\%s'', text);\\
+\ind{}scanf(``\%s'', text);\uncover<4->{~~~/* \highlight{Richtig: \%3s} */}\\
 \}\\
 ~\\}
 \uncover<2->{Buffer-Overflow für\\
@@ -1030,7 +1041,18 @@ void main() \{\\
 Segmentation fault}
 }}}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Sehen wir uns \texttt{scanf} mit \texttt{\%s} an.
+	\texttt{scanf} liest hier Benutzereingaben und schreibt
+	einen String in das \texttt{char}-Array \texttt{text}.
+
+	Sieht jemand ein Problem?~~<PAUSE>
+
+	Richtig: Dieser String kann länger sein, als das Array Platz hat;
+	ab einer Länge von 3 schreibt \texttt{scanf} über das Ende
+	des Arrays hinaus.  Auf meiner Maschine bringen 24 Zeichen
+	das Programm zum Absturz.
+
+	Sicher ist hier nur, \texttt{\%3s} zu verwenden.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1050,7 +1072,15 @@ Buffer-Overflow für\\
 ~
 }}}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Ein ähnliches Problem hat die \texttt{sprintf}-Familie.
+
+	Wie lang muss \texttt{error} sein, damit dieser Code knallt?~~<PAUSE>
+
+	Richtig: 249 zeichen oder mehr.
+
+	Mit s\underline{n}printf wäre das nicht passert.
+	Eigentlich muss hier aber dynamisch ausreichend Speicher
+	angefordert werden.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1063,7 +1093,10 @@ Besser:\quad{}\texttt{snprintf}\\
 ~
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Diese Funktion ist auf ihre ganz eigene Art problematisch.
+	Besser gleich \texttt{snprintf} verwenden.
+
+	Sehen wir uns ein Beispiel an.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1084,7 +1117,16 @@ strncpy(text, ``Test'', sizeof(text));}\\
 ~
 }}}}}}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Hier bitten wir \texttt{strncpy}, bis zu 5 Zeichen zu kopieren.
+	Weil \glqq{}Test\grqq{} nur vier Zeichen lang ist, läuft das glatt:
+	\texttt{strncpy} kopiert 4 Zeichen und den Nullterminator.
+
+	Wieder bitten wir um das Kopieren von bis zu 5 Zeichen,
+	bieten aber mehr Text an: \glqq{}hallo\grqq{} hat 5 Zeichen.
+	\texttt{strncpy} schreibt 5 Zeichen, aber keinen Nullterminator.
+
+	Anders mit \texttt{snprintf}: Nur 4 Zeichen werden kopiert ---
+	das fünfte Zeichen ist der Nullterminator.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1100,7 +1142,12 @@ Besser:\quad{}\texttt{strtol}, \texttt{strtoll}\\
 ~
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Kommen wir zu etwas Lustigerem.
+
+	Bei atoi und seinen Verwandten fehlt jegliche Fehlerbehandlung.
+	Warum ist mir schleierhaft.
+
+	Sehen wir uns das näher an.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1110,7 +1157,11 @@ Besser:\quad{}\texttt{strtol}, \texttt{strtoll}\\
 \texttt{atoi(``0'')}\phantom{\texttt{Hallo}}\sexyarrowrightLARGE~\,0
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	TODO
+	Die Lösung ist, \texttt{strtol} zu verwenden.
+
+	Stop.  Für diesen Code braucht man etwas Ruhe und die Manpage
+	von \texttt{strtol}.  Hier in der Vorlesung würde ich gern
+	mit anderem Stoff weitermachen.  Die Folien sind online zu finden.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1132,8 +1183,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Zu allererst sollte ich erwähnen was const eigentlich
-	tut: const verbietet Schreibzugriff auf bestimmte Variablen.
+	Zu allererst sollte ich erwähnen was \texttt{const} eigentlich
+	tut: \texttt{const} verbietet Schreibzugriff auf bestimmte Variablen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1142,8 +1193,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 ~~\temporal<2>{\underline{~~~~~}}{\underlinehighlight{const}}{\underline{~~~~~}} int \alt<3>{\underlinehighlight{const}}{\underline{~~~~~}} foo;\\~\\\phantom{<2a>}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Bei dieser Deklaration des Integers foo wäre const
-	an zwei Stellen erlaubt: links vom int und rechts vom int.
+	Bei dieser Deklaration des Integers \texttt{foo} wäre const
+	an zwei Stellen erlaubt: links vom \texttt{int} und rechts vom \texttt{int}.
 
 	Auf welcher Seite man es schreibt, ist hier Geschmacksache.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1156,8 +1207,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 ~~\uncover<3->{~<2a>~~~~~~<2b>~~~}\uncover<2->{~<1>\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Bei einfachen Pointern kommt nun eine wietere Stelle hinzu,
-	an der const stehen darf.
+	Bei einfachen Pointern kommt nun eine weitere Stelle hinzu,
+	an der \texttt{const} stehen darf.
 
 	Ich benenne diese Stellen mal eben mit \glqq{}1\grqq{}, \glqq{}2a\grqq{} und \glqq{}2b\grqq{}.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1175,10 +1226,10 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0] = \ldots{};\\}}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Steht const an Position 1 - also ganz rechts beim foo -
-	darf der Wert von foo selbst nicht mehr verändert werden.
+	Steht const an Position 1 --- also ganz rechts bei \texttt{foo} ---
+	darf der Wert von \texttt{foo} selbst nicht mehr verändert werden.
 
-	Steht const hingegen beim int so darf der Inhalt hinter foo
+	Steht const hingegen beim \texttt{int} so darf der Inhalt hinter \texttt{foo}
 	nicht geschrieben werden.
 
 	Diese beiden Fälle lassen sich auch kombinieren \ldots{}
@@ -1194,8 +1245,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     ~~~~~~~foo[0]~= \ldots{};}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Steht beim int und bei foo const, so darf weder foo selbst
-	noch der Inhalt hinter foo verändert werden.
+	Steht beim int und bei \texttt{foo} \texttt{const}, so darf weder \texttt{foo} selbst
+	noch der Inhalt hinter \texttt{foo} verändert werden.
 
 	Schauen wir uns noch ein Beispiel mit Doppelpointern an \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1215,16 +1266,16 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 
 	<PAUSE>
 
-	Richtig, ich darf foo selbst verändern.
+	Richtig, ich darf \texttt{foo} selbst verändern.
 
-	Was ich nicht verändern darf, ist der Inhalt hinter foo und
-	der Inhalt hinter dem Inhalt von foo.
+	Was ich nicht verändern darf, ist der Inhalt hinter \texttt{foo} und
+	der Inhalt hinter dem Inhalt von \texttt{foo}.
 
 	Gibt es Fragen dazu?
 
 	<PAUSE>
 
-	Ich schulde Ihnen noch eine Erklärung zu unserer Funktionen
+	Ich schulde Ihnen noch eine Erklärung zu Funktion
 	\texttt{my\_strlen} von vorhin \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
@@ -1245,19 +1296,19 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<5->{\ind{}\texttt{my\_strlen(``ABC'')} erlaubt und sicher\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Hier sehen Sie zwei verschiedene Prototypen von texttt{my\_strlen}:
-	einen mit const und einen ohne.  Wo liegt der Unterschied?
+	Hier sehen Sie zwei verschiedene Prototypen von \texttt{my\_strlen}:
+	einen mit \texttt{const} und einen ohne.  Wo liegt der Unterschied?
 
-	Aus Sicht des Compilers darf die Variante ohne const den
-	Inhalt von str verändern.  Wenn wir diese Funktion mit der
+	Aus Sicht des Compilers darf die Variante ohne \texttt{const} den
+	Inhalt von \texttt{str} verändern.  Wenn wir diese Funktion mit der
 	String-Konstante \glqq{}ABC\grqq{} aufrufen, wirft der Compiler einen Fehler.
 
 	Der Typ von String-Konstanten ist \texttt{const char *}.
-	Diese Variante von \texttt{my\_strlen} erwartet zuviel vom übergegen String:
+	Diese Variante von \texttt{my\_strlen} erwartet zuviel vom übergebenen String:
 	sie erwartet, schreiben zu dürfen.
 
-	Bei der Variante mit const darf die Funktion den Inhalt von
-	str nicht ändern.  Ein Aufruf mit der String-Konstante \glqq{}ABC\grqq{}
+	Bei der Variante mit \texttt{const} \emph{darf} die Funktion den Inhalt von
+	\texttt{str} nicht ändern.  Ein Aufruf mit der String-Konstante \glqq{}ABC\grqq{}
 	ist daher erlaubt und sicher.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -1287,21 +1338,22 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
     \uncover<8->{\ind{}Inhalt \emph{nicht} schreibbar\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Hier initialisieren wir einen String a mit \glqq{}Hallo\grqq{}.
+	Hier initialisieren wir einen String $a$ mit \glqq{}Hallo\grqq{}.
 	im Speicher belegt a dann 5 + 1 Byte, 5 Byte für jeden
 	Buchstaben, 1 Byte extra für den Nullterminator.
 
 	Diese Variante möchte ich \glqq{}Mit Array\grqq{} nennen.
-	a ist ein vollwertiges Array, sein Inhalt ist les- und schreibbar.
+	$a$ ist ein vollwertiges Array: der String in $a$ ist les- und schreibbar.
 
 	Die Zweite Variante nenne ich \glqq{}Nur Pointer\grqq{}.
 	Ihre Syntax ist anders: syntaktisch deklarieren wir hier einen
-	ganz normalen Pointer.  Und das ist p auch im Hinblick auf
+	ganz normalen Pointer $p$.  Das ist $p$ auch im Hinblick auf
 	seine Größe: ein ganz normal Pointer: auf einer 32-Bit-Machine
-	4 Byte groß.  Sein inhalt ist \emph{nicht} schreibbar.
+	4 Byte groß.  Der String hinter $p$ liegt in einem besonderem,
+	schreibgeschützten Scheichersegment und ist daher \emph{nicht} schreibbar.
 
-	Weil sein Inhalt nicht schreibbar ist, fehlt von der
-	Const Correctness her bei dieser Variante auch ein const.
+	Weil sein Inhalt nicht schreibbar ist, fehlt Aus Sicht der
+	Const Correctness bei dieser Variante auch ein \texttt{const}.
 
 	Schauen wir uns dazu noch einmal etwas Code an \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1336,7 +1388,7 @@ int main() \{\\
 	Zur Erinnerung: \texttt{\%p} im Format-String steht für Pointer.
 	Für ihren Inhalt hätten wir \texttt{\%s} geschrieben.
 
-	Danach überschreiben wir den ersten Buchstaben von a mit
+	Danach überschreiben wir den ersten Buchstaben von $a$ mit
 	einem großen \glqq{}X\grqq{}.  Schauen wir uns an, was passiert \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
@@ -1355,14 +1407,14 @@ int main() \{\\
     \uncover<5->{\highlight{Segmentation fault}}}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Kompilieren, ausführen, \ldots{} da sind a und b.
+	Kompilieren, ausführen, \ldots{} da sind $a$ und $b$.
 
 	Wie Sie sehen --- sie haben dieselbe Adresse!
 
-	a und b zeigen also auf den gleichen Speicherbereich.
-	Wenn wir nun den Text hinter a verändern, ändert sich auch b.
+	$a$ und $b$ zeigen also auf den gleichen Speicherbereich.
+	Wenn wir nun den Text hinter $a$ verändern, ändert sich auch $b$.
 
-	Aber dazu kommt es nicht: Es knallt - wir bekommen einen
+	Aber dazu kommt es nicht: Es knallt --- wir bekommen einen
 	Segmentation Fault.
 
 	Dieser Speicher ist nicht schreibbar, ich sagte es ja bereits.
@@ -1390,8 +1442,8 @@ int main() \{\\
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Compilieren wir also noch einmal.
-	-Wall und -Wextra möchte ich generell empfehlen,
-	für dieses Beispiel wird aber noch -Wwrite-strings benötigt.
+	\texttt{-Wall} und \texttt{-Wextra} möchte ich generell empfehlen,
+	für dieses Beispiel wird aber noch \texttt{-Wwrite-strings} benötigt.
 	Ja, wirklich.
 
 	Und da sind die Warnungen, die wir erwarten können.
@@ -1418,12 +1470,12 @@ int main() \{\\
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	So sah unser Code eben aus.
 
-	Hier gehört eigentlich const hin.
+	Hier gehört eigentlich \texttt{const} hin.
 
-	Wenn wir dieses const einfügen, merkt der Compiler
+	Wenn wir dieses \texttt{const} einfügen, merkt der Compiler
 	hier unten, dass wir böse Dinge tun, und verbietet uns das.
 
-	Damit wissen sie jetzt ausgezeichnet Bescheid über die
+	Damit wissen Sie jetzt ausgezeichnet Bescheid über die
 	Initialisierung von Strings.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -1455,8 +1507,8 @@ Zwei Varianten:
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Mehrdimensionale Arrays sind im Speicher entweder
-	ein Array von Arrays (deep arrays) oder linear -
-	quasi ein-dimensional - (flat arrays).
+	ein Array von Arrays (\emph{deep arrays}) oder linear ---
+	quasi ein-dimensional --- (\emph{flat arrays}).
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 [frame]>
@@ -1494,7 +1546,7 @@ Zwei Varianten:
 }
 [center]>
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Speichern wollen wir eine 2x3 Matrix, also ein Array
+	Speichern wollen wir eine $2\times3$ Matrix, also ein Array
 	mit 2 Zeilen und 3 Spalten.
 
 	Bei dieser Variante liegen beide Zeilen als je ein 1D-Array
@@ -1502,13 +1554,13 @@ Zwei Varianten:
 
 	Oben drauf setzen wir dann ein 1D-Array aus Pointern,
 	die auf die Zeilen zeigen.  Dieses Zeilen-Pointer-Array
-	ist das eigentliche Array, hier a genannt.
+	ist das eigentliche Array, hier $a$ genannt.
 
-	a[0] zeigt auf die erste Zeile, a[1] auf die zweite.
+	\texttt{a[0]} zeigt auf die erste Zeile, \texttt{a[1]} auf die zweite.
 
-	Hier unten sitzt a[1][2].
+	Hier unten sitzt \texttt{a[1][2]}.
 
-	Im Code sieht das dann so aus:
+	Im Code sieht das dann so aus: \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1530,14 +1582,14 @@ Zwei Varianten:
 	Wieder das Gerüst, dann definieren wir die zwei Zeilen
 	und dann das Zeilen-Pointer-Array.
 
-	Dieses Array d kann ich dann an eine Funktion \texttt{demo\_deep}
+	Dieses Array $d$ kann ich dann an eine Funktion \texttt{demo\_deep}
 	übergeben.
 
 	Diese Funktion tut nicht viel Sinnvolles:
 	sie verändert einfach einen der Einträge unserer Matrix.
 
 	Das const habe ich eingefügt, weil \texttt{demo\_deep} sonst erlaubt
-	wäre, die Struktur der matrix zu verändern, zum Beispiel
+	wäre, die Struktur der Matrix zu verändern, zum Beispiel
 	Zeilen der Matrix zu vertauschen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -1566,11 +1618,11 @@ Zwei Varianten:
 	\ldots{} Beide Zeilen liegen an einem Stück hintereinander
 	im Speicher.
 
-	a zeigt auf das erste Element.
+	$a$ zeigt auf das erste Element.
 	Die Ausdrücke \texttt{a[0]}, \texttt{a[1]}, \texttt{a[1][2]} funktionieren wie
 	erwartet, dereferenzieren aber nicht wie erwartet.
 
-	a ist kein Doppelpointer.  Wäre er das, müsste bei a im
+	$a$ ist kein Doppelpointer.  Wäre er das, müsste bei $a$ im
 	Speicher ein Pointer liegen.  Dort liegt aber ein Datum
 	unseren Matrix.
 
@@ -1595,10 +1647,13 @@ Zwei Varianten:
 	Wir initialisieren die Matrix in einem Stück \ldots{}
 	und übergeben sie dann dan \texttt{demo\_flat}.
 
-	Auffällig ist der Paramater a dieser Funktion:
+	Auffällig ist der Paramater $a$ dieser Funktion:
 	das ist kein Doppelpointer.  Und die 3 ist nötig,
 	damit der Code kompiliert.  Der Kompiler weiß sonst nicht,
 	wieviele Elemente er für eine Zeile überspringen muss.
+
+	Das bedeutet auch, dass wir bei dieser Variante zur Zeit der
+	Kompilierung wissen müssen, wie groß das Array sein soll.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1624,14 +1679,14 @@ Zwei Varianten:
     \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Wir initialisieren f als Flat Array wie zuvor.
+	Wir initialisieren $f$ als Flat Array wie zuvor.
 
 	Oben drauf setzen wir dann ein Zeilen-Pointer-Array,
-	das in f Zeigt.  Die Ausdrücke f[0] und f[1] liefern,
+	das in $f$ Zeigt.  Die Ausdrücke \texttt{f[0]} und \texttt{f[1]} liefern,
 	was wir dazu brauchen.
 
-	Das resultierende Array d ist mit unserer früheren
-	Funktion \texttt{demo\_deep} kompatibel, während f selbst weiterhin
+	Das resultierende Array $d$ ist mit unserer früheren
+	Funktion \texttt{demo\_deep} kompatibel, während $f$ selbst weiterhin
 	\texttt{demo\_flat} bedienen kann.
 
 	Zur Erinnerung: So sahen die Prototypen aus.
@@ -1667,26 +1722,26 @@ Zwei Varianten:
     \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Das ist die main()-Funktion, wie Sie sie inzwischen
+	Das ist die \texttt{main()}-Funktion, wie Sie sie inzwischen
 	dutzende Male gesehen habt.
 
 	Das hier ist eine Alternative, die Zugriff auf Programmargumente
 	erlaubt.
 
 	Für die, die wissen, was Overloading ist:
-	Mit Overloading hat das nichts zu tun - C unterstützt kein Overloading.
+	Mit Overloading hat das nichts zu tun --- C unterstützt kein Overloading.
 
-	argc ist die Anzahl der Parameter, die wir übergeben bekommen:
-	es ist die Anzahl der Einträge in argv.
+	\texttt{argc} ist die Anzahl der Parameter, die wir übergeben bekommen:
+	es ist die Anzahl der Einträge in \texttt{argv}.
 
 	Weil das erste Element unser Programmename ist, gibt es also
-	argc - 1 echte Parameter.
+	\texttt{argc - 1} echte Parameter.
 
 	In einer Schleife laufen wir über das Array, dass ein echtes
 	\glqq{}Deep Array\grqq{} aus Zeilen-Pointern ist.
 
-	argv[i] ist vom Typ char *, was mit Nullterminierung Strings sind.
-	Diese übergeben wir direkt an printf().
+	\texttt{argv[i]} ist vom Typ \texttt{char *}, was hier nullterminierte Strings sind.
+	Diese übergeben wir direkt an \texttt{printf()}.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -1729,8 +1784,6 @@ Zwei Varianten:
 * Der Typ \texttt{size\_t}
 * Void-Pointer
 * Funktions-Pointer
-* Dynamische Speicherverwaltung
-* Komplexe Datenstrukturen
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	\ldots{} Wir haben uns nicht mit Character Encodings und Unicode
@@ -1739,7 +1792,7 @@ Zwei Varianten:
 
 	Die dynamische Längenberechnung von Strings kann zu einem
 	Sicherheits-Problem werden, wenn man nicht sorgfältig damit
-	umgeht.  Aus das haben wir ausgeblendet.
+	umgeht.  Auch das haben wir ausgeblendet.
 
 	Der Rückgabetyp unserer Funktion \texttt{my\_strlen} hätte \texttt{size\_t}
 	sein sollen, nicht int.  Was es damit auf sich hat,
@@ -1747,18 +1800,14 @@ Zwei Varianten:
 
 	Auch Void- und Funktions-Pointer haben wir außen vorgelassen.
 	Beides sind einfache Themen, die Sie sich schnell selbst
-	aneignen.
-
-	Auf dynamische  Speicherverwaltung wird später im Kurs noch
-	detailliert eingegangen.  Mit ihrer Hilfe lassen sich erst
-	wirklich komlexe Datenstrukturen erzeugen.
+	aneignen lassen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
 == Zusammenfassung ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Wir haben aber auch viel geschafft.
-	Wir haben Grundlagen aufgebaut und einige Stolpersteine
+	Wir haben neue Grundlagen aufgebaut und einige Stolpersteine
 	umgedreht.
 
 	Was Sie unbedingt mitnehmen müssen:
@@ -1785,12 +1834,12 @@ Zwei Varianten:
 	Pointer-Arithmetik das zu nutze macht.
 
 	Arrays sind auch Pointer auf ihr erstes Element.
-	Sie erinnern sich an die Formel von vorhin: a[k] = *(a + k).
+	Sie erinnern sich an die Formel von vorhin: \texttt{a[k] = *(a + k)}.
 
 	Strings sind nullterminiert, ihre Größe wird dynamisch
 	berechnet.  Auch das haben wir uns genau angesehen.
 
-	Const Correctness bei Pointern ist mehr als nur Geschmack
+	Const Correctness bei Pointern ist mehr als nur Geschmack,
 	sondern macht einen echten Unterschied.
 
 	Wenn Sie das, was auf dieser Folie steht, wirklich verstanden
