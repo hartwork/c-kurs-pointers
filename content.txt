@@ -983,7 +983,7 @@ Clonen\\
 
 
 \disableintroslides{}
-\subsection{Problemfälle}
+\subsection{Problemkandidaten}
 \enableintroslides{}
 
 ==== Bitte vermeiden: ====
@@ -1154,7 +1154,57 @@ Besser:\quad{}\texttt{strtol}, \texttt{strtoll}\\
 ==== Beispiel \texttt{atoi} ====
 {\LARGE
 \texttt{atoi(``Hallo'')}\phantom{\texttt{0}}\sexyarrowrightLARGE~\,0\\[1ex]
-\texttt{atoi(``0'')}\phantom{\texttt{Hallo}}\sexyarrowrightLARGE~\,0
+\texttt{atoi(``0'')}\phantom{\texttt{Hallo}}\sexyarrowrightLARGE~\,0\\
+\uncover<2->{~\\
+Problem:\\
+\ind{}$\texttt{atoi(\emph{s})} = 0$~~\sexyarrowrightLARGE~\,$\texttt{\emph{s}} =\,?$\\
+~\\
+\uncover<3->{Idee:\\[1ex]
+\ind{}Vorher $s$ mit ``0'' vergleichen?
+}}}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Sowohl aus \glqq{}hallo\grqq{} als auch aus \glqq{}0\grqq{} macht
+	\texttt{atoi} 0.  Wir wissen also nur, dass die Konvertierung
+	erfolgreich war, wenn das Ergebnis \emph{nicht} 0 ist.
+
+	Wenn die Rückgabe 0 ist, wissen wir nichts.
+
+	Lässt sich dieses Problem umgehen?
+
+	<PAUSE>
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Beispiel \texttt{atoi} ====
+{\LARGE
+\begin{tabular}{lcr}
+	\texttt{atoi(``2'')}      & \sexyarrowrightLARGE{} & 2 \\
+	\texttt{atoi(``0002'')}   & \sexyarrowrightLARGE{} & 2 \\
+	\texttt{atoi(``+2'')}     & \sexyarrowrightLARGE{} & 2 \\
+	\texttt{atoi(``~~2'')}    & \sexyarrowrightLARGE{} & 2 \\
+	\texttt{atoi(``2Hallo'')} & \sexyarrowrightLARGE{} & 2 \\
+\end{tabular}
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Nicht wirklich.  Was für 2 gilt, gilt auch für 0.
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Ausweg \texttt{strtol} ====
+{\Large\ttfamily
+\#include <stdlib.h>\\
+\#include <string.h>\\
+~\\
+int str\_to\_long(const char * text,\\
+\ind{}\ind{}long * output) \{\\
+\ind{}char * end;\\
+\ind{}long number = \highlight{strtol}(text, \&end, 10);\\
+\ind{}if ((end != text) \&\& (*end == `$\backslash$0')) \{\\
+\ind{}\ind{}*output = number;\\
+\ind{}\ind{}return 1;\\
+\ind{}\}\\
+\ind{}return 0;\\
+\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Die Lösung ist, \texttt{strtol} zu verwenden.
