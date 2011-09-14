@@ -159,7 +159,6 @@ Pointer sind Grundlage für:
 	vorstellen:
 		Was ist das Konzept?
 		Wie lautet die Syntax?
-		Wie ist der Bezug zum Arbeitsspeicher?
 
 	Danach möchte unter Verwendung von Pointern Call by Reference
 	nachbauen, also Funktionen erlauben, ausgewählten Variablen der
@@ -234,7 +233,7 @@ Was ist ein \glqq{}Pointer\grqq{}?
 	die eine Adresse speichert.  Diese Mehrdeutigkeit ist gar nichts
 	wirklich Neues: Das Wort \glqq{}Integer\grqq{} verwenden wir ganz
 	selbstverständlich zum einen für ganze Zahlen --- sagen wir die 3 ---
-	und zum anderen für Variablen die ganze Zahlen speichern:
+	und zum anderen für Variablen, die ganze Zahlen speichern:
 	wir sagen \glqq{}$i$ ist ein Integer\grqq{}.
 
 	\glqq{}Pointer\grqq{} meint also eine Adresse oder eine Variable,
@@ -349,7 +348,7 @@ Was ist ein \glqq{}Pointer\grqq{}?
 	Besonders für die Mathematiker unter Ihnen:
 	Diese beiden Operatoren sind komplementär.
 	Wenn ich nach der Adresse von $x$ frage und dann dieser Adresse
-	folge arbeite ich wieder mit $x$ selbst --- und anders herum.
+	folge, arbeite ich wieder mit $x$ selbst --- und anders herum.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -363,7 +362,7 @@ Pointer zeigen auf typisierte Daten:\\[1ex]
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Pointer zeigen auf typisierte Daten.
 	Es gibt einen Unterschied zwischen Pointern auf \texttt{int}s
-	und Pointern auch \texttt{char}s.  Diese Unterscheidung ist die
+	und Pointern auf \texttt{char}s.  Diese Unterscheidung ist die
 	Grundlage für Pointer-Arithmetik --- dazu später mehr.
 
 	Zuvor möchte ich Ihnen zeigen, wie man mithilfe von Pointern
@@ -408,8 +407,7 @@ int main() \{\\
 	Übergeben wir $i$ nun an eine Funktion \texttt{by\_value} und
 	eine Funktion \texttt{by\_reference}.
 
-	\texttt{by\_value} verändert Paramater $x$, arbeitet somit auf
-	einem kopierten Wert von $i$.
+	\texttt{by\_value} verändert Paramater $x$, einer Kopie von $i$.
 
 	\texttt{by\_reference} dagegen schreibt in den Speicher hinter
 	der kopierten Adresse von \texttt{\&i} und verändert
@@ -654,7 +652,7 @@ int main() \{\\
 
 	Vermeiden lässt sich das hier mithilfe des \texttt{sizeof}-Operators.
 	\texttt{sizeof} erkennt zur Compilezeit, wieviele Byte Speicher sein
-	Argument belegt.  Auf einer 32-Bit-Machine belegt das Array
+	Argument belegt.  Auf einer 32-Bit-x86-Machine belegt das Array
 	\texttt{primes} 20 Byte, ein \texttt{int} belegt 4 Byte.
 	20 geteilt durch 4 sind 5.
 
@@ -740,8 +738,8 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 	Des Weiteren kann \texttt{sizeof} auch die Größe von Typen bestimmen:
 	wieviele Byte Speicher wird Typ \texttt{xy} belegen.
 
-	\texttt{sizeof} kann noch ein bisschen mehr, aber weitere Details
-	sind im Augenblick nicht wichtig.
+	\texttt{sizeof} kann noch ein bisschen mehr, aber das soll
+	uns hier reichen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -750,7 +748,7 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 	Kommen wir nun zu Pointer-Arithmetik, die wir vorhin
 	bereits mehrfach verwendet haben.
 
-	Mit Pointern kann man Rechnen, daher Arithmetik.
+	Mit Pointern kann man rechnen, daher Arithmetik.
 
 	Beim Array-Zugriff passiert das automatisch.
 	Aber was passiert da eigentlich genau?
@@ -776,7 +774,7 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Angenommen wir haben zwei Arrays: \texttt{numbers} und \texttt{text}.
-	Eins von denen ist ein String, aber das stört nicht weiter.
+	Eines von beiden ist auch ein String, aber das stört nicht weiter.
 
 	Ein paar Dinge müssen dann gelten:
 	%
@@ -794,7 +792,7 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 	\vspace*{-1ex}%
 	%
 	Gibt es da nicht ein Problem - kann das funktionieren?
-	Ich geb die Frage mal an Sie weiter: kann das funktionieren?~~<PAUSE>
+	Ich geb die Frage mal an Sie weiter: Kann das funktionieren?~~<PAUSE>
 
 	Für die Operatoren Plus und Minus auf Pointern folgt:
 	Die Sprungweite variiert mit dem Typen.
@@ -829,14 +827,15 @@ Pascal Strings\\
 	Das besondere an ihnen ist, dass Sie Ihre Länge verraten.
 
 	In der programmiersprache Pascal sieht der String \glqq{}ABC\grqq{}
-	so aus: 4 Byte, ein Byte für die Länge --- 3 --- gefolgt von
+	so aus: 4 Byte, ein Byte für die Länge --- 3 --- am Anfang gefolgt von
 	den ASCII-Werten für die Großbuchstaben \glqq{}A\grqq{}, \glqq{}B\grqq{} und \glqq{}C\grqq{}.
 
 	In C wird das anders gelöst.  Aus \glqq{}ABC\grqq{} macht der Compiler
 	die ASCII-Werte von \glqq{}A\grqq{}, \glqq{}B\grqq{} und \glqq{}C\grqq{}
-	gefolgt von 0, genannt Nullterminator.
+	\emph{gefolgt} von Null, dem Nullterminator.  Diese Null markiert
+	das Ende des Strings.
 
-	Frage an Sie: Was fallen Ihnen für diese Varianten an
+	Frage an Sie: Was fällt Ihnen für diese Varianten an
 	Vor- und Nachteilen ein?~~<PAUSE>
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -861,13 +860,13 @@ Pascal Strings\\
 	dass wir die Zahl Null nicht in einen String schreiben dürfen:
 
 	Dieser String - \glqq{}012\grqq{} - wird ersetzt durch 48, 49, 50, 0.
-	Der ASCII-Wert des Zeichens \glqq{}0\grqq{} ist 48.
+	Der ASCII-Wert des \emph{Zeichens} \glqq{}0\grqq{} ist 48.
 
 	Künstlich den ASCII-Wert Null einfügen können wir auch:
 	Aus 0, 1, 2, Backslash 0 wird 48, 49, 50, 0 und nochmal 0.
 
 	Die Länge eines Strings müssen wir nicht per Hand berechnen.
-	Das macht die Funktion \glqq{}strlen\grqq{} aus \texttt{string.h} für uns.
+	Das macht die Funktion  \texttt{strlen()} aus \texttt{string.h} für uns.
 
 	\texttt{strlen} von \glqq{}ABC$\backslash$0$\backslash$0\grqq{} liefert den Wert 3.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -959,7 +958,7 @@ Clonen\\
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Die Liste der verfügbaren Funktionen und deren
-	Anwengung ist in den Manpages \texttt{string}, \texttt{string.h},
+	Anwendung ist in den Manpages \texttt{string}, \texttt{string.h},
 	\texttt{stdio.h} und \texttt{stdlib.h} beschrieben.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
@@ -979,7 +978,7 @@ Clonen\\
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Ein paar Problemkandidaten möchte ich gerne mit Beispiel
-	vorstellen.  Was ihr hier seht, sind Funktionen,
+	vorstellen.  Was Sie hier sehen, sind Funktionen,
 	die Sie eigentlich \emph{gar nicht} verwenden solltet.
 	Mehr dazu gleich.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1034,7 +1033,7 @@ Segmentation fault}
 	des Arrays hinaus.  Auf meiner Maschine bringen 24 Zeichen
 	das Programm zum Absturz.
 
-	Sicher ist hier nur, \texttt{\%3s} zu verwenden.
+	Sicher ist hier, statt \texttt{\%s} das explizite \texttt{\%3s} zu verwenden.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1104,7 +1103,7 @@ strncpy(text, ``Test'', sizeof(text));}\\
 	\texttt{strncpy} kopiert 4 Zeichen und den Nullterminator.
 
 	Wieder bitten wir um das Kopieren von bis zu 5 Zeichen,
-	bieten aber mehr Text an: \glqq{}hallo\grqq{} hat 5 Zeichen.
+	bieten aber mehr Text an: \glqq{}Hallo\grqq{} hat 5 Zeichen.
 	\texttt{strncpy} schreibt 5 Zeichen, aber keinen Nullterminator.
 
 	Anders mit \texttt{snprintf}: Nur 4 Zeichen werden kopiert ---
@@ -1145,15 +1144,19 @@ Problem:\\
 \ind{}Vorher $s$ mit ``0'' vergleichen?
 }}}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Sowohl aus \glqq{}hallo\grqq{} als auch aus \glqq{}0\grqq{} macht
-	\texttt{atoi} 0.  Wir wissen also nur, dass die Konvertierung
+	Sowohl aus \glqq{}Hallo\grqq{} als auch aus dem String
+	\glqq{}0\grqq{} extrahiert \texttt{atoi} den Wert 0.
+	Wir wissen also nur, dass die Konvertierung
 	erfolgreich war, wenn das Ergebnis \emph{nicht} 0 ist.
 
 	Wenn die Rückgabe 0 ist, wissen wir nichts.
 
-	Lässt sich dieses Problem umgehen?
+	Frage an Sie: lässt sich dieses Problem umgehen?
 
 	<PAUSE>
+
+	Ja, wir könnten vorher mit \glqq{}0\grqq{} vergleichen.
+	Wir müssten allerdings noch deutlich mehr Fälle abdecken:
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1168,7 +1171,11 @@ Problem:\\
 \end{tabular}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Nicht wirklich.  Was für 2 gilt, gilt auch für 0.
+	Aus all diesen Strings extrahiert \texttt{atoi} den Wert 2.
+
+	Was für 2 gilt, gilt auch für 0.
+
+	Überzeugt Sie das?~~<PAUSE>
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1193,7 +1200,7 @@ int str\_to\_long(const char * text,\\
 
 	Stop.  Für diesen Code braucht man etwas Ruhe und die Manpage
 	von \texttt{strtol}.  Hier in der Vorlesung würde ich gern
-	mit anderem Stoff weitermachen.  Die Folien sind online zu finden.
+	mit anderem Stoff weitermachen.  Meine Folien sind auch online zu finden.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1215,8 +1222,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Zu allererst sollte ich erwähnen was \texttt{const} eigentlich
-	tut: \texttt{const} verbietet Schreibzugriff auf bestimmte Variablen.
+	Zu allererst sollte ich erwähnen, was \texttt{const} eigentlich
+	tut: \texttt{const} verbietet Schreibzugriff auf ausgewählte Variablen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1239,7 +1246,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 ~~\uncover<3->{~<2a>~~~~~~<2b>~~~}\uncover<2->{~<1>\\}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Bei einfachen Pointern kommt nun eine weitere Stelle hinzu,
+	Bei Pointern --- einfachen Pointern --- kommt nun eine weitere Stelle hinzu,
 	an der \texttt{const} stehen darf.
 
 	Ich benenne diese Stellen mal eben mit \glqq{}1\grqq{}, \glqq{}2a\grqq{} und \glqq{}2b\grqq{}.
@@ -1261,8 +1268,8 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	Steht const an Position 1 --- also ganz rechts bei \texttt{foo} ---
 	darf der Wert von \texttt{foo} selbst nicht mehr verändert werden.
 
-	Steht const hingegen beim \texttt{int} so darf der Inhalt hinter \texttt{foo}
-	nicht geschrieben werden.
+	Steht const hingegen beim \texttt{int} so darf der Inhalt \emph{hinter} \texttt{foo}
+	nicht verändert werden.
 
 	Diese beiden Fälle lassen sich auch kombinieren \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1337,7 +1344,7 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 
 	Der Typ von String-Konstanten ist \texttt{const char *}.
 	Diese Variante von \texttt{my\_strlen} erwartet zuviel vom übergebenen String:
-	sie erwartet, schreiben zu dürfen.
+	sie erwartet, den String verändern zu dürfen.
 
 	Bei der Variante mit \texttt{const} \emph{darf} die Funktion den Inhalt von
 	\texttt{str} nicht ändern.  Ein Aufruf mit der String-Konstante \glqq{}ABC\grqq{}
@@ -1371,20 +1378,20 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Hier initialisieren wir einen String $a$ mit \glqq{}Hallo\grqq{}.
-	im Speicher belegt a dann 5 + 1 Byte, 5 Byte für jeden
+	Im Speicher belegt $a$ dann 5 + 1 Byte, 5 Byte für jeden
 	Buchstaben, 1 Byte extra für den Nullterminator.
 
 	Diese Variante möchte ich \glqq{}Mit Array\grqq{} nennen.
 	$a$ ist ein vollwertiges Array: der String in $a$ ist les- und schreibbar.
 
-	Die Zweite Variante nenne ich \glqq{}Nur Pointer\grqq{}.
+	Die zweite Variante nenne ich \glqq{}Nur Pointer\grqq{}.
 	Ihre Syntax ist anders: wir deklarieren hier einen
 	ganz normalen Pointer $p$.  Das ist $p$ auch im Hinblick auf
-	seine Größe: ein ganz normaler Pointer: auf einer amd64-Machine
+	seine Größe --- ein ganz normaler Pointer: auf einer amd64-Machine
 	8 Byte groß.  Der String hinter $p$ liegt in einem besonderem,
-	schreibgeschützten Scheichersegment und ist daher \emph{nicht} schreibbar.
+	schreibgeschützten Speichersegment und ist daher \emph{nicht} schreibbar.
 
-	Weil sein Inhalt nicht schreibbar ist, fehlt Aus Sicht der
+	Weil sein Inhalt nicht schreibbar ist, fehlt aus Sicht der
 	Const Correctness bei dieser Variante auch ein \texttt{const}.
 
 	Schauen wir uns dazu noch einmal etwas Code an \ldots{}
@@ -1418,7 +1425,7 @@ int main() \{\\
 
 	Dann geben wir ihre Adressen aus.
 	Zur Erinnerung: \texttt{\%p} im Format-String steht für Pointer.
-	Für ihren Inhalt hätten wir \texttt{\%s} geschrieben.
+	Für ihren Inhalt hätten wir stattdessen \texttt{\%s} geschrieben.
 
 	Danach überschreiben wir den ersten Buchstaben von $a$ mit
 	einem großen \glqq{}X\grqq{}.  Schauen wir uns an, was passiert \ldots{}
@@ -1453,7 +1460,7 @@ int main() \{\\
 
 	Warum warnt uns der Compiler nicht?
 	Wir hatten ihn bisher nicht darum gebeten.
-	Tun wir das doch mal \ldots{}
+	Holen wir das nach \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -1518,7 +1525,7 @@ int main() \{\\
 	gibt es in C zwei Varianten, die sich stark unterscheiden.
 
 	Wenn man über diesen Unterschied stolpert, steht man relativ
-	im Dunklen: Zu diesem Thema schweigen tielweise auch dickere
+	im Dunkeln: Zu diesem Thema schweigen tielweise auch dickere
 	C-Bücher.  Im Internet dazu etwas zu finden, ist auch nicht
 	einfach.
 
@@ -1540,7 +1547,7 @@ Zwei Varianten:
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Mehrdimensionale Arrays sind im Speicher entweder
 	ein Array von Arrays (\emph{deep arrays}) oder linear ---
-	quasi ein-dimensional --- (\emph{flat arrays}).
+	quasi ein-dimensional (\emph{flat arrays}).
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 [frame]>
@@ -1652,7 +1659,7 @@ Zwei Varianten:
 
 	$a$ zeigt auf das erste Element.
 	Die Ausdrücke \texttt{a[0]}, \texttt{a[1]}, \texttt{a[1][2]} funktionieren wie
-	erwartet, dereferenzieren aber nicht wie erwartet.
+	erwartet, dereferenzieren aber anders als erwartet.
 
 	$a$ ist kein Doppelpointer.  Wäre er das, müsste bei $a$ im
 	Speicher ein Pointer liegen.  Dort liegt aber ein Datum
@@ -1677,15 +1684,16 @@ Zwei Varianten:
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Wir initialisieren die Matrix in einem Stück \ldots{}
-	und übergeben sie dann dan \texttt{demo\_flat}.
+	und übergeben sie dann an \texttt{demo\_flat}.
 
 	Auffällig ist der Paramater $a$ dieser Funktion:
 	das ist kein Doppelpointer.  Und die 3 ist nötig,
-	damit der Code kompiliert.  Der Kompiler weiß sonst nicht,
-	wieviele Elemente er für eine Zeile überspringen muss.
+	damit der Code kompiliert.  Der Compiler weiß sonst nicht,
+	wieviele Elemente er je Zeile springen muss.
 
 	Das bedeutet auch, dass wir bei dieser Variante zur Zeit der
-	Kompilierung wissen müssen, wie groß das Array sein soll.
+	Kompilierung wissen müssen, wie groß das Array sein soll:
+	Das kann ein Ausschlusskriterium für diese Variante sein.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1722,9 +1730,6 @@ Zwei Varianten:
 	\texttt{demo\_flat} bedienen kann.
 
 	Zur Erinnerung: So sahen die Prototypen aus.
-
-	Fragen hierzu würde ich aus Zeitgründen gern erst am Ende
-	des Vortrags oder nach dem Vortrag klären.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -1757,11 +1762,8 @@ Zwei Varianten:
 	Das ist die \texttt{main()}-Funktion, wie Sie sie inzwischen
 	dutzende Male gesehen habt.
 
-	Das hier ist eine Alternative, die Zugriff auf Programmargumente
+	Das hier ist die Variante, die Zugriff auf Programmargumente
 	erlaubt.
-
-	Für die, die wissen, was Overloading ist:
-	Mit Overloading hat das nichts zu tun --- C unterstützt kein Overloading.
 
 	\texttt{argc} ist die Anzahl der Parameter, die wir übergeben bekommen:
 	es ist die Anzahl der Einträge in \texttt{argv}.
@@ -1769,7 +1771,7 @@ Zwei Varianten:
 	Weil das erste Element unser Programmename ist, gibt es also
 	\texttt{argc - 1} echte Parameter.
 
-	In einer Schleife laufen wir über das Array, dass ein echtes
+	In einer Schleife laufen wir über das Array, das ein echtes
 	\glqq{}Deep Array\grqq{} aus Zeilen-Pointern ist.
 
 	\texttt{argv[i]} ist vom Typ \texttt{char *}, was hier nullterminierte Strings sind.
@@ -1824,13 +1826,13 @@ Zwei Varianten:
 
 	Die dynamische Längenberechnung von Strings kann zu einem
 	Sicherheits-Problem werden, wenn man nicht sorgfältig damit
-	umgeht.  Auch das haben wir ausgeblendet.
+	umgeht.  Auch das habe ich ausgeblendet.
 
 	Der Rückgabetyp unserer Funktion \texttt{my\_strlen} hätte \texttt{size\_t}
 	sein sollen, nicht int.  Was es damit auf sich hat,
 	hat hier keinen Platz mehr gefunden.
 
-	Auch Void- und Funktions-Pointer haben wir außen vorgelassen.
+	Auch Void- und Funktions-Pointer habe ich außen vor gelassen.
 	Beides sind einfache Themen, die Sie sich schnell selbst
 	aneignen lassen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1862,7 +1864,7 @@ Zwei Varianten:
 	Der Operator \& liefert eine Adresse, der Operator * dagegen
 	folgt einer Adresse.  Man sagt er dereferenziert.
 
-	Pointer sind typisiert.  Wir haben gesehen, wie sich die
+	Pointer sind typisiert.  Wir haben gesehen, wie sich
 	Pointer-Arithmetik das zu nutze macht.
 
 	Arrays sind auch Pointer auf ihr erstes Element.
@@ -1875,7 +1877,7 @@ Zwei Varianten:
 	sondern macht einen echten Unterschied.
 
 	Wenn Sie das, was auf dieser Folie steht, wirklich verstanden
-	habem, vielleicht sogar anderen erklären können, dann bin ich
+	haben --- vielleicht sogar anderen erklären können --- dann bin ich
 	stolz darauf, Ihnen das beigebracht zu haben.
 
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1887,7 +1889,7 @@ Veröffentlichen Sie Ihren Code\\[1ex]
 als Freie Software.
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Eine letzte Bitte an Sie: veröffentlichen Sie den Code,
+	Eine letzte Bitte an Sie: Veröffentlichen Sie den Code,
 	den Sie schreiben, als Freie Software.  Für Fragen
 	zu diesem Thema bin ich immer zu haben.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1906,7 +1908,7 @@ Zeit für Ihre Fragen!\\
 [center]>
 \vspace*{-4ex}
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Damit bedanke ich mich für eure Aufmerksamkeit.
+	Ich danke Ihnen für die Aufmerksamkeit.
 
 	Zeit für Ihre Fragen!
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
