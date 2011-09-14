@@ -339,7 +339,7 @@ Was ist ein \glqq{}Pointer\grqq{}?
 {\LARGE
 *$\,$\uncover<1->{Operator \texttt{\&} liefert eine Adresse}
 *$\,$\uncover<2->{Operator \texttt{*} folgt einer Adresse\\\ind{}(er \emph{dereferenziert})}
-*$\,$\uncover<3->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) = x}}
+*$\,$\uncover<3->{\texttt{\&} und \texttt{*} sind komplementär; es gilt:\\\ind{}\texttt{*(\&x) = x = \&(*x)}}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Operator \& liefert eine Adresse.
@@ -349,7 +349,7 @@ Was ist ein \glqq{}Pointer\grqq{}?
 	Besonders für die Mathematiker unter Ihnen:
 	Diese beiden Operatoren sind komplementär.
 	Wenn ich nach der Adresse von $x$ frage und dann dieser Adresse
-	folge arbeite ich wieder mit $x$ selbst.
+	folge arbeite ich wieder mit $x$ selbst --- und anders herum.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -835,6 +835,9 @@ Pascal Strings\\
 	In C wird das anders gelöst.  Aus \glqq{}ABC\grqq{} macht der Compiler
 	die ASCII-Werte von \glqq{}A\grqq{}, \glqq{}B\grqq{} und \glqq{}C\grqq{}
 	gefolgt von 0, genannt Nullterminator.
+
+	Frage an Sie: Was fallen Ihnen für diese Varianten an
+	Vor- und Nachteilen ein?~~<PAUSE>
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
