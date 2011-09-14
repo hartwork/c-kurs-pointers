@@ -584,7 +584,7 @@ SYNOPSIS\\
 ~\\
 \uncover<2->{void dump(const int * data, int count) \{\\
 ~~\uncover<3->{int i = 0;\\
-~~for (; i < count; ++i) \{\\
+~~for (; i < count; i++) \{\\
 ~~~~\uncover<4->{printf(``Field \%d: \%d$\backslash$n'', i + 1, \alt<4>{\highlight{*(data + i)}}{\alt<5>{\highlight{data[i]}}{data[i]}});}\\
 ~~\}}\\
 \}}\\
@@ -624,7 +624,7 @@ int main() \{\\
 ~\\
 void dump(const int * data, int count) \{\\
 ~~int i = 0;\\
-~~for (; i < count; ++i) \{\\
+~~for (; i < count; i++) \{\\
 ~~~~printf(``Field \%d: \%d$\backslash$n'', i + 1, \alt<1>{\highlight{data[i]}}{data[i]});\\
 ~~\}\\
 \}\\
@@ -658,7 +658,7 @@ int main() \{\\
 ~\\
 void dump(const int * data, int count) \{\\
 ~~int i = 0;\\
-~~for (; i < count; ++i) \{\\
+~~for (; i < count; i++) \{\\
 ~~~~printf(``Field \%d: \%d$\backslash$n'', i + 1, \alt<0| handout:1>{\highlight{data[i]}}{data[i]});\\
 ~~\}\\
 \}\\
@@ -1660,7 +1660,7 @@ Zwei Varianten:
     int main(\only<2->{int argc, char ** argv}) \{\\
     \uncover<4->{~~int i = 0;\\}
     \uncover<3->{~~printf(``\%d parameters$\backslash$n'', argc - 1);\\}
-    \uncover<4->{~~for (; i < argc; ++i) \{\\
+    \uncover<4->{~~for (; i < argc; i++) \{\\
     \uncover<5->{~~~~printf(``[\%d] \%s$\backslash$n'', i, argv[i]);\\}
     ~~\}\\}
     ~~return 0;\\
