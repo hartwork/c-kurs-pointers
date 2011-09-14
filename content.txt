@@ -84,7 +84,7 @@
 	Ganz wichtig zur Vorlesung:
 	Bitte unterbrechen Sie mich, wenn Verständnisfragen auftauchen.
 	Das fördert die Lebendigkeit dieser Vorlesung und trägt dazu bei,
-	das all am Ball bleiben, auch wenn es mal etwas theoretischer wird.
+	dass alle am Ball bleiben, auch wenn es mal etwas theoretischer wird.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -153,7 +153,7 @@ Pointer sind Grundlage für:
 \tocslide{%
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Und weil in C nichts ohne Pointer geht, werde ich neben
-	Array und Strings auch Pointer selbst in Detail beleuchten.
+	Arrays und Strings auch Pointer selbst in Detail beleuchten.
 
 	In \glqq{}Hello Pointer\grqq{} möchte ich Pointer an einem Minimalbeispiel
 	vorstellen:
@@ -217,27 +217,6 @@ Was ist ein \glqq{}Pointer\grqq{}?
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Also was ist ein \glqq{}Pointer\grqq{}?
-
-	Um diese Frage zu benantworten, möchte
-	ich zuvor definieren, was eine Adresse ist.
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-==== ====
-{\LARGE
-Eine \glqq{}Adresse\grqq{} ist die\\
-\highlight{Beschreibung der Lage eines Ortes}\\
-~\\
-Zum Beispiel:
-* \glqq{}Im Kühlschrank ganz oben, links\grqq{}
-* \glqq{}Speicherzelle 0xbfa3ad8c im RAM\grqq{}
-}
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Eine Adresse beschreibt die Lage eines Ortes.
-	Im echten Leben könnte das im Kühlschrank oben links sein,
-	im Computer eine bestimmte Speicherzelle.
-
-	Nun zum Begriff \glqq{}Pointer\grqq{}.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -265,7 +244,7 @@ Zum Beispiel:
 
 == Hello Pointer ==
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Hello Pointer - lasst uns dazu etwas Code ansehen.
+	Hello Pointer - lassen Sie uns dazu etwas Code ansehen.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 \disableintroslides{}
@@ -291,8 +270,8 @@ Zum Beispiel:
     \}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Fangen wir an mit einem Gerüst, dass Ihnen inzwischen
-	sehr bekannt vorkommen wollte.
+	Beginnen wir mit einem Gerüst, dass Ihnen inzwischen
+	sehr bekannt vorkommen sollte.
 
 	Wir definieren einen Integer $i$ --- bisher nichts Neues.
 
@@ -310,7 +289,7 @@ Zum Beispiel:
 	Als Letztes fügen wir noch ein paar \text{printf()}s ein,
 	um die Werte von $i$ und $p$ auszugeben.
 
-	Lasst uns das doch mal ausführen \ldots{}
+	Lassen Sie uns das einmal ausführen \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -334,20 +313,20 @@ Zum Beispiel:
 
 	Dann ausführen \ldots{}
 
-	$i$ ist 3 --- so wie wir es initialisiert hatten --- und $p$
+	Integer $i$ ist 3 --- so wie wir es initialisiert hatten --- und Pointer $p$
 	zeigt auf $i$, das an Adresse \glqq{}bfa und so weiter\grqq{} liegt.
 	Nebenbei: Diese Adresse kann bei jeden Aufruf verschieden sein.
 
 	Zur Erinnerung: Dann kam \texttt{*p = 4;}.
 
 	Weil der *-Operator der Adresse in $p$ folgt, landet die 4 in $i$.
-	$p$ selbst bleibt unverändert.
+	Der Pointer $p$ selbst bleibt unverändert.
 
 	Dann kam \texttt{p = 5;}.
 
 	Diesmal wird $p$ selbst verändert: $p$ zeigt jetzt auf Adresse 5.
 
-	Lasst mich das kurz zusammenfassen \ldots{}
+	Lassen Sie mich das kurz zusammenfassen \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -482,10 +461,10 @@ int main() \{\\
 * $\,$\uncover<2->{Call by Reference \emph{von} Pointern}
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	\ldots{} mehrdimensionale Arrays oder, wenn Pointer selbst
+	\ldots{} mehrdimensionale Arrays oder wenn Pointer selbst
 	mittels Call by Reference verändert werden sollen.
 
-	Eine Funktion, die Sie selbst brauchen werden, macht
+	Eine Funktion, die Sie selbst verwenden werden, macht
 	Gebrauch davon: \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
@@ -598,7 +577,7 @@ int main() \{\\
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Dieses Gerüst kennen Sie schon.
 
-	Hier definiere ich eine Funktion \texttt{dump} die Daten ausgeben soll.
+	Hier definiere ich eine Funktion \texttt{dump}, die Daten ausgeben soll.
 	Die Daten sind Integer, die im Speicher direkt
 	hintereinanderliegen: ein Array von \texttt{int}s.
 
@@ -608,8 +587,8 @@ int main() \{\\
 	Was ich jetzt machen kann, ist, mit einer simplen \texttt{for}-Schleife
 	über die Daten iterieren und jedes Datum einzeln ausgeben.
 
-	An den jeweiligen Wert gelangen wir, indem wir auf die
-	Basisadresse \texttt{data} $i$ drauf addieren und dann der
+	An den jeweiligen Wert gelangen wir, indem wir zu der
+	Basisadresse \texttt{data} den Index $i$ addieren und dann der
 	resultierenden Adresse folgen.
 
 	Sind Sie einverstanden, dass das so funktioniert?
@@ -683,7 +662,7 @@ int main() \{\\
 	\texttt{primes} anhängen, ohne den Aufruf von \texttt{dump()}
 	anpassen zu müssen.
 
-	Lasst mich das eben zusammenfassen \ldots{}
+	Lassen Sie mich das eben zusammenfassen \ldots{}
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -713,7 +692,7 @@ Array~\,=\,~Pointer auf das erste Element
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Ein Array ist auch ein Pointer auf sein erstes Element.
 	Mit dieser Adresse können wir auch direkt arbeiten,
-	zum Beispiel darauf addieren.  Mehr dazu später.
+	konkret: damit rechnen.  Mehr dazu später.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
@@ -726,7 +705,7 @@ Array~\,=\,~Pointer auf das erste Element
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Die Syntax mit den eckigen Klammern ist eine syntaktische
 	Abkürzung.  Eigentlich wird die Adresse des ersten Elements
-	genommen, darauf addiert und dann der resultierenden
+	gelesen, der Index $k$ addiert und dann der resultierenden
 	Adresse gefolgt.
 
 	Array-Zugriff ist also auch dereferenzieren!
@@ -758,7 +737,7 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 [center]>
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Desweiteren kann \texttt{sizeof} auch die Größe von Typen bestimmen:
+	Des Weiteren kann \texttt{sizeof} auch die Größe von Typen bestimmen:
 	wieviele Byte Speicher wird Typ \texttt{xy} belegen.
 
 	\texttt{sizeof} kann noch ein bisschen mehr, aber weitere Details
@@ -820,8 +799,8 @@ Von \texttt{\emph{type}}-Instanzen belegter Speicher in Byte}
 	Für die Operatoren Plus und Minus auf Pointern folgt:
 	Die Sprungweite variiert mit dem Typen.
 	Auf einer 32-Bit-Machine springt \texttt{numbers + 1}
-	4 Byte wegen $\texttt{sizeof(int)} = 4$, aber \texttt{text + 1} springt
-	nur 1 Byte weiter wegen $\texttt{sizeof(char)} = 1$.
+	vier Byte wegen $\texttt{sizeof(int)} = 4$, aber \texttt{text + 1} springt
+	nur ein Byte weiter wegen $\texttt{sizeof(char)} = 1$.
 	Das ist der Grund, warum \texttt{int *} und \texttt{char *} nicht das
 	Gleiche sind.  Der Compiler braucht diese Information für Pointer-Arithmetik.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -868,7 +847,7 @@ Pascal Strings\\
     \uncover<7->{{\ttfamily
         \#include <string.h>\\
         ...\\
-        strlen(``ABC'');\\[1ex]
+        strlen(``ABC$\backslash$0$\backslash$0'');\\[1ex]
     }
     \uncover<8->{\textsf{=}\,~3\\}}}
 }
@@ -887,7 +866,7 @@ Pascal Strings\\
 	Die Länge eines Strings müssen wir nicht per Hand berechnen.
 	Das macht die Funktion \glqq{}strlen\grqq{} aus \texttt{string.h} für uns.
 
-	\texttt{strlen} von \glqq{}ABC\grqq{} liefert den Wert 3.
+	\texttt{strlen} von \glqq{}ABC$\backslash$0$\backslash$0\grqq{} liefert den Wert 3.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 [frame]>
 
@@ -1017,7 +996,7 @@ Besser:\quad{}\texttt{s\underline{n}printf}, \texttt{vs\underline{n}printf}, \te
 }
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Beginnen wir mit dieser Gruppe von Funktionen.
-	Buffer-Overflows sind mit Ihnen schwer bis gar nicht
+	Buffer-Overflows sind mit ihnen schwer bis gar nicht
 	vermeidbar.
 
 	Sehen wir uns dazu ein Beispiel an.
@@ -1048,7 +1027,7 @@ Segmentation fault}
 	Sieht jemand ein Problem?~~<PAUSE>
 
 	Richtig: Dieser String kann länger sein, als das Array Platz hat;
-	ab einer Länge von 3 schreibt \texttt{scanf} über das Ende
+	ab einer Länge von drei schreibt \texttt{scanf} über das Ende
 	des Arrays hinaus.  Auf meiner Maschine bringen 24 Zeichen
 	das Programm zum Absturz.
 
@@ -1396,10 +1375,10 @@ Modifikator \texttt{const}\\verbietet Schreibzugriff
 	$a$ ist ein vollwertiges Array: der String in $a$ ist les- und schreibbar.
 
 	Die Zweite Variante nenne ich \glqq{}Nur Pointer\grqq{}.
-	Ihre Syntax ist anders: syntaktisch deklarieren wir hier einen
+	Ihre Syntax ist anders: wir deklarieren hier einen
 	ganz normalen Pointer $p$.  Das ist $p$ auch im Hinblick auf
-	seine Größe: ein ganz normal Pointer: auf einer 32-Bit-Machine
-	4 Byte groß.  Der String hinter $p$ liegt in einem besonderem,
+	seine Größe: ein ganz normaler Pointer: auf einer amd64-Machine
+	8 Byte groß.  Der String hinter $p$ liegt in einem besonderem,
 	schreibgeschützten Scheichersegment und ist daher \emph{nicht} schreibbar.
 
 	Weil sein Inhalt nicht schreibbar ist, fehlt Aus Sicht der
@@ -1732,7 +1711,7 @@ Zwei Varianten:
 	Wir initialisieren $f$ als Flat Array wie zuvor.
 
 	Oben drauf setzen wir dann ein Zeilen-Pointer-Array,
-	das in $f$ Zeigt.  Die Ausdrücke \texttt{f[0]} und \texttt{f[1]} liefern,
+	das in $f$ zeigt.  Die Ausdrücke \texttt{f[0]} und \texttt{f[1]} liefern,
 	was wir dazu brauchen.
 
 	Das resultierende Array $d$ ist mit unserer früheren
