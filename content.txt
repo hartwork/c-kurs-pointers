@@ -86,28 +86,8 @@
 
 
 \disableintroslides{}
-\section{C-Kurs-Fahrplan}
+\section{Einführung}
 \enableintroslides{}
-
-==== C-Kurs ====
-{\LARGE
-\hspace*{-1.5ex}\begin{tabular}{ll@{~~~}l}
-~        & Di  & Einführung \\
-~        & ~   & I/O, Formatierung\\[1ex]
-~        & Mi  & Structs, Enums, Unions \\
-~        & ~   & Speicherverwaltung\\[1ex]
-Next \sexyarrowrightLARGE{} & Do  & Arrays, Strings, Pointer \\
-~        & ~   & Präprozessor, Makefiles\\[1ex]
-~        & Fr  & Fehlererkennung\\
-~        & ~   & Bibliotheken, SDL, SVN \\
-\end{tabular}
-}
-\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-	Gestern haben wir uns mit den Grundbausteinen von C
-	und mit Ein- und Ausgabe beschäftigt.
-	Dabei haben wir an mehreren Stellen bereits Pointer verwendet.
-}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
 
 ==== ====
 {\Huge
