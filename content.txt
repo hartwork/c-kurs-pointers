@@ -2,7 +2,6 @@
 % Licensed under Creative Commons Attribution-ShareAlike 3.0 License
 %
 \newcommand{\ind}{\hspace*{3ex}}
-\setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertpagenumber\vspace*{0.5ex}\hspace*{0.5ex}}
 \mode<beamer>{
 	\newcommand{\highlight}[1]{{\color{yellow} #1}}
 	\newcommand{\underlinehighlight}[1]{\underline{\highlight{#1}}}
@@ -25,7 +24,6 @@
     }
 }
 
-
 \newcommand{\enableintroslides}[0]{
 	\AtBeginSection[] % Do nothing for \section*
 	{
@@ -44,18 +42,30 @@
 	{}
 }
 
+
+==== ====
+	\titlepage
+	\vfill
+	\begin{center}
+		\CcGroupBySa{0.33}{0.95ex}\\[2.5ex]
+		{\tiny\CcNote{\CcLongnameBySa}}
+		\vspace*{13ex}
+	\end{center}
+	\vspace*{-5ex}
+	\vspace*{-0.5\textheight}\hspace*{0.65\textwidth}\cwfslogo{}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Willkommen zum zweiten Tag des C-Kurses.
+	Mein Name ist Sebastian Pipping.  In der nächsten Stunde
+	werde ich versuchen, euch Pointer in C näherzubringen.
+
+	Die Folien und alle Code Beispiele sind übrigens im Netz.
+	Ihr könnt gerne mitschreiben, müsst aber nicht.
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+[frame]>
+
+
 \enableintroslides{}
-
-
-
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-%	Willkommen zum zweiten Tag des C-Kurses.
-%	Mein Name ist Sebastian Pipping.  In der nächsten Stunde
-%	werde ich versuchen, euch Pointer in C näherzubringen.
-%
-%	Die Folien und alle Code Beispiele sind übrigens im Netz.
-%	Ihr könnt gerne mitschreiben, müsst aber nicht.
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+\setbeamertemplate{footline}{\vspace*{-2cm}\hfill\Large\insertpagenumber\vspace*{0.5ex}\hspace*{0.5ex}}
 
 
 \disableintroslides{}
