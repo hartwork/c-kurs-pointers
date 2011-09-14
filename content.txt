@@ -1896,9 +1896,18 @@ Zwei Varianten:
 	habem, vielleicht sogar anderen erklären können, dann bin ich
 	stolz darauf, Ihnen das beigebracht zu haben.
 
-	Eine letzte Bitte an Sie: wenn Sie Code schreiben,
-	veröffentlichen Sie ihn als Freie Software.  Für Fragen
-	zu diesem Thema bin ich immer haben.
+}%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+==== Eine Bitte ====
+{\LARGE
+Veröffentlichen Sie Ihren Code\\[1ex]
+als Freie Software.
+}
+\note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+	Eine letzte Bitte an Sie: veröffentlichen Sie den Code,
+	den Sie schreiben, als Freie Software.  Für Fragen
+	zu diesem Thema bin ich immer zu haben.
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 
