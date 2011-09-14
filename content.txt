@@ -1916,7 +1916,7 @@ als Freie Software.
 {\Huge
 Danke!\\
 ~\\
-Fragen?\\
+Zeit für Ihre Fragen!\\
 \vfill
 \vfill
 }
@@ -1926,5 +1926,5 @@ Fragen?\\
 \note{%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 	Damit bedanke ich mich für eure Aufmerksamkeit.
 
-	Gibt es Fragen?
+	Zeit für Ihre Fragen!
 }%XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
