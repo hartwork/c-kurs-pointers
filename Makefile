@@ -43,3 +43,14 @@ distclean: clean
 
 view: all
 	$(viewer) $(base).pdf &
+
+
+# Workaround for tarball
+.git:
+	mkdir -p .git
+	touch VERSION.tex
+
+.git/refs/tags: .git
+	mkdir -p .git/refs
+	touch .git/refs/tags
+	touch VERSION.tex
