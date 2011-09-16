@@ -50,6 +50,7 @@
 
 \let\notebackup\note
 \renewcommand{\note}[1]{\notebackup{%
+	\mode<handout>{\addtocounter{page}{-1}}%
 	\setlength{\parindent}{0ex}%
 	\setlength{\parskip}{10pt}%
 	\noindent%
