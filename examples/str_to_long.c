@@ -6,7 +6,7 @@ int str_to_long__strtol(const char * text, long * output) {
 	if (! text) return 0;
 	char * end;
 	long number = strtol(text, &end, 10);
-	if ((end != text) && (end[0] == '\0')) {
+	if (end != text) {
 		*output = number;
 		return 1;
 	}
@@ -32,6 +32,15 @@ void show(const char * s) {
 	long number_sscanf = -1;
 	int success_sscanf = str_to_long__sscanf(s, &number_sscanf);
 	printf("str_to_long__sscanf(\"%s\") --> %2ld, success = %d\n", s, number_sscanf, success_sscanf);
+
+	if (s) {
+		long number_atol = atol(s);
+		int success_atol = 1;
+		printf("atoi               (\"%s\") --> %2ld, success = %d\n", s, number_atol, success_atol);
+	} else {
+		int success_atol = 0;
+		printf("atoi               (\"%s\") --> %2s, success = %d\n", s, "?", success_atol);
+	}
 }
 
 void main() {
